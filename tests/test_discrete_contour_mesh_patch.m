@@ -6,9 +6,9 @@ clear all, close all, clc;
 addpath('../src');
 addpath('../data');
 
-n = 64;
+n = 32;
 
-% % 2D test #1 : convex hull of random point set
+% 2D test #1 : convex hull of random point set
 V = 2*(rand(n,2)-0.5);
 H_raw = convhull(V);
 
@@ -31,31 +31,33 @@ H_raw = convhull(V);
 % Z = sqrt(X.^2 + Y.^2);
 % V = cat(2,X,Y,Z);
 
+
 if size(V,2) == 2 
     V = cat(2,V,zeros(size(V,1),1));        
 end
 
 Rmx = @(theta)[1 0          0;
-    0 cos(theta) -sin(theta);
-    0 sin(theta) cos(theta)];
+               0 cos(theta) -sin(theta);
+               0 sin(theta) cos(theta)];
 
 V = (Rmx(0.25*pi)*V')';
 V = V(unique(H_raw,'stable'),:);
 
 
 % V = V + 0.05*rand(size(V,1),3); % noise
-% V = V([end,end-1,1,2:end-2],:); % disorder ( = V_in)
+V = V([end,end-1,1,2:end-2],:); % disorder ( = V_in)
 
-[V,T,N] = discrete_contour_mesh_patch(V);
+[C,T,N] = discrete_contour_mesh_patch(V);
 
 h = figure;
 set(h,'Position',get(0,'ScreenSize'));
 set(gcf,'Color',[0 0 0]);
 
-line(cat(1,V(:,1),V(1,1)),cat(1,V(:,2),V(1,2)),cat(1,V(:,3),V(1,3)),'Color',[0 1 0],'LineWidth',4), hold on;
-quiver3(V(:,1),V(:,2),V(:,3),N(:,1),N(:,2),N(:,3),'Color',[1 0.5 0],'Linewidth',2), hold on;
+plot3(C(:,1),C(:,2),C(:,3),'bo','LineWidth',4,'MarkerSize',10,'MarkerFaceColor', [0 0 1],'MarkerEdgeColor', [0 0 1]), hold on;
+line(cat(1,C(:,1),C(1,1)),cat(1,C(:,2),C(1,2)),cat(1,C(:,3),C(1,3)),'Color',[0 1 0],'LineWidth',4), hold on;
+quiver3(C(:,1),C(:,2),C(:,3),N(:,1),N(:,2),N(:,3),'Color',[1 0.5 0],'Linewidth',2), hold on;
 
-trisurf(T,V(:,1),V(:,2),V(:,3)), shading faceted, hold on;
+trisurf(T,C(:,1),C(:,2),C(:,3)), shading faceted, hold on;
 colormap([0 1 1]);        
 
 xlabel('X'), ylabel('Y'), zlabel('Z');

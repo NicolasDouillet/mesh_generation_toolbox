@@ -5,9 +5,9 @@ clear all, close all, clc;
 addpath('../src');
 addpath('../data');
 
-id = 1;
-nb_it = 5;
-projection_mode = 'face_centres' ; % 'edge_oversamples';
+id = 3;
+nb_it = 3;
+projection_mode = 'edge_oversamples'; % ; % 'face_centres'
 [V,T] = build_geoid(id,projection_mode,nb_it);
 
 h = figure;

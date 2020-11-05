@@ -1,5 +1,5 @@
-function [V, T] = build_geoid(id, projection_mode, nb_it)
-% build_geoid : function to build a geoid based one platonic solid
+function [V, T] = build_geoid(id, projection_mode, nb_it, volumic_mesh)
+%% build_geoid : function to build a geoid based one platonic solid
 % (all except dodecahedron) iterative projections on the sphere, with
 % two different projection mode available : from triangular face centres
 % or from edge oversampling.
@@ -11,9 +11,11 @@ function [V, T] = build_geoid(id, projection_mode, nb_it)
 %
 % - id : positive integer scalar double, the basis polyhedron (platonic solid) id.
 %
+% - projection_mode : character string in the set : {'face_centres','edge_oversamples'}. Case insensitive.
+%
 % - nb_it : positive integer scalar double, the number of iterations.
 %
-% - mode : character string in the set : {'face_centres','edge_oversamples'}. Case insensitive.
+% - volumic_mesh : logical true(1) / *false (0), to enable / disable volumic mesh.
 %
 %
 % Output arguments
@@ -48,9 +50,13 @@ switch id
         
         begin_nb_faces = 20;
         
+    case 5 % dodecahedron
+        
+        begin_nb_faces = 36;
+        
     otherwise
         
-        error('id must be in the range |[1 ; 4]|.');
+        error('id must be in the range |[1 ; 5]|.');
         
 end
 
@@ -123,9 +129,22 @@ else
 end
 
 
+if volumic_mesh
+    
+   C = [0 0 0] ; % geoid centre
+   V = cat(1,V,C);
+   C_id = size(V,1);
+      
+   new_tgl = create_vol_mesh_triangles(T,C_id);
+   T = cat(1,T,new_tgl);
+    
+end
+
+
 end % build_geoid
 
 
+%% grow_nxt_lvl_tetrahedra subfunction
 function [V, T, N] = grow_nxt_lvl_tetrahedra(V, T, N, tgl_idx)
 % grow_nxt_lvl_tetrahedra : function to create the three new
 % vertices and link them to the 4*3^nb_it new triangles
@@ -158,6 +177,7 @@ N(tgl_idx,:) = [];
 end % grow_nxt_lvl_tetrahedra
 
 
+%% detect_concavity subfunction
 function [isconcave] = detect_concavity(V, T, N, tgl_pair_idx, epsilon)
 % detect_concavity : function to detect
 % concave triangle pair configurations.
@@ -184,6 +204,7 @@ isconcave = sign(dot(n1+n2,H2-H1,2).*(abs(dot(n1+n2,H2-H1,2)) > epsilon ) ) > 0;
 end % detect_concavity
 
 
+%% flip_two_ngb_triangles subfunction
 function [T, N, edg_list] = flip_two_ngb_triangles(tgl_pair_idx, T, V, N, edg_list)
 % flip_two_ngb_triangles : function to flip
 % two triangles sharing one common edge.
@@ -233,3 +254,15 @@ edg_list(all(bsxfun(@eq,edg_list,sort(cmn_edg)),2),:) = [];
 
 
 end % flip_two_ngb_triangles
+
+
+%% create_vol_mesh_triangles subfunction
+function [new_tgl] = create_vol_mesh_triangles(T, C_id)
+% create_vol_mesh_triangles : function to create new triangles
+% part of tetrahedric volumic mesh (inside triangles)
+
+edg_list = unique(query_edges_list(T,'sorted'),'rows');
+new_tgl = cat(2,edg_list,C_id*ones(size(edg_list,1),1));
+
+
+end % create_vol_mesh_triangles

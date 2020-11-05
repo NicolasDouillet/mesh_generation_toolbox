@@ -40,11 +40,7 @@ if nargin  > 1 && strcmpi(mode,'sorted')
     
 elseif nargin  < 2 || strcmpi(mode,'raw')
     
-    % do nothing
-    
-else
-    
-    % do nothing
+    % do nothing   
     
 end
 
