@@ -10,7 +10,7 @@ function [V, F] = platonic_solids(id, Rho, option_display, face_type)
 % - F the number of faces.  
 %
 %
-% Author and support : nicolas.douillet (at) free.fr, 2020.
+% Author and support : nicolas.douillet (at) free.fr, 2021.
 %
 %
 % Syntax

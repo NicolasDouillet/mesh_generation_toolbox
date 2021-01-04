@@ -1,10 +1,10 @@
 function [V, T] = build_geoid(id, projection_mode, nb_it, volumic_mesh)
 %% build_geoid : function to build a geoid based one platonic solid
-% (all except dodecahedron) iterative projections on the sphere, with
+% (all except dodecahedron) iterative projections on the unit sphere, with
 % two different projection mode available : from triangular face centres
 % or from edge oversampling.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020.
+% Author & support : nicolas.douillet (at) free.fr, 2021.
 %
 %
 % Input arguments
@@ -28,6 +28,10 @@ function [V, T] = build_geoid(id, projection_mode, nb_it, volumic_mesh)
 % - T = [i1 i2 i3], positive integer matrix double, the resulting triangulation, size(T) = [nb_triangles,3].
 %       [ |  |  |]
 
+
+if nargin  < 4
+    volumic_mesh = false;
+end
 
 epsilon = 1e4*eps;
 [V,T] = platonic_solids(id,1,false,'triangle');

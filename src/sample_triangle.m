@@ -4,7 +4,7 @@ function [V, T] = sample_triangle(V1, V2, V3, nbstep, option_random, nb_points)
 % homothetic smaller version of (V1, V2, V3) triangle. Works in any
 % dimension Ndim >= 2.
 %
-% Author & support nicolas.douillet (at) free.fr, 2017-2020.
+% Author & support nicolas.douillet (at) free.fr, 2017-2021.
 %
 %% Syntax
 % [V T] = sample_triangle(V1, V2, V3)
