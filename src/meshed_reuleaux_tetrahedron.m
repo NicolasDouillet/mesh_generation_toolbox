@@ -16,7 +16,7 @@ function [V, T] = meshed_reuleaux_tetrahedron(sample_step, option_display)
 %
 % meshed_reuleaux_tetrahedron computes and displays the meshed Reuleaux
 % tetrahedron included in the unit sphere, and which each
-% edge is sampled in 32.
+% edge is sampled in 8.
 %
 % meshed_reuleaux_tetrahedron(sample_step) uses sample_step steps.
 %
@@ -63,7 +63,7 @@ if nargin > 0
         option_display = true;        
     end    
 else
-    sample_step = 32;    
+    sample_step = 8;    
     option_display = true;    
 end
 
@@ -135,10 +135,9 @@ TRI = triangulation(T, V(:,1), V(:,2), V(:,3));
 if option_display
     
     figure;    
-    trisurf(TRI), shading flat, hold on;    
+    trimesh(TRI), hold on;    
     colormap([0 0 1]);    
     axis square, axis equal, axis tight;
-    camlight left, camlight right;
     
 end
 
