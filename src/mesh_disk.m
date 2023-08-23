@@ -1,0 +1,51 @@
+function [V, T] = mesh_disk(r, edg_nb_smpl)
+%
+% Author & support : nicolas.douillet (at) free.fr, 2023.
+%
+%
+% - r : the disk radius.
+% - edg_nb_smpl : one sixth of the number of samples on the disk perimeter.
+%
+% Disk is centred on the origin, [0 0 0], and has (Oz) for axis.
+
+
+M1 = r*[0.5*sqrt(3)  0.5 0]';
+M2 = r*[0.5*sqrt(3) -0.5 0]';
+
+[V1,T1] = sample_triangle(zeros(3,1),M1,M2,edg_nb_smpl);
+
+
+% Disk sector transformation
+% Intersection points with the vertical line
+X = zeros(size(V1));
+X(:,1) = 0.5*r*sqrt(3);
+X(:,3) = zeros(size(V1,1),1);
+X(:,2) = V1(:,2) + (0.5*r*sqrt(3) - V1(:,1)).*V1(:,2)./V1(:,1);
+
+N1 = sqrt(sum(V1.^2,2));
+Nx = sqrt(sum(X.^2,2));
+norm_pct = N1./Nx;
+
+% Update norm = distance ratio OM/OX
+V1 = V1.*norm_pct./N1;
+V1(1,:) = zeros(1,3);
+
+% Duplication by rotation
+Rmz = @(theta)[cos(theta) -sin(theta) 0;
+               sin(theta)  cos(theta) 0;
+               0           0          1];
+
+V2 = (Rmz(pi/3)*V1')';
+V3 = (Rmz(2*pi/3)*V1')';
+V4 = cat(1,V1,V2,V3);
+V5 = (Rmz(pi)*V4')';
+
+V = cat(1,V4,V5);
+T = cat(1,T1,T1+size(V1,1),T1+2*size(V1,1),T1+3*size(V1,1),T1+4*size(V1,1),T1+5*size(V1,1));
+
+% Duplicata removal
+[V,~,n] = uniquetol(V,'ByRows',true);
+T = n(T);
+
+
+end % mesh_disk

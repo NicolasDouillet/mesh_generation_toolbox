@@ -1,21 +1,22 @@
-function [V, T] = build_geoid(id, projection_mode, nb_it, volumic_mesh)
-%% build_geoid : function to build a geoid based one platonic solid
+function [V, T] = mesh_geoid(id, nb_it, projection_mode)
+% mesh_geoid : function to mesh a geoid based one platonic solid
 % (all except dodecahedron) iterative projections on the unit sphere, with
-% two different projection mode available : from triangular face centres
-% or from edge oversampling.
+% two different projection mode available.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2021.
+% Author & support : nicolas.douillet (at) free.fr, 2021-2023.
 %
 %
 % Input arguments
 %
 % - id : positive integer scalar double, the basis polyhedron (platonic solid) id.
 %
-% - projection_mode : character string in the set : {'face_centres','edge_oversamples'}. Case insensitive.
+% - projection_mode : character string in the set : {'edge_oversamples','face_centres'}. Case insensitive.
 %
-% - nb_it : positive integer scalar double, the number of iterations.
+% - nb_it : positive integer scalar double, either the number of sub edges to subdivide the original edge in,
+%                                           when projection_mode = 'edge_oversamples')
 %
-% - volumic_mesh : logical true(1) / *false (0), to enable / disable volumic mesh.
+%                                           or the number of iterations to perform,
+%                                           when projection_mode = 'face_centres'.
 %
 %
 % Output arguments
@@ -29,12 +30,16 @@ function [V, T] = build_geoid(id, projection_mode, nb_it, volumic_mesh)
 %       [ |  |  |]
 
 
-if nargin  < 4
-    volumic_mesh = false;
+epsilon = 1e3*eps;
+[V,T] = mesh_platonic_solids(id,1,false,'triangle');
+
+
+if nargin < 3
+   
+    projection_mode = 'edge_oversamples';
+    
 end
 
-epsilon = 1e4*eps;
-[V,T] = platonic_solids(id,1,false,'triangle');
 
 switch id
     
@@ -58,48 +63,15 @@ switch id
         
         begin_nb_faces = 36;
         
-    otherwise
-        
-        error('id must be in the range |[1 ; 5]|.');
+%     otherwise
+%         
+%         error('id must be in the range |[1 ; 5]|.');
         
 end
 
-if strcmpi(projection_mode,'face_centres')
+        
+if strcmpi(projection_mode,'edge_oversamples')
     
-    iteration = 0; % to start with
-    N = compute_face_normals(V,T,'norm');
-        
-    while iteration < nb_it
-                
-        tgl_idx = 1:begin_nb_faces*3^iteration; % concavity
-        
-        [V,T,N] = grow_nxt_lvl_tetrahedra(V,T,N,tgl_idx);
-        edg_list = query_edges_list(T,'sorted');
-        i = 1;
-        
-        while i < 1 + size(edg_list,1)
-            
-            tgl_pair_idx = cell2mat(find_triangle_indices_from_edges_list(T,edg_list(i,:)));
-            isconcave = detect_concavity(V,T,N,tgl_pair_idx, epsilon);
-            
-            if isconcave
-                
-                [T,N,edg_list] = flip_two_ngb_triangles(tgl_pair_idx,T,V,N,edg_list);
-                
-            else
-                
-                i = i + 1;
-                
-            end
-            
-        end
-        
-        iteration = iteration + 1;
-        
-    end
-        
-elseif strcmpi(projection_mode,'edge_oversamples')
-        
     % Oversample triangles by creating new vertices ; link vertices to create new triangles
     nt = nb_it^2;               % nb new triangles
     nv = (nb_it+1)*(nb_it+2)/2; % nb new vertices (1:nb_it) sum
@@ -118,42 +90,76 @@ elseif strcmpi(projection_mode,'edge_oversamples')
     end
     
     T = T_new;
-    V = V_new;    
+    V = V_new;
     
     % Vertices normalization / projection on the sphere surface
     V = V ./ sqrt(sum(V.^2,2));
     
-    [V, T] = remove_duplicated_vertices(V, T);        
+    [V, T] = remove_duplicated_vertices(V, T);
     T = remove_duplicated_triangles(T);
+    
+elseif strcmpi(projection_mode,'face_centres')
+    
+    iteration = 0; % to start with
+    N = compute_face_normals(V,T,'norm');
+    
+    while iteration < nb_it
+        
+        tgl_idx = 1:begin_nb_faces*3^iteration; % concavity
+        
+        [V,T,N] = grow_nxt_lvl_tetrahedra(V,T,N,tgl_idx);
+        edg_list = query_edges_list(T,'sorted');
+        i = 1;
+        
+        while i < 1 + size(edg_list,1)
+            
+            tgl_pair_idx = cell2mat(find_triangle_indices_from_edges_list(T,edg_list(i,:)));
+            isconcave = detect_concavity(V,T,N,tgl_pair_idx,epsilon);
+            
+            if isconcave
+                
+                [T,N,edg_list] = flip_two_ngb_triangles(tgl_pair_idx,T,V,N,edg_list);
+                
+            else
+                
+                i = i + 1;
+                
+            end
+            
+        end
+        
+        iteration = iteration + 1;
+        
+    end
     
 else
     
-    error('Unrecognized projection mode.');
+    error('Unknown projection mode.');
     
 end
 
 
-if volumic_mesh
-    
-   C = [0 0 0] ; % geoid centre
-   V = cat(1,V,C);
-   C_id = size(V,1);
-      
-   new_tgl = create_vol_mesh_triangles(T,C_id);
-   T = cat(1,T,new_tgl);
-    
-end
+% Remove duplicated vertices
+[V,~,n] = uniquetol(V,epsilon,'ByRows',true);
+T = n(T);
+
+% Remove duplicated triangles
+T_sort = sort(T,2);
+[~,idx,~] = unique(T_sort,'rows','stable');
+T = T(idx,:);
 
 
-end % build_geoid
+end % mesh_geoid
 
 
-%% grow_nxt_lvl_tetrahedra subfunction
+% grow_nxt_lvl_tetrahedra subfunction
 function [V, T, N] = grow_nxt_lvl_tetrahedra(V, T, N, tgl_idx)
 % grow_nxt_lvl_tetrahedra : function to create the three new
 % vertices and link them to the 4*3^nb_it new triangles
 % to create the next triangulation level and erase
 % the 4*three^(nb_it-1) previous triangles.
+%
+% Author & support : nicolas.douillet (at) free.fr, 2021-2023.
 
 
 for idx = tgl_idx
@@ -181,10 +187,11 @@ N(tgl_idx,:) = [];
 end % grow_nxt_lvl_tetrahedra
 
 
-%% detect_concavity subfunction
+% detect_concavity subfunction
 function [isconcave] = detect_concavity(V, T, N, tgl_pair_idx, epsilon)
-% detect_concavity : function to detect
-% concave triangle pair configurations.
+% detect_concavity : function to detect concave triangle pair configurations.
+%
+% Author & support : nicolas.douillet (at) free.fr, 2021-2023.
 
 
 i1 = tgl_pair_idx(1);
@@ -208,14 +215,14 @@ isconcave = sign(dot(n1+n2,H2-H1,2).*(abs(dot(n1+n2,H2-H1,2)) > epsilon ) ) > 0;
 end % detect_concavity
 
 
-%% flip_two_ngb_triangles subfunction
+% flip_two_ngb_triangles subfunction
 function [T, N, edg_list] = flip_two_ngb_triangles(tgl_pair_idx, T, V, N, edg_list)
-% flip_two_ngb_triangles : function to flip
-% two triangles sharing one common edge.
+% flip_two_ngb_triangles : function to flip two triangles sharing one common edge.
+%
+% Author & support : nicolas.douillet (at) free.fr, 2021-2023.
 
 
 nb_vtx = size(V,1);
-
 T1 = T(tgl_pair_idx(1),:);
 T2 = T(tgl_pair_idx(2),:);
 
@@ -258,15 +265,3 @@ edg_list(all(bsxfun(@eq,edg_list,sort(cmn_edg)),2),:) = [];
 
 
 end % flip_two_ngb_triangles
-
-
-%% create_vol_mesh_triangles subfunction
-function [new_tgl] = create_vol_mesh_triangles(T, C_id)
-% create_vol_mesh_triangles : function to create new triangles
-% part of tetrahedric volumic mesh (inside triangles)
-
-edg_list = unique(query_edges_list(T,'sorted'),'rows');
-new_tgl = cat(2,edg_list,C_id*ones(size(edg_list,1),1));
-
-
-end % create_vol_mesh_triangles

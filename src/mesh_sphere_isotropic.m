@@ -1,0 +1,62 @@
+function [V, T] = mesh_sphere_isotropic(r, nb_samples)
+%
+% Author & support : nicolas.douillet (at) free.fr, 2023.
+%
+%
+% - r > 0 : the sphere radius.
+
+u = linspace(0,pi,0.5*nb_samples)';
+v = linspace(0,2*pi,nb_samples);
+
+% Surface sampling
+X = r*sin(u)*cos(v);
+Y = r*sin(u)*sin(v);
+Z = r*repmat(cos(u),[1,nb_samples]);
+
+% Triplet indices for mesh facets
+T = zeros(0.5*nb_samples^2,3);
+row_idx = 1;
+i = 1;
+
+while i < nb_samples
+    
+    j = 1;
+    
+    while j < 0.5*nb_samples      
+        
+        T(row_idx,:)   = [(i-1)*0.5*nb_samples+j (i-1)*0.5*nb_samples+j+1 i*0.5*nb_samples+j];
+        row_idx = row_idx + 1;
+        T(row_idx,:)   = [i*0.5*nb_samples+j i*0.5*nb_samples+j+1 (i-1)*0.5*nb_samples+j+1];
+        row_idx = row_idx + 1;
+        
+        j = j + 1;
+        
+    end
+    
+    % begin-end loop junction
+    T(row_idx,:)   = [(i-1)*0.5*nb_samples+j (i-1)*0.5*nb_samples+1 i*0.5*nb_samples+j];
+    row_idx = row_idx + 1;
+    T(row_idx,:)   = [i*0.5*nb_samples+j i*0.5*nb_samples (i-1)*0.5*nb_samples+1];
+    row_idx = row_idx + 1; 
+    
+    i = i + 1;
+    
+end
+
+X = X(:);
+Y = Y(:);
+Z = Z(:);
+
+V = [X Y Z];
+
+% Remove duplicated vertices
+[V,~,n] = uniquetol(V,1e3*eps,'ByRows',true);
+T = n(T);
+
+% Remove duplicated triangles
+T_sort = sort(T,2);
+[~,idx,~] = unique(T_sort,'rows','stable');
+T = T(idx,:);
+
+
+end % mesh_sphere_isotropic

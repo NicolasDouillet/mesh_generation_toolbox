@@ -1,5 +1,5 @@
-function [V, F] = platonic_solids(id, Rho, option_display, face_type)
-%% platonic_solids : function to compute and display the five platonic solids.
+function [V, F] = mesh_platonic_solids(id, Rho, option_display, face_type)
+%% mesh_platonic_solids : function to compute and display the five platonic solids.
 %
 % % About / info
 %
@@ -15,30 +15,30 @@ function [V, F] = platonic_solids(id, Rho, option_display, face_type)
 %
 % Syntax
 %
-% platonic_solids(id);
+% mesh_platonic_solids(id);
 %
-% platonic_solids(id, Rho);
+% mesh_platonic_solids(id, Rho);
 %
-% platonic_solids(id, Rho, option_display);
+% mesh_platonic_solids(id, Rho, option_display);
 %
-% platonic_solids(id, Rho, option_display, face_type);
+% mesh_platonic_solids(id, Rho, option_display, face_type);
 %
-% [V, F] = platonic_solids(id, Rho, option_display, face_type);
+% [V, F] = mesh_platonic_solids(id, Rho, option_display, face_type);
 %
 %
 % Description
 %
-% platonic_solids(id) computes the vertex coordinates of the solid #id, its corresponding face set, and displays it.
+% mesh_platonic_solids(id) computes the vertex coordinates of the solid #id, its corresponding face set, and displays it.
 %
-% platonic_solids(id, Rho) allows to change the radius Rho. Default value is Rho = 1; 
+% mesh_platonic_solids(id, Rho) allows to change the radius Rho. Default value is Rho = 1; 
 %
-% platonic_solids(id, Rho, option_display) allows to *enable / disable the display.
+% mesh_platonic_solids(id, Rho, option_display) allows to *enable / disable the display.
 %
-% platonic_solids(id, Rho, option_display, face_type) uses either default face type (id+2) edges polygon when set
+% mesh_platonic_solids(id, Rho, option_display, face_type) uses either default face type (id+2) edges polygon when set
 % to 'default' or triangular face type when set to 'triangle'. Since tetrahedron, octahedron, and icosahedron
 % default face type are already triangles, this option influences only square (id=2) and dodecahedron (id=5).
 %
-% [V, F] = platonic_solids(id, Rho, option_display, face_type) also returns vertex and face sets.
+% [V, F] = mesh_platonic_solids(id, Rho, option_display, face_type) also returns vertex and face sets.
 %
 %
 % See also : PLOT::TETRAHEDRON, PLOT::CUBE, PLOT::OCTAHEDRON, PLOT::ICOSAHEDRON, PLOT::DODECAHEDRON, PLOT::SPHERE
@@ -73,15 +73,15 @@ function [V, F] = platonic_solids(id, Rho, option_display, face_type)
 %
 % Examples
 %
-% platonic_solids(1); % tetrahedron
+% mesh_platonic_solids(1); % tetrahedron
 %
-% platonic_solids(2,1,true,'triangle'); % triangulated cube
+% mesh_platonic_solids(2,1,true,'triangle'); % triangulated cube
 %
-% platonic_solids(3,9); % octahedron living in the sphere centred in [0 0 0] and of radius Rho = 9.
+% mesh_platonic_solids(3,9); % octahedron living in the sphere centred in [0 0 0] and of radius Rho = 9.
 %
-% [V,T] = platonic_solids(4); % icosahedron
+% [V,T] = mesh_platonic_solids(4); % icosahedron
 %
-% [V,T] = platonic_solids(5); % dodecahedron
+% [V,T] = mesh_platonic_solids(5); % dodecahedron
 % V = V + repmat([1 2 3],[size(V,1),1]); % translate the centre from [0 0 0] to [1 2 3]
 
 
@@ -245,7 +245,7 @@ switch id
         
     case 5 % dodecahedron | "ether"   
         
-        [V,F] = platonic_solids(4,Rho,false); % from the icosahedron, as its dual polyhedron
+        [V,F] = mesh_platonic_solids(4,Rho,false); % from the icosahedron, as its dual polyhedron
         
         V = cell2mat(cellfun(@(r) mean(V(r,:),1),num2cell(F,2),'UniformOutput', false));                
         V = V ./ repmat(sqrt(sum(V.^2,2)),[1,3]);
@@ -328,7 +328,7 @@ if option_display
 end
 
 
-end % platonic_solids
+end % mesh_platonic_solids
 
 
 %% plot subfunction
