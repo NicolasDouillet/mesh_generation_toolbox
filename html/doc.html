@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>mesh generation toolbox</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-01-04"><meta name="DC.source" content="doc.m"><style type="text/css">
+      --><title>doc</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-08-24"><meta name="DC.source" content="doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,25 +66,35 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>mesh generation toolbox</h1><!--introduction--><p>Author &amp; support : nicolas.douillet (at) free.fr, 2020-2021.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Example #1 : octahedron based geoid</a></li><li><a href="#2">Example #2 : icosahedron based geoid</a></li><li><a href="#3">Example #3 : volumic mesh</a></li><li><a href="#4">Example #4 : discrete contour mesh patch</a></li></ul></div><h2 id="1">Example #1 : octahedron based geoid</h2><pre class="codeinput">addpath(<span class="string">'src/'</span>);
-id = 3; <span class="comment">% base = octahedron</span>
-nb_it = 5;
-projection_mode = <span class="string">'edge_oversamples'</span>;
-[V,T] = build_geoid(id,projection_mode,nb_it);
-plot_mesh(V,T);
-</pre><pre class="codeoutput">Mesh with 144 vertices and 200 triangles displayed in 7.497670e-02 seconds.
-</pre><img vspace="5" hspace="5" src="doc_01.png" alt=""> <h2 id="2">Example #2 : icosahedron based geoid</h2><pre class="codeinput">id = 4; <span class="comment">% base = icosahedron</span>
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">mesh generation toolbox</a></li><li><a href="#2">Example #1 : mesh an icosahedron based geoid</a></li><li><a href="#3">Example #2 : mesh a cylinder</a></li><li><a href="#4">Example #3 : mesh an ovoid and select its face normals</a></li><li><a href="#5">Example #4 : mesh a torus with quasi equilateral triangles</a></li><li><a href="#6">Example #5 : (triangle) mesh a polygon</a></li><li><a href="#7">Example #6 : discrete contour mesh patch</a></li></ul></div><h2 id="1">mesh generation toolbox</h2><p>Author &amp; support : nicolas.douillet (at) free.fr, 2020-2023.</p><pre class="codeinput">addpath(<span class="string">'src/'</span>);
+</pre><h2 id="2">Example #1 : mesh an icosahedron based geoid</h2><pre class="codeinput">id = 4; <span class="comment">% base = icosahedron</span>
 nb_it = 3;
-projection_mode = <span class="string">'face_centres'</span>;
-[V,T] = build_geoid(id,projection_mode,nb_it);
+sampling_mode = <span class="string">'face'</span>;
+[V,T] = mesh_geoid(id,nb_it,sampling_mode);
 plot_mesh(V,T);
-</pre><pre class="codeoutput">Mesh with 272 vertices and 540 triangles displayed in 7.845240e-02 seconds.
-</pre><img vspace="5" hspace="5" src="doc_02.png" alt=""> <h2 id="3">Example #3 : volumic mesh</h2><pre class="codeinput">[V,T] = build_volumic_mesh_from_convex_set_mesh(V,T);
-V_set = 1:36;
-[V,T] = remove_vertices(V_set,V,T); <span class="comment">% remove some vertices to have an insight view</span>
+</pre><pre class="codeoutput">Mesh with 272 vertices and 540 triangles displayed in 1.995453e-01 seconds.
+</pre><img vspace="5" hspace="5" src="doc_01.png" alt=""> <h2 id="3">Example #2 : mesh a cylinder</h2><pre class="codeinput">[V,T] = mesh_cylinder(3,7,5);
 plot_mesh(V,T);
-</pre><pre class="codeoutput">Mesh with 237 vertices and 942 triangles displayed in 6.445740e-02 seconds.
-</pre><img vspace="5" hspace="5" src="doc_03.png" alt=""> <h2 id="4">Example #4 : discrete contour mesh patch</h2><pre class="codeinput">n = 32;
+</pre><pre class="codeoutput">Mesh with 302 vertices and 600 triangles displayed in 9.030880e-02 seconds.
+</pre><img vspace="5" hspace="5" src="doc_02.png" alt=""> <h2 id="4">Example #3 : mesh an ovoid and select its face normals</h2><pre class="codeinput">[V,T] = mesh_ovoid(8);
+select_face_normals(V,T); <span class="comment">% beware : not all coherently oriented / facing outward</span>
+</pre><pre class="codeoutput">Mesh with 114 vertices and 254 triangles displayed in 9.718590e-02 seconds.
+</pre><img vspace="5" hspace="5" src="doc_03.png" alt=""> <h2 id="5">Example #4 : mesh a torus with quasi equilateral triangles</h2><pre class="codeinput">longtude_nb_samples = 37;
+latitude_nb_samples = 15; <span class="comment">% odd number</span>
+[V, T] = mesh_torus_specific(longtude_nb_samples,latitude_nb_samples);
+plot_mesh(V,T);
+</pre><pre class="codeoutput">Mesh with 504 vertices and 1008 triangles displayed in 8.914050e-02 seconds.
+</pre><img vspace="5" hspace="5" src="doc_04.png" alt=""> <h2 id="6">Example #5 : (triangle) mesh a polygon</h2><p>Hexagon of the 3D space</p><pre class="codeinput">V1 = [-sqrt(2)/3 sqrt(6)/3 -1/3];
+V3 = [-sqrt(2)/3 -sqrt(6)/3 -1/3];
+V5 = [0 0 1];
+V2 = (2/3)*(V1+V3) - (1/3)*V5;
+V4 = (2/3)*(V3+V5) - (1/3)*V1;
+V6 = (2/3)*(V1+V5) - (1/3)*V3;
+P = cat(1,V1,V2,V3,V4,V5,V6);
+[V,T] = mesh_polygon(P,<span class="string">'sorted'</span>);
+plot_mesh(V,T);
+</pre><pre class="codeoutput">Mesh with 6 vertices and 4 triangles displayed in 1.052260e-01 seconds.
+</pre><img vspace="5" hspace="5" src="doc_05.png" alt=""> <h2 id="7">Example #6 : discrete contour mesh patch</h2><pre class="codeinput">n = 32;
 V = 2*(rand(n,2)-0.5);
 H_raw = convhull(V);
 
@@ -103,7 +113,6 @@ V = V([end,end-1,1,2:end-2],:); <span class="comment">% disorder ( = V_in)</span
 [C,T,N] = discrete_contour_mesh_patch(V);
 
 h = figure;
-<span class="comment">% set(h,'Position',get(0,'ScreenSize'));</span>
 set(gcf,<span class="string">'Color'</span>,[0 0 0]);
 
 subplot(121);
@@ -125,35 +134,49 @@ ax = gca;
 ax.Clipping = <span class="string">'off'</span>;
 set(ax, <span class="string">'Color'</span>, [0 0 0], <span class="string">'XColor'</span>, [1 1 1], <span class="string">'YColor'</span>, [1 1 1], <span class="string">'ZColor'</span>, [1 1 1]);
 view(3);
-</pre><img vspace="5" hspace="5" src="doc_04.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="doc_06.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% mesh generation toolbox
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020-2021.
+% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
 
-
-%% Example #1 : octahedron based geoid
 addpath('src/');
-id = 3; % base = octahedron
-nb_it = 5;
-projection_mode = 'edge_oversamples';
-[V,T] = build_geoid(id,projection_mode,nb_it);
-plot_mesh(V,T);
 
-%% Example #2 : icosahedron based geoid
+
+%% Example #1 : mesh an icosahedron based geoid
 id = 4; % base = icosahedron
 nb_it = 3;
-projection_mode = 'face_centres';
-[V,T] = build_geoid(id,projection_mode,nb_it);
+sampling_mode = 'face';
+[V,T] = mesh_geoid(id,nb_it,sampling_mode);
 plot_mesh(V,T);
 
-%% Example #3 : volumic mesh 
-[V,T] = build_volumic_mesh_from_convex_set_mesh(V,T);
-V_set = 1:36;
-[V,T] = remove_vertices(V_set,V,T); % remove some vertices to have an insight view
+%% Example #2 : mesh a cylinder 
+[V,T] = mesh_cylinder(3,7,5);
 plot_mesh(V,T);
 
-%% Example #4 : discrete contour mesh patch
+%% Example #3 : mesh an ovoid and select its face normals
+[V,T] = mesh_ovoid(8);
+select_face_normals(V,T); % beware : not all coherently oriented / facing outward
+
+%% Example #4 : mesh a torus with quasi equilateral triangles 
+longtude_nb_samples = 37;
+latitude_nb_samples = 15; % odd number
+[V, T] = mesh_torus_specific(longtude_nb_samples,latitude_nb_samples);
+plot_mesh(V,T);
+
+%% Example #5 : (triangle) mesh a polygon
+% Hexagon of the 3D space
+V1 = [-sqrt(2)/3 sqrt(6)/3 -1/3];
+V3 = [-sqrt(2)/3 -sqrt(6)/3 -1/3];
+V5 = [0 0 1];
+V2 = (2/3)*(V1+V3) - (1/3)*V5;
+V4 = (2/3)*(V3+V5) - (1/3)*V1;
+V6 = (2/3)*(V1+V5) - (1/3)*V3;
+P = cat(1,V1,V2,V3,V4,V5,V6);
+[V,T] = mesh_polygon(P,'sorted');
+plot_mesh(V,T);
+
+%% Example #6 : discrete contour mesh patch
 n = 32;
 V = 2*(rand(n,2)-0.5);
 H_raw = convhull(V);
@@ -173,7 +196,6 @@ V = V([end,end-1,1,2:end-2],:); % disorder ( = V_in)
 [C,T,N] = discrete_contour_mesh_patch(V);
 
 h = figure;
-% set(h,'Position',get(0,'ScreenSize'));
 set(gcf,'Color',[0 0 0]);
 
 subplot(121);
@@ -195,5 +217,6 @@ ax = gca;
 ax.Clipping = 'off';
 set(ax, 'Color', [0 0 0], 'XColor', [1 1 1], 'YColor', [1 1 1], 'ZColor', [1 1 1]);
 view(3);
+
 ##### SOURCE END #####
 --></body></html>

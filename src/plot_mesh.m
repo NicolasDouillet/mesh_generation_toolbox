@@ -17,9 +17,9 @@ function [] = plot_mesh(V, T)
 
 %% Body
 tic;
-% h = figure;
+h = figure;
 % set(h,'Position',get(0,'ScreenSize'));
-% set(gcf,'Color',[0 0 0]);
+set(gcf,'Color',[0 0 0]);
 
 trisurf(T,V(:,1),V(:,2),V(:,3)), shading faceted, hold on; % ,'FaceColor',[0 1 1]
 colormap([0 1 1]);        

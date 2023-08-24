@@ -1,9 +1,32 @@
 function [V, T] = mesh_sphere_isotropic(r, nb_samples)
+% mesh_sphere_isotropic : function isotropically mesh a sphere.
 %
 % Author & support : nicolas.douillet (at) free.fr, 2023.
 %
 %
-% - r > 0 : the sphere radius.
+%%% Input arguments :
+%
+% - r > 0 :      positive real scalar double, the sphere radius.
+% - nb_samples : positive integer scalar double , the number of samples.
+%
+%
+%%% Output arguments :
+%
+%        [| | |]
+% - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
+%        [| | |]
+%                 with nb_vertices is the same number as the number of vertices in P.
+%
+%       [|  |  |]
+% - T = [i1 i2 i3], positive integer matrix double, the triangulation, size(T) = [nb_triangles,3].
+%       [|  |  |]
+%
+%
+%%% About / other informations
+%
+% Sphere is centered on the origin, [0 0 0].
+% Triangles / normals are coherently oriented and facing outward.
+
 
 u = linspace(0,pi,0.5*nb_samples)';
 v = linspace(0,2*pi,nb_samples);
@@ -26,7 +49,7 @@ while i < nb_samples
         
         T(row_idx,:)   = [(i-1)*0.5*nb_samples+j (i-1)*0.5*nb_samples+j+1 i*0.5*nb_samples+j];
         row_idx = row_idx + 1;
-        T(row_idx,:)   = [i*0.5*nb_samples+j i*0.5*nb_samples+j+1 (i-1)*0.5*nb_samples+j+1];
+        T(row_idx,:)   = [(i-1)*0.5*nb_samples+j+1 i*0.5*nb_samples+j+1 i*0.5*nb_samples+j];
         row_idx = row_idx + 1;
         
         j = j + 1;

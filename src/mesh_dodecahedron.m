@@ -1,12 +1,12 @@
-function [V, T] = mesh_cube(edg_nb_smpl)
-% mesh_cube : function to mesh a cube.
+function [V, T] = mesh_dodecahedron(edg_nb_smpl)
+% mesh_dodecahedron : function to mesh a dodecahedron.
 %
 % Author & support : nicolas.douillet (at) free.fr, 2023.
 %
 %
 %%% Input arguments :
 %
-% - edg_nb_smpl : positive integer scalar double, the number of samples for each one the cube edges.
+% - edg_nb_smpl : positive integer scalar double, the number of samples for each one the dodecahedron edges.
 %
 %
 %%% Output arguments :
@@ -23,11 +23,11 @@ function [V, T] = mesh_cube(edg_nb_smpl)
 %
 %%% About / others information
 %
-% Cube is centered on the origin, [0 0 0].
+% Dodecahedron is centered on the origin, [0 0 0].
 % Triangles / normals are coherently oriented and facing outward.
 
 
-[M,F] = platonic_solids(2,1,'triangle'); % cube made of 12 triangles at this point
+[M,F] = platonic_solids(5,1,'triangle'); % dodecahedron made of 12 triangles at this point
 
 V = zeros(0,3);
 T = zeros(0,3);
@@ -43,4 +43,4 @@ for k = 1:size(F,1) % 12
 end
 
 
-end % mesh_cube
+end % mesh_dodecahedron

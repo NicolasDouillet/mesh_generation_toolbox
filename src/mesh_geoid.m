@@ -1,25 +1,23 @@
-function [V, T] = mesh_geoid(id, nb_it, projection_mode)
+function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
 % mesh_geoid : function to mesh a geoid based one platonic solid
-% (all except dodecahedron) iterative projections on the unit sphere, with
-% two different projection mode available.
+% (all except dodecahedron) iterative projections on the unit sphere,
+% with two different sampling modes available.
 %
 % Author & support : nicolas.douillet (at) free.fr, 2021-2023.
 %
 %
-% Input arguments
+%%% Input arguments
 %
-% - id : positive integer scalar double, the basis polyhedron (platonic solid) id.
+% - id :              positive integer scalar double, the basis polyhedron (platonic solid) id.
 %
-% - projection_mode : character string in the set : {'edge_oversamples','face_centres'}. Case insensitive.
+% - sampling_mode :   character string in the set : {'edge','face'}. Case insensitive.
 %
-% - nb_it : positive integer scalar double, either the number of sub edges to subdivide the original edge in,
-%                                           when projection_mode = 'edge_oversamples')
-%
-%                                           or the number of iterations to perform,
-%                                           when projection_mode = 'face_centres'.
+% - nb_it :           positive integer scalar double, either the number of sub edges to subdivide the original edge in,
+%                     when sampling_mode = 'edge') or the number of iterations to perform,
+%                     when sampling_mode = 'face'.
 %
 %
-% Output arguments
+%%% Output arguments
 %
 %       [| | |]
 % - V = [X Y Z], real matrix double, the resulting point set, size(V) = [nb_vertices,3].
@@ -28,15 +26,21 @@ function [V, T] = mesh_geoid(id, nb_it, projection_mode)
 %       [ |  |  |]
 % - T = [i1 i2 i3], positive integer matrix double, the resulting triangulation, size(T) = [nb_triangles,3].
 %       [ |  |  |]
+%
+%
+%%% About / other informations
+%
+% Geoid is centered on the origin, [0 0 0].
+% Triangles / normals are coherently oriented and facing outward.
 
 
 epsilon = 1e3*eps;
-[V,T] = mesh_platonic_solids(id,1,false,'triangle');
+[V,T] = platonic_solids(id,1,'triangle');
 
 
 if nargin < 3
    
-    projection_mode = 'edge_oversamples';
+    sampling_mode = 'edge';
     
 end
 
@@ -70,7 +74,7 @@ switch id
 end
 
         
-if strcmpi(projection_mode,'edge_oversamples')
+if strcmpi(sampling_mode,'edge')
     
     % Oversample triangles by creating new vertices ; link vertices to create new triangles
     nt = nb_it^2;               % nb new triangles
@@ -81,7 +85,7 @@ if strcmpi(projection_mode,'edge_oversamples')
     
     for j = 1:size(T,1)
         
-        [new_sub_V, new_sub_T] = sample_triangle(V(T(j,1),:)',V(T(j,2),:)',V(T(j,3),:)',nb_it);
+        [new_sub_V, new_sub_T] = mesh_triangle(V(T(j,1),:)',V(T(j,2),:)',V(T(j,3),:)',nb_it);
         new_sub_T = new_sub_T + (j-1)*nv; % update triangle indices
         
         T_new((j-1)*nt+1:j*nt,:) = new_sub_T;
@@ -93,12 +97,9 @@ if strcmpi(projection_mode,'edge_oversamples')
     V = V_new;
     
     % Vertices normalization / projection on the sphere surface
-    V = V ./ sqrt(sum(V.^2,2));
+    V = V ./ sqrt(sum(V.^2,2));        
     
-    [V, T] = remove_duplicated_vertices(V, T);
-    T = remove_duplicated_triangles(T);
-    
-elseif strcmpi(projection_mode,'face_centres')
+elseif strcmpi(sampling_mode,'face')
     
     iteration = 0; % to start with
     N = compute_face_normals(V,T,'norm');
@@ -134,7 +135,7 @@ elseif strcmpi(projection_mode,'face_centres')
     
 else
     
-    error('Unknown projection mode.');
+    error('Unknown sampling mode.');
     
 end
 
@@ -147,6 +148,9 @@ T = n(T);
 T_sort = sort(T,2);
 [~,idx,~] = unique(T_sort,'rows','stable');
 T = T(idx,:);
+
+% Reorient normal outward
+T = fliplr(T);
 
 
 end % mesh_geoid

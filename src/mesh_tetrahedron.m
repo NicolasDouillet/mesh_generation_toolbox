@@ -1,12 +1,12 @@
-function [V, T] = mesh_cube(edg_nb_smpl)
-% mesh_cube : function to mesh a cube.
+function [V, T] = mesh_tetrahedron(edg_nb_smpl)
+% mesh_tetrahedron : function to mesh a tetrahedron.
 %
 % Author & support : nicolas.douillet (at) free.fr, 2023.
 %
 %
 %%% Input arguments :
 %
-% - edg_nb_smpl : positive integer scalar double, the number of samples for each one the cube edges.
+% - edg_nb_smpl : positive integer scalar double, the number of samples for each one the tetrahedron edges.
 %
 %
 %%% Output arguments :
@@ -23,17 +23,17 @@ function [V, T] = mesh_cube(edg_nb_smpl)
 %
 %%% About / others information
 %
-% Cube is centered on the origin, [0 0 0].
+% Tetrahedron is centered on the origin, [0 0 0].
 % Triangles / normals are coherently oriented and facing outward.
 
 
-[M,F] = platonic_solids(2,1,'triangle'); % cube made of 12 triangles at this point
+[M,F] = platonic_solids(1,1); % tetrahedron made of 4 triangles at this point
 
 V = zeros(0,3);
 T = zeros(0,3);
 
 
-for k = 1:size(F,1) % 12
+for k = 1:size(F,1) % 4
     
     [Vk,Tk] = mesh_triangle(M(F(k,3),:)',M(F(k,2),:)',M(F(k,1),:)',edg_nb_smpl);        
         
@@ -43,4 +43,4 @@ for k = 1:size(F,1) % 12
 end
 
 
-end % mesh_cube
+end % mesh_tetrahedron

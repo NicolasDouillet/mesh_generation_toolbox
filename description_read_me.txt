@@ -1,9 +1,11 @@
 Please first check the doc tab on the right to get some relevant and functional examples of this toobox functions.
 
+Feel free to check and download the mesh processing toolbox ( https://fr.mathworks.com/matlabcentral/fileexchange/77004-mesh-processing-toolbox?s_tid=srchtitle ) for many further meshing relative functions.
+
 
 %% DESCRIPTION
 
-This package is a mesh generation toolbox which aim at providing a command line mesh lab in Matlab(R) console. It is designed to deal with and generate 3D triangular meshes.
+This package is a mesh generation toolbox which on the long term aim at providing a command line mesh generation lab in Matlab(R) console. It is designed to deal with and generate 3D triangular meshes.
 
 
 %% HELP
@@ -43,13 +45,15 @@ Then to create your own .mat file for vertex set V and triangle set T, just use 
 
 %% COPYRIGHT & SUPPORT
 
-All the code included in this toolbox is the result of my unique personal own work and effort in 2020-2021, and going on for upcoming updates.
+All the code included in this toolbox is the result of my unique personal own work and effort in 2020-2023, and going on for upcoming updates.
 
 Each one of the algorithms / functions included have been independently tested, however I cannot provide any warrantee of any kind about them. Use them at your own risks.
 Downloading and using this toolbox or just part of it assume you to have read and accept all the condition in this current description. 
 
 This toolbox and its content is free of use and distribution with the following condition :
 this description_read_me file must be included as well as each function header must be preserved.
+
+SELLING THIS WHOLE TOOLBOX OR EVEN PARTS OF IT IS STRICLY PROHIBITED.
 
 Modification of any kind are done under your own, only, and unique responsability.
 
@@ -58,16 +62,18 @@ Please report me any bug (with data set used and Matlab(R) code attached) or sug
 
 %% KNOWN LIMITATIONS
 
-Only three core mesh generation functions are exploitable at the moment :
+Three core mesh generation functions are exploitable at the moment :
 
-- build_geoid
+- mesh_geoid
 - discrete_contour_mesh_patch
-- build_volumic_mesh_from_convex_set_mesh
+- volumic_mesh_from_convex_set_mesh
 
 The function build_volumic_mesh_from_convex_set_mesh will of course create non manifold edges. It will also lose orientation of the face normals.
 
 
 %% MISC INFORMATION
+
+Except for the ovoid shape, all the other meshes have their normals / faces coherently oriented outward.
 
 Most of the time, I did my best to make function names pretty explicit in english.
 
@@ -85,4 +91,4 @@ Since I am not native english speaker, please forgive my langage approximations.
 Matlab release version used for development and tests : R2019b.
 
 
-Last update : 01 / 04 / 2021.
+Last update : 24 / 08 / 2023.

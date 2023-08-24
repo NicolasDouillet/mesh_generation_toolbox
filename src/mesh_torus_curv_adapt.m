@@ -4,8 +4,28 @@ function [V, T] = mesh_torus_curv_adapt(R, r)
 % Author & support : nicolas.douillet (at) free.fr, 2023.
 %
 %
-% - R > r > 0 : large torus radius.
-% - r > 0 : small torus radius.
+%%% Input arguments :
+%
+% - R > r > 0 : positive real scalar double, the torus large radius.
+% - r > 0 :     positive real scalar double, the torus small radius.
+%
+%
+%%% Output arguments :
+%
+%        [| | |]
+% - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
+%        [| | |]
+%                 with nb_vertices is the same number as the number of vertices in P.
+%
+%       [|  |  |]
+% - T = [i1 i2 i3], positive integer matrix double, the triangulation, size(T) = [nb_triangles,3].
+%       [|  |  |]
+%
+%
+%%% About / other informations
+%
+% Torus is centered on the origin, [0 0 0], and has (0z) for axis.
+% Triangles / normals are coherently oriented and facing outward.
 
 
 % Input parsing
@@ -46,15 +66,15 @@ V7 = Rmz(1.2*pi)*V10;
 
 V = [V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12]';
 
-T = [2 3 8; % centre belt (10 triangles)
+T = [3 2 8; % centre belt (10 triangles)
      3 8 7;
-     3 4 7;
+     4 3 7;
      4 7 11;
-     4 5 11;
+     5 4 11;
      5 11 10;
-     5 6 10;
+     6 5 10;
      6 10 9;
-     6 2 9;
+     2 6 9;
      2 9 8];
 
 % Remove icosahedron top and bottom vertices
@@ -65,7 +85,7 @@ T = T - 1;
 % Sample triangles
 for k = 1:size(T,1)
        
-    [Vt,Tt] = sample_triangle(V(T(k,1),:)',V(T(k,2),:)',V(T(k,3),:)',nb_samples);
+    [Vt,Tt] = mesh_triangle(V(T(k,1),:)',V(T(k,2),:)',V(T(k,3),:)',nb_samples);
             
     T = cat(1,T,Tt+size(V,1));
     V = cat(1,V,Vt);    
@@ -84,7 +104,7 @@ end
 
 % Symetric lower part
 V(:,3) = V(:,3) - min(V(:,3));
-T = cat(1,T,T+size(V,1));
+T = cat(1,T,fliplr(T+size(V,1)));
 V = cat(1,V,cat(2,V(:,1),V(:,2),-V(:,3)));
 
 

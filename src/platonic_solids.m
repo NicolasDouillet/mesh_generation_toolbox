@@ -1,44 +1,43 @@
-function [V, F] = mesh_platonic_solids(id, Rho, option_display, face_type)
-%% mesh_platonic_solids : function to compute and display the five platonic solids.
+function [V, F] = platonic_solids(id, Rho, face_type)
+% platonic_solids : function to compute the five platonic solids.
 %
-% % About / info
+% About / info
 %
 % Platonic solids verify Euler formula, V - E + F = 2 with here : 
 %
 % - V the number of vertices
 % - E the number of edges
-% - F the number of faces.  
+% - F the number of faces.
+%
+% Solid is centered on the origin, [0 0 0].
+% Triangles / normals are coherently oriented and facing outward.
 %
 %
-% Author and support : nicolas.douillet (at) free.fr, 2021.
+% Author and support : nicolas.douillet (at) free.fr, 2021-2023.
 %
 %
 % Syntax
 %
-% mesh_platonic_solids(id);
+% platonic_solids(id);
 %
-% mesh_platonic_solids(id, Rho);
+% platonic_solids(id, Rho);
 %
-% mesh_platonic_solids(id, Rho, option_display);
+% platonic_solids(id, Rho, face_type);
 %
-% mesh_platonic_solids(id, Rho, option_display, face_type);
-%
-% [V, F] = mesh_platonic_solids(id, Rho, option_display, face_type);
+% [V, F] = platonic_solids(id, Rho, face_type);
 %
 %
 % Description
 %
-% mesh_platonic_solids(id) computes the vertex coordinates of the solid #id, its corresponding face set, and displays it.
+% platonic_solids(id) computes the vertex coordinates of the solid #id, its corresponding face set, and displays it.
 %
-% mesh_platonic_solids(id, Rho) allows to change the radius Rho. Default value is Rho = 1; 
+% platonic_solids(id, Rho) allows to change the radius Rho. Default value is Rho = 1; 
 %
-% mesh_platonic_solids(id, Rho, option_display) allows to *enable / disable the display.
-%
-% mesh_platonic_solids(id, Rho, option_display, face_type) uses either default face type (id+2) edges polygon when set
+% platonic_solids(id, Rho, face_type) uses either default face type (id+2) edges polygon when set
 % to 'default' or triangular face type when set to 'triangle'. Since tetrahedron, octahedron, and icosahedron
 % default face type are already triangles, this option influences only square (id=2) and dodecahedron (id=5).
 %
-% [V, F] = mesh_platonic_solids(id, Rho, option_display, face_type) also returns vertex and face sets.
+% [V, F] = platonic_solids(id, Rho, face_type) also returns vertex and face sets.
 %
 %
 % See also : PLOT::TETRAHEDRON, PLOT::CUBE, PLOT::OCTAHEDRON, PLOT::ICOSAHEDRON, PLOT::DODECAHEDRON, PLOT::SPHERE
@@ -54,8 +53,6 @@ function [V, F] = mesh_platonic_solids(id, Rho, option_display, face_type)
 %        id = 5 -> dodecahedron (ether)
 %
 % - Rho : real positive scalar double, the radius of the sphere circumscribed to the solid.
-%
-% - option_display : logical *true/false, to enable/disable the display.
 %
 % - face_type : character string in the set {'default','triangle'}. Case insensitive.
 %
@@ -73,44 +70,38 @@ function [V, F] = mesh_platonic_solids(id, Rho, option_display, face_type)
 %
 % Examples
 %
-% mesh_platonic_solids(1); % tetrahedron
+% platonic_solids(1); % tetrahedron
 %
-% mesh_platonic_solids(2,1,true,'triangle'); % triangulated cube
+% platonic_solids(2,1,'triangle'); % triangulated cube
 %
-% mesh_platonic_solids(3,9); % octahedron living in the sphere centred in [0 0 0] and of radius Rho = 9.
+% platonic_solids(3,9); % octahedron living in the sphere centred in [0 0 0] and of radius Rho = 9.
 %
-% [V,T] = mesh_platonic_solids(4); % icosahedron
+% [V,T] = platonic_solids(4); % icosahedron
 %
-% [V,T] = mesh_platonic_solids(5); % dodecahedron
+% [V,T] = platonic_solids(5); % dodecahedron
 % V = V + repmat([1 2 3],[size(V,1),1]); % translate the centre from [0 0 0] to [1 2 3]
 
 
-%% Input parsing
-if nargin < 4
+% Input parsing
+if nargin < 3
     
     face_type = 'default';
     
-    if nargin < 3
+    if nargin < 2
         
-        option_display = true;
+        Rho = 1;
+        assert(nargin > 0,'Not enough input argument.');
         
-        if nargin < 2
-            
-            Rho = 1;
-            assert(nargin > 0,'Not enough input argument.');
-            
-        else
-            
-            assert(isreal(Rho) & Rho > 0,'Rho must be a positive real number.');
-            
-        end
+    else
+        
+        assert(isreal(Rho) & Rho > 0,'Rho must be a positive real number.');
         
     end
     
 end
 
 
-%% Body
+% Body
 phi = 0.5*(1+sqrt(5));
 
 switch id
@@ -125,9 +116,7 @@ switch id
                   F = [1 3 2;...
                        1 2 4;...
                        2 3 4;...
-                       3 1 4];
-                   
-                   color = [1 0 0];
+                       3 1 4];                                      
         
     case 2 % cube | "earth"
         
@@ -164,9 +153,7 @@ switch id
                              5 8 7;...
                              6 5 7];
                           
-                      end
-                      
-                      color = [0 1 0];
+                      end                                            
         
     case 3 % octahedron | "air"
         
@@ -184,9 +171,7 @@ switch id
               1 6 2;...
               2 6 3;...
               3 6 4;...
-              4 6 1];
-          
-          color = [0 1 1];
+              4 6 1];                    
         
     case 4 % icosahedron | "water"                                                          
         
@@ -239,13 +224,11 @@ switch id
                  5 9 6;...
                  6 9 10;...
                  2 6 10;...
-                 2 10 11];                    
-         
-         color = [0 0 1];
+                 2 10 11];                                      
         
     case 5 % dodecahedron | "ether"   
         
-        [V,F] = mesh_platonic_solids(4,Rho,false); % from the icosahedron, as its dual polyhedron
+        [V,F] = platonic_solids(4,Rho,false); % from the icosahedron, as its dual polyhedron
         
         V = cell2mat(cellfun(@(r) mean(V(r,:),1),num2cell(F,2),'UniformOutput', false));                
         V = V ./ repmat(sqrt(sum(V.^2,2)),[1,3]);
@@ -306,9 +289,7 @@ switch id
                  10 16 15;...
                  10 15 14];
             
-        end
-         
-         color = [1 1 0];
+        end                  
         
     otherwise
         
@@ -318,51 +299,5 @@ end
 
 V = Rho*V;
 
-if option_display
-    
-    plot_mesh(V,F,Rho,'none',color,2,false);
-    
-    % % another display type; uncomment/comment to enable/disable
-    % plot_mesh(V,F,Rho,color,[0 0 0],0.5,false);
-        
-end
 
-
-end % mesh_platonic_solids
-
-
-%% plot subfunction
-function [] = plot_mesh(V, F, Rho, facecolor, edgecolor, linewidth, disp_sphere)
-
-
-h = figure;
-set(h,'Position',get(0,'ScreenSize'));
-set(gcf,'Color',[0 0 0]);
-
-patch('Faces',F,'Vertices',V,'FaceVertexCData',[0 1 1],'FaceColor',facecolor,'LineWidth',linewidth,'EdgeColor',edgecolor), hold on;        
-
-if disp_sphere
-   
-    angle_step = pi/180;
-    theta = (0:angle_step:pi)';
-    phi = (0:angle_step:2*pi);
-    
-    Xs = Rho*sin(theta)*cos(phi);
-    Ys = Rho*sin(theta)*sin(phi);
-    Zs = Rho*repmat(cos(theta),[1 length(phi)]);
-    
-    plot3(Xs(:,1:30:end),  Ys(:,1:30:end),  Zs(:,1:30:end),  '-.', 'Color', [1 1 1]), hold on;
-    plot3(Ys(1:30:end,:)', Xs(1:30:end,:)', Zs(1:30:end,:)', '-.', 'Color', [1 1 1]), hold on;
-    
-end
-
-alpha(0.5);
-xlabel('X'), ylabel('Y'), zlabel('Z');
-axis equal, axis tight;
-ax = gca;
-ax.Clipping = 'off';
-set(gca, 'Color', [0 0 0], 'XColor', [1 1 1], 'YColor', [1 1 1], 'ZColor', [1 1 1]);
-view(3);
-
-
-end % plot_mesh
+end % platonic_solids

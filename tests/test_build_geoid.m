@@ -1,4 +1,4 @@
-% test build_geoid
+% test mesh_geoid
 
 clear all, close all, clc;
 
@@ -7,8 +7,8 @@ addpath('../data');
 
 id = 3;
 nb_it = 3;
-projection_mode = 'edge_oversamples'; % ; % 'face_centres'
-[V,T] = build_geoid(id,projection_mode,nb_it);
+sampling_mode = 'edge'; % ; % 'face'
+[V,T] = mesh_geoid(id,nb_it,sampling_mode);
 
 h = figure;
 set(h,'Position',get(0,'ScreenSize'));

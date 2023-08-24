@@ -1,18 +1,18 @@
 function [C, T, N] = discrete_contour_mesh_patch(V, mode)
-%% discrete_contour_mesh_patch : function to mesh one discrete 2D
+% discrete_contour_mesh_patch : function to mesh one discrete 2D
 % or 3D contour composed of sorted or disordered 3D points.
 %
-% Author and support : nicolas.douillet (at) free.fr, 2021.
+% Author and support : nicolas.douillet (at) free.fr, 2021-2023
 %
 %
-% Syntax
+%%% Syntax
 %
 % [C, T] = discrete_contour_mesh_patch(V);
 % [C, T] = discrete_contour_mesh_patch(V, mode);
 % [C, T, N] = discrete_contour_mesh_patch(V);
 %
 %
-% Description
+%%% Description
 %
 % [C, T] = discrete_contour_mesh_patch(V) meshes the discrete contour
 % defined by the vertex set V and store the resulting triangulation in T
@@ -26,10 +26,10 @@ function [C, T, N] = discrete_contour_mesh_patch(V, mode)
 % vertex normals set N.
 %
 %
-% See also : MESH, TRIMESH
+%%% See also : MESH, TRIMESH
 %
 %
-% Input arguments
+%%% Input arguments
 %
 %       [ |  |  |]
 % - V = [Vx Vy Vz], real matrix double, the point set, size(V) = [nb_vertices,3].
@@ -39,7 +39,7 @@ function [C, T, N] = discrete_contour_mesh_patch(V, mode)
 %          the type of contour considered. Case insensitive.
 %
 %
-% Output argument
+%%% Output argument
 %
 %       [ |  |  |]
 % - C = [Cx Cy Cz], real matrix double, the output sorted point set, size(C) = [nb_vertices,3].
@@ -54,7 +54,7 @@ function [C, T, N] = discrete_contour_mesh_patch(V, mode)
 %       [ |  |  |]
 
 
-%% Body
+% Body
 tic;
 
 assert(nargin > 0,'Not enought input argument.');
