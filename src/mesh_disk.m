@@ -63,9 +63,8 @@ V5 = (Rmz(pi)*V4')';
 V = cat(1,V4,V5);
 T = cat(1,T1,T1+size(V1,1),T1+2*size(V1,1),T1+3*size(V1,1),T1+4*size(V1,1),T1+5*size(V1,1));
 
-% Duplicata removal
-[V,~,n] = uniquetol(V,'ByRows',true);
-T = n(T);
+% Remove duplicated vertices
+[V,T] = remove_duplicated_vertices(V,T);
 
 
 end % mesh_disk

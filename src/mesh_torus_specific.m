@@ -49,13 +49,10 @@ V = cat(2,X,Y,Z);
 
 
 % Remove duplicated vertices
-[V,~,n] = uniquetol(V,1e3*eps,'ByRows',true);
-T = n(T);
+[V,T] = remove_duplicated_vertices(V,T);
 
 % Remove duplicated triangles
-T_sort = sort(T,2);
-[~,idx,~] = unique(T_sort,'rows','stable');
-T = T(idx,:);
+T = remove_duplicated_triangles(T);
 
 
 end % mesh_torus_specific

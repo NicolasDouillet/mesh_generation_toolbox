@@ -141,13 +141,10 @@ end
 
 
 % Remove duplicated vertices
-[V,~,n] = uniquetol(V,epsilon,'ByRows',true);
-T = n(T);
+[V,T] = remove_duplicated_vertices(V,T);
 
 % Remove duplicated triangles
-T_sort = sort(T,2);
-[~,idx,~] = unique(T_sort,'rows','stable');
-T = T(idx,:);
+T = remove_duplicated_triangles(T);
 
 % Reorient normal outward
 T = fliplr(T);

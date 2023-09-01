@@ -132,27 +132,4 @@ T = [T;
 [V,T] = remove_duplicated_vertices(V,T);
 
 
-TRI = triangulation(T, V(:,1), V(:,2), V(:,3));
-
-%  Display
-if option_display
-    
-    figure;    
-    trimesh(TRI), hold on;    
-    colormap([0 0 1]);    
-    axis square, axis equal, axis tight;
-    
-end
-
-
 end % mesh_reuleaux_tetrahedron
-
-
-% remove_duplicated_vertices subfunction
-function [V_out, T_out] = remove_duplicated_vertices(V_in, T_in)
-
-tol = 1e4*eps;
-[V_out,~,n] = uniquetol(V_in,tol,'ByRows',true);
-T_out = n(T_in);
-
-end % remove_duplicated_vertices

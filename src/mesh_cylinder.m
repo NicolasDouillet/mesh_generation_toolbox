@@ -74,9 +74,8 @@ Tlc = fliplr(Tuc + size(Vuc,1));
 T = cat(1,T,Tuc+size(V,1),Tlc+size(V,1));
 V = cat(1,V,Vuc,Vlc);
 
-% Duplicata removal
-[V,~,n] = uniquetol(V,'ByRows',true);
-T = n(T);
+% Remove duplicated vertices
+[V,T] = remove_duplicated_vertices(V,T);
 
 
 end % mesh_cylinder
