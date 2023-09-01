@@ -1,4 +1,4 @@
-function [V, T] = mesh_torus_curv_adapt(R, r)
+function [V, T] = mesh_torus_curv_adapt(R, r, nb_samples)
 % mesh_torus_curv_adapt : function to create mesh adaptated to the curvature for the torus.
 %
 % Author & support : nicolas.douillet (at) free.fr, 2023.
@@ -8,6 +8,7 @@ function [V, T] = mesh_torus_curv_adapt(R, r)
 %
 % - R > r > 0 : positive real scalar double, the torus large radius.
 % - r > 0 :     positive real scalar double, the torus small radius.
+% - nb_samples > 0 : positive integer scalar double, the number of samples.
 %
 %
 %%% Output arguments :
@@ -21,6 +22,8 @@ function [V, T] = mesh_torus_curv_adapt(R, r)
 % - T = [i1 i2 i3], positive integer matrix double, the triangulation, size(T) = [nb_triangles,3].
 %       [|  |  |]
 %
+% - nb_samples : positive integer scalar double, the nmber of samples.
+%
 %
 %%% About / other informations
 %
@@ -33,10 +36,10 @@ assert(r > 0, 'Torus small radius must be a real positive number');
 assert(R > 0, 'Torus great radius must be a real positive number');
 assert(R > r, 'Torus big radius must be greater than torus small radius.');
 
-%                                  ____________________________________________
-%                                 |                                            |
-nb_samples = 1 + floor(R/r); % <= | modify the sampling rate HERE if necessary |
-%                                 |____________________________________________|
+%                                    ____________________________________________
+%                                   |                                            |
+% nb_samples = 1 + floor(R/r); % <= | modify the sampling rate HERE if necessary |
+%                                   |____________________________________________|
 
 % Build icosahedron
 phi_n = 0.5*(1+sqrt(5));
