@@ -1,5 +1,5 @@
-function [V, T] = mesh_reuleaux_tetrahedron(sample_step, option_display)
-% mesh_reuleaux_tetrahedron : function to compute, display, and save a meshed Reuleaux tetrahedron. 
+function [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl)
+% mesh_reuleaux_tetrahedron : function to compute and save a meshed Reuleaux tetrahedron. 
 %
 % Author & support : nicolas.douillet (at) free.fr, 2017-2023.
 %
@@ -7,24 +7,19 @@ function [V, T] = mesh_reuleaux_tetrahedron(sample_step, option_display)
 % Syntax
 %
 % mesh_reuleaux_tetrahedron;
-% mesh_reuleaux_tetrahedron(sample_step);
-% mesh_reuleaux_tetrahedron(sample_step, option_display);
-% [V, T] = mesh_reuleaux_tetrahedron(sample_step, option_display);
+% mesh_reuleaux_tetrahedron(nb_edg_smpl);
+% [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl);
 %
 %
 % Description
 %
-% mesh_reuleaux_tetrahedron computes and displays the meshed Reuleaux
+% mesh_reuleaux_tetrahedron computes the meshed Reuleaux
 % tetrahedron included in the unit sphere, and which each
 % edge is sampled in 8.
 %
-% mesh_reuleaux_tetrahedron(sample_step) uses sample_step steps.
+% mesh_reuleaux_tetrahedron(nb_edg_smpl) uses nb_edg_smpl steps.
 %
-% mesh_reuleaux_tetrahedron(sample_step, option_display)
-% displays the result when option_display is logical *true/1, and doesn't when it is
-% logical false/0.
-%
-% [V, T] = mesh_reuleaux_tetrahedron(sample_step, option_display) stores the resulting
+% [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl) stores the resulting
 % vertices coordinates in the array V, and the corresponding triplet indices list in the array T.
 % 
 %
@@ -36,9 +31,7 @@ function [V, T] = mesh_reuleaux_tetrahedron(sample_step, option_display)
 %
 % Input arguments
 %
-% - sample_step : positive integer scalar, power of 2.
-%
-% - option_display : logical *true (1) / false (0).
+% - nb_edg_smpl : positive integer scalar, power of 2.
 %
 %
 % Output arguments
@@ -56,18 +49,16 @@ function [V, T] = mesh_reuleaux_tetrahedron(sample_step, option_display)
 
 
 % Input parsing
-assert(nargin < 3,'Too many input arguments.');
+assert(nargin < 2,'Too many input arguments.');
 
 if nargin > 0
-    assert(isnumeric(sample_step) && sample_step == floor(sample_step) && sample_step > 0,'sample_step parameter must be a positive integer.');    
-    if nargin  > 1                                
-            assert(islogical(option_display) || isnumeric(option_display),'option_display parameter type must be either logical or numeric.');                    
-    else                
-        option_display = true;        
-    end    
+
+    assert(isnumeric(nb_edg_smpl) && nb_edg_smpl == floor(nb_edg_smpl) && nb_edg_smpl > 0,'nb_edg_smpl parameter must be a positive integer.');        
+	
 else
-    sample_step = 8;    
-    option_display = true;    
+
+    nb_edg_smpl = 8;    
+	
 end
 
 
@@ -80,15 +71,16 @@ V4 = [-sqrt(2)/3 -sqrt(6)/3 -1/3];
 
 edge_length = norm(V1-V2); %  = 2*sqrt(6)/3
 
-[V123, T] = mesh_triangle(V2', V1', V3', sample_step);
+
+[V123, T] = mesh_triangle(V2', V1', V3', nb_edg_smpl);
 V_flat = V123; 
 
 D123 = sqrt(sum((V123 - V4).^2,2)); % distance matrix
 V123 = edge_length*(V123 - V4) ./ repmat(D123, [1 3]) + repmat(V4, [size(V123,1), 1]); % "inflated triangle" / opposite vertex V4
 
-be = 1:sample_step+1;                       % bottom edge index vector
-re = cumsum(sample_step+1:-1:0);            % right edge index vector
-le = cat(2,1,1+cumsum(sample_step+1:-1:2)); % left edge index vector
+be = 1:nb_edg_smpl+1;                       % bottom edge index vector
+re = cumsum(nb_edg_smpl+1:-1:0);            % right edge index vector
+le = cat(2,1,1+cumsum(nb_edg_smpl+1:-1:2)); % left edge index vector
 
 M34 = [-sqrt(2)/3 0 -1/3]; % middle of [V3;V4] segment
 D34 = sqrt(sum((V_flat(le,:) - M34).^2,2));
