@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>doc</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-08-24"><meta name="DC.source" content="doc.m"><style type="text/css">
+      --><title>doc</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-09-26"><meta name="DC.source" content="doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -72,18 +72,14 @@ nb_it = 3;
 sampling_mode = <span class="string">'face'</span>;
 [V,T] = mesh_geoid(id,nb_it,sampling_mode);
 plot_mesh(V,T);
-</pre><pre class="codeoutput">Mesh with 272 vertices and 540 triangles displayed in 2.355670e-01 seconds.
 </pre><img vspace="5" hspace="5" src="doc_01.png" alt=""> <h2 id="3">Example #2 : mesh a cylinder</h2><pre class="codeinput">[V,T] = mesh_cylinder(3,7,5);
 plot_mesh(V,T);
-</pre><pre class="codeoutput">Mesh with 302 vertices and 600 triangles displayed in 1.896151e-01 seconds.
 </pre><img vspace="5" hspace="5" src="doc_02.png" alt=""> <h2 id="4">Example #3 : mesh an ovoid and select its face normals</h2><pre class="codeinput">[V,T] = mesh_ovoid(8);
 select_face_normals(V,T); <span class="comment">% beware : not all coherently oriented / facing outward</span>
-</pre><pre class="codeoutput">Mesh with 114 vertices and 254 triangles displayed in 1.731357e-01 seconds.
 </pre><img vspace="5" hspace="5" src="doc_03.png" alt=""> <h2 id="5">Example #4 : mesh a torus with quasi equilateral triangles</h2><pre class="codeinput">longtude_nb_samples = 37;
 latitude_nb_samples = 15; <span class="comment">% odd number</span>
 [V, T] = mesh_torus_specific(longtude_nb_samples,latitude_nb_samples);
 plot_mesh(V,T);
-</pre><pre class="codeoutput">Mesh with 504 vertices and 1008 triangles displayed in 1.847091e-01 seconds.
 </pre><img vspace="5" hspace="5" src="doc_04.png" alt=""> <h2 id="6">Example #5 : (triangle) mesh a polygon</h2><p>Hexagon of the 3D space</p><pre class="codeinput">V1 = [-sqrt(2)/3 sqrt(6)/3 -1/3];
 V3 = [-sqrt(2)/3 -sqrt(6)/3 -1/3];
 V5 = [0 0 1];
@@ -93,7 +89,6 @@ V6 = (2/3)*(V1+V5) - (1/3)*V3;
 P = cat(1,V1,V2,V3,V4,V5,V6);
 [V,T] = mesh_polygon(P,<span class="string">'sorted'</span>);
 plot_mesh(V,T);
-</pre><pre class="codeoutput">Mesh with 6 vertices and 4 triangles displayed in 1.510291e-01 seconds.
 </pre><img vspace="5" hspace="5" src="doc_05.png" alt=""> <h2 id="7">Example #6 : discrete contour mesh patch</h2><pre class="codeinput">n = 32;
 V = 2*(rand(n,2)-0.5);
 H_raw = convhull(V);

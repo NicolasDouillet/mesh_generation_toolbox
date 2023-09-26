@@ -1,11 +1,13 @@
 Please first check the doc tab on the right to get some relevant and functional examples of this toobox functions.
 
+Please don'tforget ta rate if this code helped you. Thanks ! ;-)
+
 Feel free to check and download the mesh processing toolbox ( https://fr.mathworks.com/matlabcentral/fileexchange/77004-mesh-processing-toolbox?s_tid=srchtitle ) for many further meshing relative functions.
 
 
 %% DESCRIPTION
 
-This package is a mesh generation toolbox which on the long term aim at providing a command line mesh generation lab in Matlab(R) console. It is designed to deal with and generate 3D triangular meshes.
+This package is a mesh generation toolbox which aim at providing a command line mesh generation lab in Matlab(R) console. It is designed to deal with and generate 3D triangular meshes.
 
 
 %% HELP
@@ -62,18 +64,14 @@ Please report me any bug (with data set used and Matlab(R) code attached) or sug
 
 %% KNOWN LIMITATIONS
 
-Three core mesh generation functions are exploitable at the moment :
-
-- mesh_geoid
-- discrete_contour_mesh_patch
-- volumic_mesh_from_convex_set_mesh
-
 The function build_volumic_mesh_from_convex_set_mesh will of course create non manifold edges. It will also lose orientation of the face normals.
+
+The function dual_of_trimesh mostly works on quasi planar triangular meshes.
 
 
 %% MISC INFORMATION
 
-Except for the ovoid shape, all the other meshes have their normals / faces coherently oriented outward.
+Meshes have their normals / faces coherently oriented outward.
 
 Most of the time, I did my best to make function names pretty explicit in english.
 
@@ -91,4 +89,4 @@ Since I am not native english speaker, please forgive my langage approximations.
 Matlab release version used for development and tests : R2019b.
 
 
-Last update : 24 / 08 / 2023.
+Last update : 26 / 09 / 2023.

@@ -1,7 +1,7 @@
 function T_out = add_triangles(T_set, T_in, nb_vtx)
 %% add_triangles : function to add new triangles to the triangle set.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2021-2023.
+% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
 %
 %
 % Input arguments
