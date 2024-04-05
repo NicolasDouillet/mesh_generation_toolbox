@@ -1,7 +1,7 @@
 function [] = plot_mesh(V, T)
-%% plot_mesh : function to display the mesh in a Matlab (R) figure.
+% plot_mesh : function to display the mesh in a Matlab (R) figure.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments
@@ -15,7 +15,7 @@ function [] = plot_mesh(V, T)
 %       [ |  |  |]
 
 
-%% Body
+% Body
 % tic;
 h = figure;
 % set(h,'Position',get(0,'ScreenSize'));

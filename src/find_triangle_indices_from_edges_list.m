@@ -1,8 +1,8 @@
 function tgl_idx_list = find_triangle_indices_from_edges_list(T, edg_list)
-%% find_triangle_indices_from_edges_list : function to find
+% find_triangle_indices_from_edges_list : function to find
 % belonging triangle indices of the edge list.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments
@@ -21,7 +21,7 @@ function tgl_idx_list = find_triangle_indices_from_edges_list(T, edg_list)
 % - tgl_idx_list : positive integer row vector double, the triangle indices list, size(tgl_idx_list) = [nb_triangles,3].
 
 
-%% Body
+% Body
 % tic;
 tgl_idx_list = cellfun(@(r) find(sum(bitor(T == r(1,1),T == r(1,2)),2) == 2)',num2cell(edg_list,2),'un',0);
 % fprintf('find_triangle_indices_from_edges_list request executed in %d seconds.\n',toc);

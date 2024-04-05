@@ -1,8 +1,8 @@
 function edg_list = query_edges_list(T, mode)
-%% query_edges_list : function to query the edges list
+% query_edges_list : function to query the edges list
 % corresponding to the triangulation T.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments
@@ -27,7 +27,7 @@ function edg_list = query_edges_list(T, mode)
 %              with nb_edg the number of edges.
 
 
-%% Body
+% Body
 % tic;
 L = cat(2,T,T(:,1)); % loop
 R = repelem(L,1,[1 2 2 1]); % replicated

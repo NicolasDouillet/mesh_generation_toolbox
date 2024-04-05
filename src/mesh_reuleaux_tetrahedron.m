@@ -1,7 +1,7 @@
 function [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl)
 % mesh_reuleaux_tetrahedron : function to compute and save a meshed Reuleaux tetrahedron. 
 %
-% Author & support : nicolas.douillet (at) free.fr, 2017-2023.
+% Author : nicolas.douillet (at) free.fr, 2017-2024.
 %
 %
 % Syntax

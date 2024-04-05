@@ -1,7 +1,7 @@
 function [V, T] = mesh_tetrahedron(edg_nb_smpl)
 % mesh_tetrahedron : function to mesh a tetrahedron.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2023.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :

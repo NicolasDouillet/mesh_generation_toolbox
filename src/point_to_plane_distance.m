@@ -1,9 +1,9 @@
 function [d2H, H] = point_to_plane_distance(M, n, I)
-%% point_to_plane_distance : function to compute the distance between
+% point_to_plane_distance : function to compute the distance between
 % the 3D point M and the plane (I,n). Also provides the coordinates
 % of H, the projection of M on (I,n), and also works for a list of points.
 %
-% Author and support nicolas.douillet (at) free.fr, 2020-2023.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments
@@ -25,7 +25,7 @@ function [d2H, H] = point_to_plane_distance(M, n, I)
 % - H : real vector double, the projected point(s) on the plane. size(H) = [N,3].
 
 
-%% Body
+% Body
 nb_pts = size(M,1);
 d_I = -(n(1)*I(1)+n(2)*I(2)+n(3)*I(3));
 t_H = -(repmat(d_I,[nb_pts,1])+n(1)*M(:,1)+n(2)*M(:,2)+n(3)*M(:,3)) / sum(n.^2);

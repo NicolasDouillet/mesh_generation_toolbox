@@ -1,8 +1,8 @@
 function [V_out, T_out] = remove_duplicated_vertices(V_in, T_in)
-%% remove_duplicated_vertices : function to remove duplicated
+% remove_duplicated_vertices : function to remove duplicated
 % vertices from the point set.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments
@@ -28,7 +28,7 @@ function [V_out, T_out] = remove_duplicated_vertices(V_in, T_in)
 % - T_out = [i1_out i2_out i3_out], positive integer matrix double, the output triangulation, size(T_out) = [nb_output_triangles,3].
 %           [  |      |      |   ]
 
-%% Body
+% Body
 % tic;
 [V_out,~,n] = uniquetol(V_in,1e3*eps,'ByRows',true);
 T_out = n(T_in);

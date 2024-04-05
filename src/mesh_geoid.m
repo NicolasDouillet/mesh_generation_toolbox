@@ -3,7 +3,7 @@ function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
 % (all except dodecahedron) iterative projections on the unit sphere,
 % with two different sampling modes available.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2021-2023.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 %
 %
 %%% Input arguments

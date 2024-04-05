@@ -1,7 +1,7 @@
 function [V, T] = mesh_icosahedron(edg_nb_smpl)
 % mesh_icosahedron : function to mesh a icosahedron.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2023.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :

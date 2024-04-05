@@ -2,7 +2,7 @@ function [V, T] = mesh_torus_specific(R, r)
 % mesh_torus_specific : function to mesh a torus while allowing to specifically choose
 % the number of samples in the two directions, longitude and latitude.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2023.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :

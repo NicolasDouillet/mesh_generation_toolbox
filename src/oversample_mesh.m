@@ -1,7 +1,7 @@
 function [V_out, T_out] = oversample_mesh(V_in, T_in)
-%% oversample_mesh : function to oversample a mesh.
+% oversample_mesh : function to oversample a mesh.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2023.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 % Input arguments
@@ -29,7 +29,7 @@ function [V_out, T_out] = oversample_mesh(V_in, T_in)
 % Keep faces orientation
 
 
-%% Body
+% Body
 V_out = V_in;
 T_out = zeros(0,3);
 

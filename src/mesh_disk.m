@@ -1,7 +1,7 @@
 function [V, T] = mesh_disk(r, edg_nb_smpl)
 % mesh_disk : function to mesh a disk.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2023.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :

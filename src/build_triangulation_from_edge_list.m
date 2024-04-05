@@ -1,8 +1,8 @@
 function T = build_triangulation_from_edge_list(E, mode)
-%% build_triangulation_from_edge_list : function to build the
+% build_triangulation_from_edge_list : function to build the
 % triangulation T from the edge list E. 
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input argument
@@ -23,7 +23,7 @@ function T = build_triangulation_from_edge_list(E, mode)
 %       [ |  |  |]
 
 
-%% Body
+% Body
 % tic;
 if nargin > 1 && strcmpi(mode,'sorted')
     
@@ -68,7 +68,7 @@ end
 end % build_triangulation_from_edge_list
 
 
-%% get_vertex_linked_vertices subfunction
+% get_vertex_linked_vertices subfunction
 function vtx_idx_list = get_vertex_linked_vertices(E, vtx_idx)
 %
 % Author & support : nicolas.douillet (at) free.fr, 2023.

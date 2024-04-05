@@ -1,7 +1,7 @@
 function [V, T] = mesh_sphere_isotropic(r, nb_samples)
 % mesh_sphere_isotropic : function isotropically mesh a sphere.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2023.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :

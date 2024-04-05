@@ -1,7 +1,7 @@
 function [V_out, new_id] = add_vertices(V_set, V_in)
-%% add_vertices : function to add some new vertices to the vertex set.
+% add_vertices : function to add some new vertices to the vertex set.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments
@@ -27,7 +27,7 @@ function [V_out, new_id] = add_vertices(V_set, V_in)
 % - new_id : positive integer row vector double, added vertices indices, size(new_id) = [1,nb_new_vtx].
 
 
-%% Body
+% Body
 % tic;
 epsilon = 1e3*eps;
 

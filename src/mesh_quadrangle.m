@@ -1,7 +1,7 @@
 function [V, T] = mesh_quadrangle(M1, M2, M3, M4, edg_nb_smpl)
 % mesh_quadrangle : function to mesh the (M1M2M3M4) quadrangle.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2023.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :

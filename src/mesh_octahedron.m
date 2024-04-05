@@ -1,7 +1,7 @@
 function [V, T] = mesh_octahedron(edg_nb_smpl)
 % mesh_octahedron : function to mesh a octahedron.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2023.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :

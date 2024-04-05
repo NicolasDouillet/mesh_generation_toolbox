@@ -1,4 +1,5 @@
-% Test dual_of_trimesh
+% test dual_of_trimesh
+
 
 clear all, close all, clc;
 

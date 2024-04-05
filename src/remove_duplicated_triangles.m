@@ -1,8 +1,8 @@
 function T_out = remove_duplicated_triangles(T_in)
-%% remove_duplicated_triangles : function to remove duplicated
+% remove_duplicated_triangles : function to remove duplicated
 % triangles present in the triangulation T_in.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input argument
@@ -21,7 +21,7 @@ function T_out = remove_duplicated_triangles(T_in)
 %           where nb_output_triangles = nb_input_triangles - nb_duplicata.
 
 
-%% Body
+% Body
 % tic;
 T_sort = sort(T_in,2);
 [~,idx,~] = unique(T_sort,'rows','stable'); % sort a copy only to keep face orientation
