@@ -2,7 +2,7 @@ function [V, T] = mesh_ovoid(nb_samples)
 % mesh_ovoid : function to mesh an ovoid following
 % Hügelschäffer egg curve parameteric equation.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+% Author : nicotangente (at) free.fr, 2021-2024.
 %
 %
 %%% Input arguments :
@@ -69,7 +69,8 @@ S2 = 2*nb_samples+1; % number of lines
 T = build_triangulation(S1,S2,nb_samples);      
            
 % Remove duplicated vertices
-[V,T] = remove_duplicated_vertices(V,T);
+tol = 1e3*eps;
+[V,T] = remove_duplicated_vertices(V,T,tol);
 
 % Remove duplicated triangles
 T = remove_duplicated_triangles(T);

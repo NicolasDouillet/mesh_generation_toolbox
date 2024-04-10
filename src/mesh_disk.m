@@ -1,7 +1,7 @@
 function [V, T] = mesh_disk(r, edg_nb_smpl)
 % mesh_disk : function to mesh a disk.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+% Author : nicotangente (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :
@@ -64,7 +64,8 @@ V = cat(1,V4,V5);
 T = cat(1,T1,T1+size(V1,1),T1+2*size(V1,1),T1+3*size(V1,1),T1+4*size(V1,1),T1+5*size(V1,1));
 
 % Remove duplicated vertices
-[V,T] = remove_duplicated_vertices(V,T);
+tol = 1e3*eps;
+[V,T] = remove_duplicated_vertices(V,T,tol);
 
 
 end % mesh_disk

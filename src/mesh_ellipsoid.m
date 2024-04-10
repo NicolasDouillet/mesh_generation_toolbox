@@ -2,7 +2,7 @@ function [V, T] = mesh_ellipsoid(a, b, c, nb_samples)
 % mesh_ellipsoid : function to mesh an ellipsoid based on the geoid,
 % based itself on a subsampling of the icosahedron.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+% Author : nicotangente (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :

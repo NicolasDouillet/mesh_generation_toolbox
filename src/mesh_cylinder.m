@@ -1,7 +1,7 @@
 function [V, T] = mesh_cylinder(r, h, edg_nb_smpl)
 % mesh_cylinder : function to mesh a cylinder.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+% Author : nicotangente (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :
@@ -75,7 +75,8 @@ T = cat(1,T,Tuc+size(V,1),Tlc+size(V,1));
 V = cat(1,V,Vuc,Vlc);
 
 % Remove duplicated vertices
-[V,T] = remove_duplicated_vertices(V,T);
+tol = 1e3*eps;
+[V,T] = remove_duplicated_vertices(V,T,tol);
 
 
 end % mesh_cylinder

@@ -1,7 +1,7 @@
 function [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl)
 % mesh_reuleaux_tetrahedron : function to compute and save a meshed Reuleaux tetrahedron. 
 %
-% Author : nicolas.douillet (at) free.fr, 2017-2024.
+% Author : nicotangente (at) free.fr, 2017-2024.
 %
 %
 % Syntax
@@ -121,7 +121,8 @@ T = [T;
     
 
 % Duplicated vertices removal (from the edges)
-[V,T] = remove_duplicated_vertices(V,T);
+tol = 1e3*eps;
+[V,T] = remove_duplicated_vertices(V,T,tol);
 
 
 end % mesh_reuleaux_tetrahedron

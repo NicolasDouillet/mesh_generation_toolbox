@@ -2,7 +2,7 @@ function [V, T] = mesh_torus_specific(R, r)
 % mesh_torus_specific : function to mesh a torus while allowing to specifically choose
 % the number of samples in the two directions, longitude and latitude.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+% Author : nicotangente (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :
@@ -49,7 +49,8 @@ V = cat(2,X,Y,Z);
 
 
 % Remove duplicated vertices
-[V,T] = remove_duplicated_vertices(V,T);
+tol = 1e3*eps;
+[V,T] = remove_duplicated_vertices(V,T,tol);
 
 % Remove duplicated triangles
 T = remove_duplicated_triangles(T);

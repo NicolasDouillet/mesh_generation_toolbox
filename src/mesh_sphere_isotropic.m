@@ -1,7 +1,7 @@
 function [V, T] = mesh_sphere_isotropic(r, nb_samples)
 % mesh_sphere_isotropic : function isotropically mesh a sphere.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+% Author : nicotangente (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :
@@ -73,7 +73,8 @@ Z = Z(:);
 V = [X Y Z];
 
 % Remove duplicated vertices
-[V,T] = remove_duplicated_vertices(V,T);
+tol = 1e3*eps;
+[V,T] = remove_duplicated_vertices(V,T,tol);
 
 % Remove duplicated triangles
 T = remove_duplicated_triangles(T);

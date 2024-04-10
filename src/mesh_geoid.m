@@ -3,7 +3,7 @@ function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
 % (all except dodecahedron) iterative projections on the unit sphere,
 % with two different sampling modes available.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+% Author : nicotangente (at) free.fr, 2021-2024.
 %
 %
 %%% Input arguments
@@ -141,7 +141,8 @@ end
 
 
 % Remove duplicated vertices
-[V,T] = remove_duplicated_vertices(V,T);
+tol = 1e3*eps;
+[V,T] = remove_duplicated_vertices(V,T,tol);
 
 % Remove duplicated triangles
 T = remove_duplicated_triangles(T);

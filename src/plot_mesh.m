@@ -1,7 +1,7 @@
 function [] = plot_mesh(V, T)
 % plot_mesh : function to display the mesh in a Matlab (R) figure.
 %
-% Author : nicolas.douillet (at) free.fr, 2020-2024.
+% Author : nicotangente (at) free.fr, 2020-2024.
 %
 %
 % Input arguments

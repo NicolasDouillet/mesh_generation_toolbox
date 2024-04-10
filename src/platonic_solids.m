@@ -13,7 +13,7 @@ function [V, F] = platonic_solids(id, Rho, face_type)
 % Triangles / normals are coherently oriented and facing outward.
 %
 %
-% Author and support : nicolas.douillet (at) free.fr, 2021-2023.
+% Author : nicotangente (at) free.fr, 2021-2024.
 %
 %
 % Syntax

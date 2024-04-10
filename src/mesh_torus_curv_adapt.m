@@ -1,7 +1,7 @@
 function [V, T] = mesh_torus_curv_adapt(R, r, nb_samples)
 % mesh_torus_curv_adapt : function to create mesh adaptated to the curvature for the torus.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+% Author : nicotangente (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :
@@ -149,7 +149,8 @@ V = cat(2,V(:,1),V(:,3),V(:,2));
 
 
 % Remove duplicated vertices
-[V,T] = remove_duplicated_vertices(V,T);
+tol = 1e3*eps;
+[V,T] = remove_duplicated_vertices(V,T,tol);
 
 % Remove duplicated triangles
 T = remove_duplicated_triangles(T);

@@ -2,7 +2,7 @@ function T = build_triangulation_from_edge_list(E, mode)
 % build_triangulation_from_edge_list : function to build the
 % triangulation T from the edge list E. 
 %
-% Author : nicolas.douillet (at) free.fr, 2020-2024.
+% Author : nicotangente (at) free.fr, 2020-2024.
 %
 %
 % Input argument

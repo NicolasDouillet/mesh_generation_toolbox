@@ -1,7 +1,7 @@
 function [V, T] = mesh_polygon(P, mode)
 % mesh_polygon : function to triangularly mesh a given polygon.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+% Author : nicotangente (at) free.fr, 2021-2024.
 %
 %
 %%% Input arguments :

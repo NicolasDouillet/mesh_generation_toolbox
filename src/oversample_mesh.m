@@ -1,7 +1,7 @@
 function [V_out, T_out] = oversample_mesh(V_in, T_in)
 % oversample_mesh : function to oversample a mesh.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+% Author : nicotangente (at) free.fr, 2023-2024.
 %
 %
 % Input arguments
@@ -54,7 +54,7 @@ end
 
 V_out = cat(1,V_out,V_new);
 T_out = cat(1,T_out,T_new); % do not use add_triangles since no risk of duplicata here
-[V_out,T_out] = remove_duplicated_vertices(V_out,T_out);
+[V_out,T_out] = remove_duplicated_vertices(V_out,T_out,1e3*eps);
 
 
 end % oversample_mesh

@@ -2,7 +2,7 @@ function tgl_idx_list = find_triangle_indices_from_edges_list(T, edg_list)
 % find_triangle_indices_from_edges_list : function to find
 % belonging triangle indices of the edge list.
 %
-% Author : nicolas.douillet (at) free.fr, 2020-2024.
+% Author : nicotangente (at) free.fr, 2020-2024.
 %
 %
 % Input arguments
