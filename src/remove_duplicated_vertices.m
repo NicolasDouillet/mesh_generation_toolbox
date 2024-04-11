@@ -15,7 +15,7 @@ function [V_out, T_out] = remove_duplicated_vertices(V_in, T_in, tol)
 % - T_in = [i1_in i2_in i3_in], positive integer matrix double, the input triangulation, size(T_in) = [nb_input_triangles,3].
 %          [  |     |     |  ]
 %
-% - tol, real scalar double. tol = f(eps). The tolerancy.
+% - tol : real scalar double. tol = f(eps), the tolerance to error.
 %
 %
 % Output arguments
