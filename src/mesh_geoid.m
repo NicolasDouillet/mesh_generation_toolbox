@@ -3,7 +3,7 @@ function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
 % (all except dodecahedron) iterative projections on the unit sphere,
 % with two different sampling modes available.
 %
-% Author : nicotangente (at) free.fr, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 %
 %
 %%% Input arguments
@@ -221,10 +221,9 @@ end % detect_concavity
 function [T, N, edg_list] = flip_two_ngb_triangles(tgl_pair_idx, T, V, N, edg_list)
 % flip_two_ngb_triangles : function to flip two triangles sharing one common edge.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2021-2023.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 
 
-nb_vtx = size(V,1);
 T1 = T(tgl_pair_idx(1),:);
 T2 = T(tgl_pair_idx(2),:);
 
@@ -254,8 +253,8 @@ else
 end
 
 % Add 2 triangles and their face normals
-T = add_triangles(Ta,T,nb_vtx);
-T = add_triangles(Tb,T,nb_vtx);
+T = add_triangles(Ta,T);
+T = add_triangles(Tb,T);
 
 % Remove 2 triangles and their face normals
 T(tgl_pair_idx,:) = [];

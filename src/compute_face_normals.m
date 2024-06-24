@@ -1,7 +1,7 @@
 function N = compute_face_normals(V, T, mode)
 % compute_face_normals : function to compute faces (triangles) normals.
 %
-% Author : nicotangente (at) free.fr, 2020-2024.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments

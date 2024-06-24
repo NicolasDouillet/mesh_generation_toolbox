@@ -1,7 +1,7 @@
 function [V_out, new_id] = add_vertices(V_set, V_in)
 % add_vertices : function to add some new vertices to the vertex set.
 %
-% Author : nicotangente (at) free.fr, 2020-2024.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments

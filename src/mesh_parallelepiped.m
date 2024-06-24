@@ -1,7 +1,7 @@
 function [V, T] = mesh_parallelepiped(L, d, h, edg_nb_smpl)
 % mesh_parallelepiped : function to mesh a parallelepiped.
 %
-% Author : nicotangente (at) free.fr, 2023-2024.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 %%% Input arguments :

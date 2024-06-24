@@ -1,7 +1,9 @@
-function T_out = add_triangles(T_set, T_in, nb_vtx)
-% add_triangles : function to add new triangles to the triangle set.
+function T_out = add_triangles(T_set, T_in)
+%% add_triangles : function to add new triangles to the triangle set.
+% If one or more vertices are new, they must be added first in the vertex set
+% for the triangulation to be valid.
 %
-% Author : nicotangente (at) free.fr, 2020-2024.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments
@@ -14,8 +16,6 @@ function T_out = add_triangles(T_set, T_in, nb_vtx)
 % - T_in = [i1_in i2_in i3_in], positive integer matrix double, the input triangulation, size(T_in) = [nb_input_triangles,3].
 %          [  |     |     |  ]
 %
-% - nb_vtx : positive integer scalar double, the number of vertices in the input vertex set. nb_vtx = size(V_in,1).
-%
 %
 % Output arguments
 %
@@ -26,11 +26,11 @@ function T_out = add_triangles(T_set, T_in, nb_vtx)
 %           with nb_output_triangles = nb_input_triangles + nb_new_triangles.
 
 
-% Body
+%% Body
 % tic;
 
-% Check if vertices id are valid (0 < positive integers <= nb_vtx)
-if T_set > 0 & T_set <= nb_vtx & isreal(T_set) & rem(T_set,1) == 0 & floor(T_set) == T_set
+% Check if vertices id are valid
+if T_set > 0 & isreal(T_set) & rem(T_set,1) == 0 & floor(T_set) == T_set
     
     % Check if some triangles of T_set already part of T_in
     dpl_tgl_idx = ismember(sort(T_set,2),sort(T_in,2),'rows');               
@@ -48,7 +48,7 @@ if T_set > 0 & T_set <= nb_vtx & isreal(T_set) & rem(T_set,1) == 0 & floor(T_set
     
 else
     
-    error('Unable to perform triangles addition because T_set contains some invalid vertex indices. Vertex indices must be positive integers in the range |[1; %d]|.\n',nb_vtx);
+    error('Unable to perform triangles addition because T_set contains some invalid vertex indices. Vertex indices must be positive integers in the range |[1; number of vertices of the vertex set]|.\n');
     
 end
 

@@ -3,6 +3,7 @@
 
 clear all, close all, clc;
 
+addpath('C:\Users\Nicolas\Desktop\TMW_contributions\mesh_processing_toolbox\src');
 addpath('../src');
 addpath('../data/');
 
@@ -22,4 +23,4 @@ clear T;
 
 % Build the mesh
 T = build_triangulation_from_edge_list(E);
-plot_mesh(V,T);
+select_face_normals(V,T);

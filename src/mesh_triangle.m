@@ -2,7 +2,7 @@ function [V, T] = mesh_triangle(V1, V2, V3, nb_samples)
 % mesh_triangle : function to sample one given (V1V2V3) triangle using nb_samples^2
 % homothetic smaller versions of it. Works in any dimension Ndim >= 2.
 %
-% Author : nicotangente (at) free.fr, 2017-2024.
+% Author : nicolas.douillet (at) free.fr, 2017-2024.
 %
 %
 % Syntax

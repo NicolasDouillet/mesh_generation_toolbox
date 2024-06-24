@@ -2,7 +2,7 @@ function [C, T, N] = discrete_contour_mesh_patch(V, mode)
 % discrete_contour_mesh_patch : function to mesh one discrete 2D
 % or 3D contour composed of sorted or disordered 3D points.
 %
-% Author : nicotangente (at) free.fr, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 %
 %
 %%% Syntax
@@ -161,7 +161,7 @@ while bound_nb_vtx > 2
     if min_angle_idx; min_angle_idx = min_angle_idx(1,1); end
     
     new_triangle = [boundary_forward(min_angle_idx), boundary(min_angle_idx), boundary_backward(min_angle_idx)];
-    T = add_triangles(new_triangle,T,size(C,1));        
+    T = add_triangles(new_triangle,T);        
     
     nb_added_tgl = nb_added_tgl + 1;
     boundary(min_angle_idx) = [];

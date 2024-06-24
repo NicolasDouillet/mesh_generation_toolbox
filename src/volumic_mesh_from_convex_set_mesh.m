@@ -2,7 +2,7 @@ function [V_out, T_out] = volumic_mesh_from_convex_set_mesh(V_in, T_in)
 % volumic_mesh_from_convex_set_mesh : function to build a volumic mesh from a given input convex surface mesh.
 % 
 %
-% Author : nicotangente (at) free.fr, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 %
 %
 %%% Input arguments

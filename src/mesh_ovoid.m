@@ -2,7 +2,7 @@ function [V, T] = mesh_ovoid(nb_samples)
 % mesh_ovoid : function to mesh an ovoid following
 % Hügelschäffer egg curve parameteric equation.
 %
-% Author : nicotangente (at) free.fr, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 %
 %
 %%% Input arguments :
