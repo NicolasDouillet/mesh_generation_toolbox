@@ -75,7 +75,7 @@ edge_length = norm(V1-V2); %  = 2*sqrt(6)/3
 [V123, T] = mesh_triangle(V2', V1', V3', nb_edg_smpl);
 V_flat = V123; 
 
-D123 = sqrt(sum((V123 - V4).^2,2)); % distance matrix
+D123 = vecnorm((V123 - V4)',2)'; % distance matrix
 V123 = edge_length*(V123 - V4) ./ repmat(D123, [1 3]) + repmat(V4, [size(V123,1), 1]); % "inflated triangle" / opposite vertex V4
 
 be = 1:nb_edg_smpl+1;                       % bottom edge index vector
@@ -83,17 +83,17 @@ re = cumsum(nb_edg_smpl+1:-1:0);            % right edge index vector
 le = cat(2,1,1+cumsum(nb_edg_smpl+1:-1:2)); % left edge index vector
 
 M34 = [-sqrt(2)/3 0 -1/3]; % middle of [V3;V4] segment
-D34 = sqrt(sum((V_flat(le,:) - M34).^2,2));
+D34 = vecnorm((V_flat(le,:) - M34)',2)';
 V_flat(le,:) = sqrt(2)*(V_flat(le,:) - M34) ./ repmat(D34, [1 3]) + repmat(M34, [size(V_flat(le,:),1), 1]);
 V123(le,:) = V_flat(le,:);
 
 M24 = [1/3/sqrt(2) -1/sqrt(6) -1/3]; % middle of [V2;V4] segment
-D24 = sqrt(sum((V_flat(re,:) - M24).^2,2));
+D24 = vecnorm((V_flat(re,:) - M24)',2)';
 V_flat(re,:) = sqrt(2)*(V_flat(re,:) - M24) ./ repmat(D24, [1 3]) + repmat(M24, [size(V_flat(re,:),1), 1]);
 V123(re,:) = V_flat(re,:);
 
 M14 = [-1/3/sqrt(2) -1/sqrt(6) 1/3]; % middle of [V1;V4] segment
-D14 = sqrt(sum((V_flat(be,:) - M14).^2,2));
+D14 = vecnorm((V_flat(be,:) - M14)',2)';
 V_flat(be,:) = sqrt(2)*(V_flat(be,:) - M14) ./ repmat(D14, [1 3]) + repmat(M14, [size(V_flat(be,:),1), 1]);
 V123(be,:) = V_flat(be,:);
 

@@ -1,5 +1,5 @@
 function [V, T] = mesh_sphere_isotropic(r, nb_samples)
-% mesh_sphere_isotropic : function isotropically mesh a sphere.
+%% mesh_sphere_isotropic : function isotropically mesh a sphere.
 %
 % Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
@@ -28,6 +28,7 @@ function [V, T] = mesh_sphere_isotropic(r, nb_samples)
 % Triangles / normals are coherently oriented and facing outward.
 
 
+%% Body
 u = linspace(0,pi,0.5*nb_samples)';
 v = linspace(0,2*pi,nb_samples);
 
@@ -38,7 +39,7 @@ Z = r*repmat(cos(u),[1,nb_samples]);
 
 % Triplet indices for mesh facets
 T = zeros(0.5*nb_samples^2,3);
-row_idx = 1;
+row_id = 1;
 i = 1;
 
 while i < nb_samples
@@ -47,20 +48,20 @@ while i < nb_samples
     
     while j < 0.5*nb_samples      
         
-        T(row_idx,:)   = [(i-1)*0.5*nb_samples+j (i-1)*0.5*nb_samples+j+1 i*0.5*nb_samples+j];
-        row_idx = row_idx + 1;
-        T(row_idx,:)   = [(i-1)*0.5*nb_samples+j+1 i*0.5*nb_samples+j+1 i*0.5*nb_samples+j];
-        row_idx = row_idx + 1;
+        T(row_id,:)   = [(i-1)*0.5*nb_samples+j (i-1)*0.5*nb_samples+j+1 i*0.5*nb_samples+j];
+        row_id = row_id + 1;
+        T(row_id,:)   = [(i-1)*0.5*nb_samples+j+1 i*0.5*nb_samples+j+1 i*0.5*nb_samples+j];
+        row_id = row_id + 1;
         
         j = j + 1;
         
     end
     
     % begin-end loop junction
-    T(row_idx,:)   = [(i-1)*0.5*nb_samples+j (i-1)*0.5*nb_samples+1 i*0.5*nb_samples+j];
-    row_idx = row_idx + 1;
-    T(row_idx,:)   = [i*0.5*nb_samples+j i*0.5*nb_samples (i-1)*0.5*nb_samples+1];
-    row_idx = row_idx + 1; 
+    T(row_id,:)   = [(i-1)*0.5*nb_samples+j (i-1)*0.5*nb_samples+1 i*0.5*nb_samples+j];
+    row_id = row_id + 1;
+    T(row_id,:)   = [i*0.5*nb_samples+j i*0.5*nb_samples (i-1)*0.5*nb_samples+1];
+    row_id = row_id + 1; 
     
     i = i + 1;
     

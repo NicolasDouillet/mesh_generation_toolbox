@@ -1,12 +1,12 @@
 function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
-% mesh_geoid : function to mesh a geoid based one platonic solid
+%% mesh_geoid : function to mesh a geoid based one platonic solid
 % (all except dodecahedron) iterative projections on the unit sphere,
 % with two different sampling modes available.
 %
 % Author : nicolas.douillet (at) free.fr, 2021-2024.
 %
 %
-%%% Input arguments
+% Input arguments
 %
 % - id :              positive integer scalar double, the basis polyhedron (platonic solid) id.
 %
@@ -17,7 +17,7 @@ function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
 %                     when sampling_mode = 'face'.
 %
 %
-%%% Output arguments
+% Output arguments
 %
 %       [| | |]
 % - V = [X Y Z], real matrix double, the resulting point set, size(V) = [nb_vertices,3].
@@ -28,12 +28,13 @@ function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
 %       [ |  |  |]
 %
 %
-%%% About / other informations
+% About / other informations
 %
 % Geoid is centered on the origin, [0 0 0].
 % Triangles / normals are coherently oriented and facing outward.
 
 
+%% Default parameter values and input parsing
 epsilon = 1e3*eps;
 [V,T] = platonic_solids(id,1,'triangle');
 
@@ -73,7 +74,9 @@ switch id
         
 end
 
-        
+
+%% Body
+      
 if strcmpi(sampling_mode,'edge')
     
     % Oversample triangles by creating new vertices ; link vertices to create new triangles
@@ -97,29 +100,29 @@ if strcmpi(sampling_mode,'edge')
     V = V_new;
     
     % Vertices normalization / projection on the sphere surface
-    V = V ./ sqrt(sum(V.^2,2));        
+    V = V ./ vecnorm(V',2)';        
     
 elseif strcmpi(sampling_mode,'face')
     
     iteration = 0; % to start with
-    N = compute_face_normals(V,T,'norm');
+    N = face_normals(V,T,'norm');
     
     while iteration < nb_it
         
-        tgl_idx = 1:begin_nb_faces*3^iteration; % concavity
+        tgl_id = 1:begin_nb_faces*3^iteration; % concavity
         
-        [V,T,N] = grow_nxt_lvl_tetrahedra(V,T,N,tgl_idx);
+        [V,T,N] = grow_nxt_lvl_tetrahedra(V,T,N,tgl_id);
         edg_list = query_edges_list(T,'sorted');
         i = 1;
         
         while i < 1 + size(edg_list,1)
             
-            tgl_pair_idx = cell2mat(find_triangle_indices_from_edges_list(T,edg_list(i,:)));
-            isconcave = detect_concavity(V,T,N,tgl_pair_idx,epsilon);
+            tgl_pair_id = cell2mat(find_triangle_indices_from_edges_list(T,edg_list(i,:)));
+            isconcave = detect_concavity(V,T,N,tgl_pair_id,epsilon);
             
             if isconcave
                 
-                [T,N,edg_list] = flip_two_ngb_triangles(tgl_pair_idx,T,V,N,edg_list);
+                [T,N,edg_list] = flip_two_ngb_triangles(tgl_pair_id,T,V,N,edg_list);
                 
             else
                 
@@ -154,8 +157,8 @@ T = fliplr(T);
 end % mesh_geoid
 
 
-% grow_nxt_lvl_tetrahedra subfunction
-function [V, T, N] = grow_nxt_lvl_tetrahedra(V, T, N, tgl_idx)
+%% grow_nxt_lvl_tetrahedra subfunction
+function [V, T, N] = grow_nxt_lvl_tetrahedra(V, T, N, tgl_id)
 % grow_nxt_lvl_tetrahedra : function to create the three new
 % vertices and link them to the 4*3^nb_it new triangles
 % to create the next triangulation level and erase
@@ -164,10 +167,10 @@ function [V, T, N] = grow_nxt_lvl_tetrahedra(V, T, N, tgl_idx)
 % Author & support : nicolas.douillet (at) free.fr, 2021-2023.
 
 
-for idx = tgl_idx
+for idx = tgl_id
     
     new_vtx = mean(V(T(idx,:),:),1);
-    new_vtx = new_vtx ./ sqrt(sum(new_vtx.^2,2));
+    new_vtx = new_vtx ./ vecnorm(new_vtx',2)';
     V = cat(1,V,new_vtx);
     
     new_tgl1 = cat(2,T(idx,1:2),size(V,1));
@@ -176,28 +179,28 @@ for idx = tgl_idx
     
     % Add 3 new triangles and face normals
     T = cat(1,T,new_tgl1,new_tgl2,new_tgl3);
-    new_face_normals = compute_face_normals(V,T(end-2:end,:),'norm');
+    new_face_normals = face_normals(V,T(end-2:end,:),'norm');
     N = cat(1,N,new_face_normals);
     
 end
 
 % Remove one triangle and its normal
-T(tgl_idx,:) = [];
-N(tgl_idx,:) = [];
+T(tgl_id,:) = [];
+N(tgl_id,:) = [];
 
 
 end % grow_nxt_lvl_tetrahedra
 
 
-% detect_concavity subfunction
-function [isconcave] = detect_concavity(V, T, N, tgl_pair_idx, epsilon)
+%% detect_concavity subfunction
+function isconcave = detect_concavity(V, T, N, tgl_pair_id, epsilon)
 % detect_concavity : function to detect concave triangle pair configurations.
 %
 % Author & support : nicolas.douillet (at) free.fr, 2021-2023.
 
 
-i1 = tgl_pair_idx(1);
-i2 = tgl_pair_idx(2);
+i1 = tgl_pair_id(1);
+i2 = tgl_pair_id(2);
 
 T1 = T(i1,:);
 T2 = T(i2,:);
@@ -217,39 +220,39 @@ isconcave = sign(dot(n1+n2,H2-H1,2).*(abs(dot(n1+n2,H2-H1,2)) > epsilon ) ) > 0;
 end % detect_concavity
 
 
-% flip_two_ngb_triangles subfunction
-function [T, N, edg_list] = flip_two_ngb_triangles(tgl_pair_idx, T, V, N, edg_list)
+%% flip_two_ngb_triangles subfunction
+function [T, N, edg_list] = flip_two_ngb_triangles(tgl_pair_id, T, V, N, edg_list)
 % flip_two_ngb_triangles : function to flip two triangles sharing one common edge.
 %
 % Author : nicolas.douillet (at) free.fr, 2021-2024.
 
 
-T1 = T(tgl_pair_idx(1),:);
-T2 = T(tgl_pair_idx(2),:);
+T1 = T(tgl_pair_id(1),:);
+T2 = T(tgl_pair_id(2),:);
 
 cmn_edg = intersect(T1,T2);                  % = new opposit vertices
 new_cmn_edg = setdiff(union(T1,T2),cmn_edg); % = current opposit vertices
 
 
-start_idx1 = find(ismember(T1,new_cmn_edg(1)),1,'first');
+start_id1 = find(ismember(T1,new_cmn_edg(1)),1,'first');
 T1c = circshift(T1,-1);
 
-if ~isempty(start_idx1)
-    Ta = cat(2,new_cmn_edg(1),T1c(start_idx1),new_cmn_edg(2));
+if ~isempty(start_id1)
+    Ta = cat(2,new_cmn_edg(1),T1c(start_id1),new_cmn_edg(2));
 else
-    start_idx1 = find(ismember(T1,new_cmn_edg(2)),1,'first');
-    Ta = cat(2,new_cmn_edg(2),T1c(start_idx1),new_cmn_edg(1));
+    start_id1 = find(ismember(T1,new_cmn_edg(2)),1,'first');
+    Ta = cat(2,new_cmn_edg(2),T1c(start_id1),new_cmn_edg(1));
 end
 
 
-start_idx2 = find(ismember(T2,new_cmn_edg(2)),1,'first');
+start_id2 = find(ismember(T2,new_cmn_edg(2)),1,'first');
 T2c = circshift(T2,-1);
 
-if ~isempty(start_idx2)
-    Tb = cat(2,new_cmn_edg(2),T2c(start_idx2),new_cmn_edg(1));
+if ~isempty(start_id2)
+    Tb = cat(2,new_cmn_edg(2),T2c(start_id2),new_cmn_edg(1));
 else
-    start_idx2 = find(ismember(T2,new_cmn_edg(1)),1,'first');
-    Tb = cat(2,new_cmn_edg(1),T2c(start_idx2),new_cmn_edg(2));
+    start_id2 = find(ismember(T2,new_cmn_edg(1)),1,'first');
+    Tb = cat(2,new_cmn_edg(1),T2c(start_id2),new_cmn_edg(2));
 end
 
 % Add 2 triangles and their face normals
@@ -257,10 +260,10 @@ T = add_triangles(Ta,T);
 T = add_triangles(Tb,T);
 
 % Remove 2 triangles and their face normals
-T(tgl_pair_idx,:) = [];
-new_face_normals = compute_face_normals(V,T(end-1:end,:),'norm');
+T(tgl_pair_id,:) = [];
+new_face_normals = face_normals(V,T(end-1:end,:),'norm');
 N = cat(1,N,new_face_normals);
-N(tgl_pair_idx,:) = [];
+N(tgl_pair_id,:) = [];
 edg_list = cat(1,edg_list,sort(new_cmn_edg));
 edg_list(all(bsxfun(@eq,edg_list,sort(cmn_edg)),2),:) = [];
 

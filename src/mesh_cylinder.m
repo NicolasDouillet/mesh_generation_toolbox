@@ -44,8 +44,8 @@ X(:,1) = 0.5*sqrt(3);
 X(:,2) = V1(:,2) + (0.5*sqrt(3) - V1(:,1)).*V1(:,2)./V1(:,1);
 X(:,3) = V1(:,3);
 
-N1 = sqrt(sum(V1(:,1:2).^2,2));
-Nx = sqrt(sum(X(:,1:2).^2,2));
+N1 = vecnorm(V1(:,1:2)',2)';
+Nx = vecnorm(X(:,1:2)',2)';
 norm_pct = N1./Nx;
 
 % Update norm = distance ratio OM/OX

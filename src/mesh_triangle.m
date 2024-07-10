@@ -1,5 +1,5 @@
 function [V, T] = mesh_triangle(V1, V2, V3, nb_samples)
-% mesh_triangle : function to sample one given (V1V2V3) triangle using nb_samples^2
+%% mesh_triangle : function to sample one given (V1V2V3) triangle using nb_samples^2
 % homothetic smaller versions of it. Works in any dimension Ndim >= 2.
 %
 % Author : nicolas.douillet (at) free.fr, 2017-2024.
@@ -67,7 +67,7 @@ function [V, T] = mesh_triangle(V1, V2, V3, nb_samples)
 % Triangles / normals are coherently oriented.
 
 
-% Inputs parsing
+%% Inputs parsing
 assert(nargin > 2, 'Error : not enough input arguments.');
 assert(nargin < 5, 'Too many input arguments.');
 
@@ -77,6 +77,8 @@ else
     assert(isreal(nb_samples) && rem(nb_samples,1) == 0 && nb_samples > 0, 'nb_samples must be a positive integer greater or equal to 1.')
 end
 
+
+%% Body
 
 % Create sampling grid
 global Ndim;
@@ -119,7 +121,7 @@ end
 T = zeros(nb_samples^2,3);
 row_length = 1 + nb_samples;
 cum_row_length = row_length;
-row_idx = 1;
+row_id = 1;
 p = 1;
 
 while p <= nb_samples^2 && row_length > 1
@@ -130,8 +132,8 @@ while p <= nb_samples^2 && row_length > 1
         
         while i < cum_row_length
             
-            T(row_idx,:) = [i i+1 i+row_length];
-            row_idx = row_idx + 1;
+            T(row_id,:) = [i i+1 i+row_length];
+            row_id = row_id + 1;
             i = i +1;
             
         end
@@ -145,10 +147,10 @@ while p <= nb_samples^2 && row_length > 1
         % Since p >= 2
         while i < cum_row_length % both triangle series
             
-            T(row_idx,:) = [i i+1 i+row_length];
-            row_idx = row_idx + 1;            
-            T(row_idx,:) = [i i-row_length i+1]; % + upside-down triangles serie
-            row_idx = row_idx + 1;
+            T(row_id,:) = [i i+1 i+row_length];
+            row_id = row_id + 1;            
+            T(row_id,:) = [i i-row_length i+1]; % + upside-down triangles serie
+            row_id = row_id + 1;
             
             i = i +1;
             

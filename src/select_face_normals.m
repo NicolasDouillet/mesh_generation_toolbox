@@ -1,7 +1,7 @@
-function [N] = select_face_normals(V, T, mode, option_display)
-% select_face_normals : function to display the face normals on the mesh.
+function N = select_face_normals(V, T, mode, option_display)
+%% select_face_normals : function to display the face normals on the mesh.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments
@@ -27,7 +27,7 @@ function [N] = select_face_normals(V, T, mode, option_display)
 %       [ |  |  |]
 
 
-% Body
+%% Body
 if nargin < 4
     
     option_display = true;
@@ -40,7 +40,7 @@ if nargin < 4
     
 end
 
-N = compute_face_normals(V,T,mode);
+N = face_normals(V,T,mode);
 G = cell2mat(cellfun(@(r) mean(V(r,:),1),num2cell(T,2),'un',0));
 
 if option_display

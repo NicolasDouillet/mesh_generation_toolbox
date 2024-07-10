@@ -22,9 +22,9 @@ V = cat(2,X,Y,Z);
 %             };
 
 
-id = 1;
-filename = strcat(cell2mat(filenames(id,1)),'.mat');         
-load(filename);
+% id = 1;
+% filename = strcat(cell2mat(filenames(id,1)),'.mat');         
+% load(filename);
 
 
 T_cv = convhull(V(:,1),V(:,2),V(:,3)); % Matlab (R) embeded function

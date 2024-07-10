@@ -1,5 +1,5 @@
 function ngb_T = find_neighbor_triangle_indices(T, T_subset, mode)
-% find_neighbor_triangle_indices : function to compute the list of triangles
+%% find_neighbor_triangle_indices : function to compute the list of triangles
 % which are neighbors (share one edge) to the triangles in T_subset.
 %
 % Author : nicolas.douillet (at) free.fr, 2020-2024.
@@ -26,7 +26,7 @@ function ngb_T = find_neighbor_triangle_indices(T, T_subset, mode)
 %           with nbg_nb the number of neighbors.
 
 
-% Body
+%% Body
 % tic;
 
 if nargin > 1
@@ -35,11 +35,11 @@ if nargin > 1
         
         if strcmpi(mode,'indices')
             
-            subset_idx = T_subset;
+            subset_id = T_subset;
             
         elseif strcmpi(mode,'explicit')
             
-            subset_idx = find(ismember(T,T_subset,'rows'));
+            subset_id = find(all(bsxfun(@eq,T,T_subset),2));
             
             
         end
@@ -47,11 +47,11 @@ if nargin > 1
     else
         
         % mode = 'indices'; % default behaviour
-        subset_idx = T_subset;
+        subset_id = T_subset;
         
     end
     
-    T_subset = T(subset_idx,:);
+    T_subset = T(subset_id,:);
     
 else
     

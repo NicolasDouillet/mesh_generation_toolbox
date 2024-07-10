@@ -1,17 +1,17 @@
 function [V, T] = mesh_disk(r, edg_nb_smpl)
-% mesh_disk : function to mesh a disk.
+%% mesh_disk : function to mesh a disk.
 %
 % Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
-%%% Input arguments :
+% Input arguments :
 %
 % - r : positive real scalar double, the disk radius.
 %
 % - edg_nb_smpl : positive integer scalar double, one sixth of the number of samples on the disk perimeter.
 %
 %
-%%% Output arguments :
+% Output arguments :
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -23,12 +23,13 @@ function [V, T] = mesh_disk(r, edg_nb_smpl)
 %       [|  |  |]
 %
 %
-%%% About / other informations
+% About / other informations
 %
 % Disk is centered on the origin, [0 0 0], and has (Oz) for normal axis.
 % Triangles / normals are coherently oriented.
 
 
+%% Body
 M1 = [0.5*sqrt(3)  0.5 0]';
 M2 = [0.5*sqrt(3) -0.5 0]';
 
@@ -42,8 +43,8 @@ X(:,1) = 0.5*sqrt(3);
 X(:,3) = zeros(size(V1,1),1);
 X(:,2) = V1(:,2) + (0.5*sqrt(3) - V1(:,1)).*V1(:,2)./V1(:,1);
 
-N1 = sqrt(sum(V1.^2,2));
-Nx = sqrt(sum(X.^2,2));
+N1 = vecnorm(V1',2)';
+Nx = vecnorm(X',2)';
 norm_pct = N1./Nx;
 
 % Update norm = distance ratio OM/OX

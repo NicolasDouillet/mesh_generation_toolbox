@@ -114,7 +114,7 @@ V = cat(1,V,cat(2,V(:,1),V(:,2),-V(:,3)));
 % Stretch the box here in X/Y/Z
 V(:,3) = V(:,3)/max(V(:,3));
 V(:,3) = pi*(V(:,3)/12-min(V(:,3)));
-V(:,1:2) = r*V(:,1:2) ./ sqrt(sum(V(:,1:2).^2,2));
+V(:,1:2) = r*V(:,1:2) ./ vecnorm(V(:,1:2)',2)';
 
 
 Rmy = @(theta)[cos(theta) 0 -sin(theta);

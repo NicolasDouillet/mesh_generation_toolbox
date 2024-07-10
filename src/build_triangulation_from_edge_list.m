@@ -35,10 +35,10 @@ if nargin > 1 && strcmpi(mode,'sorted')
 elseif nargin < 2 || strcmpi(mode,'raw')
     
     E = unique(sort(E,2),'rows');
-    vtx_idx_list = sort(unique(E(:)'));
+    vtx_id_list = sort(unique(E(:)'));
     T = zeros(0,3);
     
-    for i = vtx_idx_list
+    for i = vtx_id_list
         
         % Find every edges linked to each vertex
         i_lk_vtx = get_vertex_linked_vertices(E,i);
@@ -69,12 +69,12 @@ end % build_triangulation_from_edge_list
 
 
 %% get_vertex_linked_vertices subfunction
-function vtx_idx_list = get_vertex_linked_vertices(E, vtx_idx)
+function vtx_id_list = get_vertex_linked_vertices(E, vtx_id)
 %
 % Author & support : nicolas.douillet (at) free.fr, 2023.
 
 
-vtx_idx_list = setdiff(E(any(E==vtx_idx,2),:),vtx_idx)';
+vtx_id_list = setdiff(E(any(E==vtx_id,2),:),vtx_id)';
 
 
 end % get_vertex_linked_vertices
