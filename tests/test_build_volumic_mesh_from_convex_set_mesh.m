@@ -1,10 +1,10 @@
 % test_volumic_mesh_from_convex_set_mesh
 
+clc;
 
-clear all, close all, clc;
-
-addpath('../src');
+addpath(genpath('../src'));
 addpath('../data');
+
 
 % Generate the mesh of a convex surface
 id = 4;
@@ -15,3 +15,4 @@ volumic_mesh = false;
 [V,T] = volumic_mesh_from_convex_set_mesh(V,T);
 
 plot_mesh(V,T);
+alpha(0.5);

@@ -1,9 +1,9 @@
 % test discrete_contour_mesh_patch
 
 
-clear all, close all, clc;
+clc;
 
-addpath('../src');
+addpath(genpath('../src'));
 addpath('../data');
 
 n = 32;

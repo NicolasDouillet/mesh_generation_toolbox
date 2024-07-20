@@ -1,15 +1,12 @@
 % test dual_of_trimesh
 
+clc;
 
-clear all, close all, clc;
-
-addpath('../src');
+addpath(genpath('../src'));
 addpath('../data');
 
 
-filenames = {'concave_Reuleaux_tetrahedron'};
-
-         
+filenames = {'concave_Reuleaux_tetrahedron'};                  
 filename = strcat(cell2mat(filenames(1,1)),'.mat');         
 load(filename);
 

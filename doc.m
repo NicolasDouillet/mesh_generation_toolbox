@@ -1,6 +1,6 @@
 %% mesh generation toolbox
 %
-% Author : nicolas.douillet (at) free.fr, 2020-2024.
+% Author : nicolas.douillet9 (at) gmail.com, 2020-2024.
 
 
 %% Example #1 : mesh an icosahedron based geoid

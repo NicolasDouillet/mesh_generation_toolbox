@@ -1,11 +1,9 @@
 % test build_triangulation_from_edge_list
 
+clc;
 
-clear all, close all, clc;
-
-addpath('C:\Users\Nicolas\Desktop\TMW_contributions\mesh_processing_toolbox\src');
-addpath('../src');
-addpath('../data/');
+addpath(genpath('../src'));
+addpath('../data');
 
 
 filenames = {'concave_Reuleaux_tetrahedron'};

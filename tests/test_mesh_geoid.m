@@ -1,10 +1,10 @@
 % test mesh_geoid
 
+clc;
 
-clear all, close all, clc;
-
-addpath('../src');
+addpath(genpath('../src'));
 addpath('../data');
+
 
 id = 3;
 nb_it = 3;
