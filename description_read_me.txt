@@ -1,5 +1,7 @@
 Please first check the doc tab on the right to get some relevant and functional examples of this toobox functions.
 
+To use the sources, mind to add its path to your paths, just like in the header of any test file : addpath(genpath('my_path_to_the_sources'));
+
 Please don'tforget ta rate if this code helped you. Thanks ! ;-)
 
 Feel free to check and download the mesh processing toolbox ( https://fr.mathworks.com/matlabcentral/fileexchange/77004-mesh-processing-toolbox?s_tid=srchtitle ) for many further meshing relative functions.
