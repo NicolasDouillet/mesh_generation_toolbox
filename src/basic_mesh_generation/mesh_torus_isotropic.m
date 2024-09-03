@@ -1,7 +1,7 @@
 function [V, T] = mesh_torus_isotropic(R, r, nb_samples)
 %% mesh_torus_isotropic : function isotropically mesh a torus.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2023-2024.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 % Input arguments :

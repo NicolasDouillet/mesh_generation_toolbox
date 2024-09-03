@@ -2,9 +2,9 @@ Please first check the doc tab on the right to get some relevant and functional 
 
 To use the sources, mind to add its path to your paths, just like in the header of any test file : addpath(genpath('my_path_to_the_sources'));
 
-Please don'tforget ta rate if this code helped you. Thanks ! ;-)
-
 Feel free to check and download the mesh processing toolbox ( https://fr.mathworks.com/matlabcentral/fileexchange/77004-mesh-processing-toolbox?s_tid=srchtitle ) for many further meshing relative functions.
+
+Please don'tforget ta rate if this code helped you. Thanks ! ;-)
 
 
 %% DESCRIPTION
@@ -61,8 +61,6 @@ SELLING THIS WHOLE TOOLBOX OR EVEN PARTS OF IT IS STRICLY PROHIBITED.
 
 Modification of any kind are done under your own, only, and unique responsability.
 
-Please report me any bug (with data set used and Matlab(R) code attached) or suggestion at nicolas.douillet9 (at) gmail.com
-
 
 %% KNOWN LIMITATIONS
 
@@ -82,13 +80,16 @@ By default, vertex and face normals are normalized at the same time they are com
 Basic 3D mathematical computation algorithm (like point_to_plane_distance) are also independently available with their documentations in my file exchange contributions.
 
 I especially thank William V, Binbin Qi, for what they taught me while solving my cody problems.
+I also thank Stepan Kortus for time optimization of the over_sample algorithm.
 Matlab users, your advices and tips to improve and speed up my algorithms are welcome !
 
 If you can’t see the mesh while plotting it, try ‘shading flat’ (it may be shadowed by its numerous dark edges).
 
 Since I am not native english speaker, please forgive my langage approximations.
 
+
 Matlab release version used for development and tests : R2019b.
 
+Contact : please report me any bug (with data set used and Matlab(R) code attached) or suggestion at nicolas.douillet (at) free.fr
 
-Last update : 20 / 07 / 2024.
+Last update : 03 / 09 / 2024.

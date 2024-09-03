@@ -2,7 +2,7 @@ function T = build_triangulation_from_edge_list(E, mode)
 %% build_triangulation_from_edge_list : function to build the
 % triangulation T from the edge list E. 
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2020-2024.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input argument
@@ -71,7 +71,7 @@ end % build_triangulation_from_edge_list
 %% get_vertex_linked_vertices subfunction
 function vtx_id_list = get_vertex_linked_vertices(E, vtx_id)
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2023-2024.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 
 
 vtx_id_list = setdiff(E(any(E==vtx_id,2),:),vtx_id)';

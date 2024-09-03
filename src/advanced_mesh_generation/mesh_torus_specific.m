@@ -2,7 +2,7 @@ function [V, T] = mesh_torus_specific(R, r)
 %% mesh_torus_specific : function to mesh a torus while allowing to specifically choose
 % the number of samples in the two directions, longitude and latitude.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2023-2024.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 % Input arguments :
@@ -63,7 +63,7 @@ end % mesh_torus_specific
 %% index_mesh_triangles subfunction
 function T = index_mesh_triangles(M)
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2023-2024.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 
 
 H = size(M,2);
@@ -114,7 +114,7 @@ end % index_mesh_triangles
 %% regular_2D_trigrid subfunction
 function M = regular_2D_trigrid(W, H, a)
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2023-2024.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 
 
 h = 0.5*a*sqrt(3); % equilateral triangle height

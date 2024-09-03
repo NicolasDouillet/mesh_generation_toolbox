@@ -2,7 +2,7 @@ function T_out = switch_neighbor_pair_triangles(T_in, tid1, tid2)
 %% switch_neighbor_pair_triangles : function to swuitch
 % neighbor pair triangles.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2024.
+% Author : nicolas.douillet (at) free.fr, 2024.
 %
 %
 % Input arguments :

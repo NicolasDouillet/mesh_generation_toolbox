@@ -3,7 +3,7 @@ function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
 % (all except dodecahedron) iterative projections on the unit sphere,
 % with two different sampling modes available.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 %
 %
 % Input arguments
@@ -165,7 +165,7 @@ function [V, T, N] = grow_nxt_lvl_tetrahedra(V, T, N, tgl_id)
 % to create the next triangulation level and erase
 % the 4*three^(nb_it-1) previous triangles.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 
 
 for idx = tgl_id
@@ -197,7 +197,7 @@ end % grow_nxt_lvl_tetrahedra
 function isconcave = detect_concavity(V, T, N, tgl_pair_id, epsilon)
 % detect_concavity : function to detect concave triangle pair configurations.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 
 
 i1 = tgl_pair_id(1);
@@ -225,7 +225,7 @@ end % detect_concavity
 function [T, N, edg_list] = flip_two_ngb_triangles(tgl_pair_id, T, V, N, edg_list)
 % flip_two_ngb_triangles : function to flip two triangles sharing one common edge.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 
 
 T1 = T(tgl_pair_id(1),:);

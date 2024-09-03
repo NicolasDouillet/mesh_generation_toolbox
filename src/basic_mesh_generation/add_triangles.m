@@ -3,8 +3,7 @@ function T_out = add_triangles(T_set, T_in)
 % If one or more vertices are new, they must be added first in the vertex set
 % for the triangulation to be valid.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2020-2024.
-%
+% Author : nicolas.douillet (at) free.fr, 2020-2024.%
 %
 % Input arguments
 %

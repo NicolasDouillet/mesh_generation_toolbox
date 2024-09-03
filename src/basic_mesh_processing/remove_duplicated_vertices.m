@@ -2,7 +2,7 @@ function [V_out, T_out] = remove_duplicated_vertices(V_in, T_in, tol)
 %% remove_duplicated_vertices : function to remove duplicated
 % vertices from the point set.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2020-2024.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments

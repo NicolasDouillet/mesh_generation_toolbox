@@ -2,7 +2,7 @@ function tgl_id_list = find_triangles_from_vertex_list(T, vtx_id)
 %% find_triangles_from_vertex_list : function to compute the index
 % list of triangles containing the vertex indices of vtx_id.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2020-2024.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments

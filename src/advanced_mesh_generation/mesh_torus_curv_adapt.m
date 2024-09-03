@@ -1,7 +1,7 @@
 function [V, T] = mesh_torus_curv_adapt(R, r, nb_samples)
 %% mesh_torus_curv_adapt : function to create mesh adaptated to the curvature for the torus.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2023-2024.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 % Input arguments :

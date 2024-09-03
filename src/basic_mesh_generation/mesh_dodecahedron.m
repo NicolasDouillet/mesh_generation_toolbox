@@ -1,7 +1,7 @@
 function [V, T] = mesh_dodecahedron(edg_nb_smpl)
 %% mesh_dodecahedron : function to mesh a dodecahedron.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2023-2024.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 % Input arguments :

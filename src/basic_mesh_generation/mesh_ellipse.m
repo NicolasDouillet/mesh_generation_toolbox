@@ -1,7 +1,7 @@
 function [V, T] = mesh_ellipse(a, b, edg_nb_smpl)
 %% mesh_ellipse : function to mesh an ellipse, based on the disk.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2023-2024.
+% Author : nicolas.douillet (at) free.fr, 2023-2024.
 %
 %
 % Input arguments :

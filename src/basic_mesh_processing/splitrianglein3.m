@@ -5,7 +5,7 @@ function T_out = splitrianglein3(T_in, tid, vid)
 % new one. The triangle is deleted after the split. Preserves normals orientation.
 %
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2024.
+% Author : nicolas.douillet (at) free.fr, 2024.
 %
 %
 % Input arguments :

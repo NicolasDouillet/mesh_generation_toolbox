@@ -1,7 +1,7 @@
 function N = select_face_normals(V, T, mode, option_display)
 %% select_face_normals : function to display the face normals on the mesh.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2020-2024.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 %
 %
 % Input arguments

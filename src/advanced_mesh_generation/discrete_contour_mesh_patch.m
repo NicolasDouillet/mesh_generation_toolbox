@@ -2,7 +2,7 @@ function [C, T, N] = discrete_contour_mesh_patch(V, mode)
 %% discrete_contour_mesh_patch : function to mesh one discrete 2D
 % or 3D contour composed of sorted or disordered 3D points.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2021-2024.
+% Author : nicolas.douillet (at) free.fr, 2021-2024.
 %
 %
 % Syntax
