@@ -4,7 +4,8 @@
 
 
 %% Example #1 : mesh an icosahedron based geoid
-addpath('src/');
+addpath('data/');
+addpath(genpath('src/'));
 id = 4; % base = icosahedron
 nb_it = 3;
 sampling_mode = 'face';

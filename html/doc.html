@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>mesh generation toolbox</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-07-20"><meta name="DC.source" content="doc.m"><style type="text/css">
+      --><title>mesh generation toolbox</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-09-03"><meta name="DC.source" content="doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>mesh generation toolbox</h1><!--introduction--><p>Author : nicolas.douillet9 (at) gmail.com, 2020-2024.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Example #1 : mesh an icosahedron based geoid</a></li><li><a href="#2">Example #2 : mesh a cylinder</a></li><li><a href="#3">Example #3 : mesh an ovoid and select its face normals</a></li><li><a href="#4">Example #4 : mesh a torus with quasi equilateral triangles</a></li><li><a href="#5">Example #5 : mesh a torus with a density proportional to its curvature</a></li><li><a href="#6">Example #6 first version of the torus 'isotropic' meshing algorithm</a></li><li><a href="#7">Example #7 : (triangle) mesh a polygon</a></li><li><a href="#8">Example #8 : discrete contour mesh patch</a></li></ul></div><h2 id="1">Example #1 : mesh an icosahedron based geoid</h2><pre class="codeinput">addpath(<span class="string">'src/'</span>);
+  </style></head><body><div class="content"><h1>mesh generation toolbox</h1><!--introduction--><p>Author : nicolas.douillet (at) free.fr, 2020-2024.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Example #1 : mesh an icosahedron based geoid</a></li><li><a href="#2">Example #2 : mesh a cylinder</a></li><li><a href="#3">Example #3 : mesh an ovoid and select its face normals</a></li><li><a href="#4">Example #4 : mesh a torus with quasi equilateral triangles</a></li><li><a href="#5">Example #5 : mesh a torus with a density proportional to its curvature</a></li><li><a href="#6">Example #6 first version of the torus 'isotropic' meshing algorithm</a></li><li><a href="#7">Example #7 : (triangle) mesh a polygon</a></li><li><a href="#8">Example #8 : discrete contour mesh patch</a></li></ul></div><h2 id="1">Example #1 : mesh an icosahedron based geoid</h2><pre class="codeinput">addpath(<span class="string">'data/'</span>);
+addpath(genpath(<span class="string">'src/'</span>));
 id = 4; <span class="comment">% base = icosahedron</span>
 nb_it = 3;
 sampling_mode = <span class="string">'face'</span>;
@@ -144,11 +145,12 @@ view(3);
 ##### SOURCE BEGIN #####
 %% mesh generation toolbox
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2020-2024.
+% Author : nicolas.douillet (at) free.fr, 2020-2024.
 
 
 %% Example #1 : mesh an icosahedron based geoid
-addpath('src/');
+addpath('data/');
+addpath(genpath('src/'));
 id = 4; % base = icosahedron
 nb_it = 3;
 sampling_mode = 'face';

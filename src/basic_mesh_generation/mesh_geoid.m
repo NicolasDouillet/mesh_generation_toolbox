@@ -80,7 +80,7 @@ end
       
 if strcmpi(sampling_mode,'edge')
     
-    % Oversample triangles by creating new vertices ; link vertices to create new triangles
+    % Upsample triangles by creating new vertices ; link vertices to create new triangles
     nt = nb_it^2;               % nb new triangles
     nv = (nb_it+1)*(nb_it+2)/2; % nb new vertices (1:nb_it) sum
     
