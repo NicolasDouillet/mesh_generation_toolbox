@@ -68,9 +68,6 @@ function [V, T] = mesh_triangle(V1, V2, V3, nb_samples)
 
 
 %% Inputs parsing
-assert(nargin > 2, 'Error : not enough input arguments.');
-assert(nargin < 5, 'Too many input arguments.');
-
 if nargin < 4
     nb_samples = 20;
 else

@@ -49,8 +49,6 @@ function [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl)
 
 
 %% Default parameter values and input parsing
-assert(nargin < 2,'Too many input arguments.');
-
 if nargin > 0
 
     assert(isnumeric(nb_edg_smpl) && nb_edg_smpl == floor(nb_edg_smpl) && nb_edg_smpl > 0,'nb_edg_smpl parameter must be a positive integer.');        

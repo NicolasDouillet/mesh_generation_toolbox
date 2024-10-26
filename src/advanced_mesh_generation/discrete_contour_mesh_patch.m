@@ -57,8 +57,6 @@ function [C, T, N] = discrete_contour_mesh_patch(V, mode)
 tic;
 
 %% Input parsing and default values
-assert(nargin > 0,'Not enought input argument.');
-
 if nargin < 2
    
     mode = 'raw'; % default behaviour

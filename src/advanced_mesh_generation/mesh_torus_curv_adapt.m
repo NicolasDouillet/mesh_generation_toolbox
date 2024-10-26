@@ -32,9 +32,24 @@ function [V, T] = mesh_torus_curv_adapt(R, r, nb_samples)
 
 
 %% Input parsing
-assert(r > 0, 'Torus small radius must be a real positive number');
-assert(R > 0, 'Torus great radius must be a real positive number');
-assert(R > r, 'Torus big radius must be greater than torus small radius.');
+if r <= 0
+    
+    error('Torus small radius must be a real positive number');
+    
+end
+
+if R <= 0
+    
+    error('Torus great radius must be a real positive number');
+    
+end
+
+if R <= r
+    
+    error('Torus big radius must be greater than torus small radius.');
+    
+end
+    
 
 %                                    ____________________________________________
 %                                   |                                            |

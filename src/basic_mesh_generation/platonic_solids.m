@@ -89,12 +89,15 @@ if nargin < 3
     
     if nargin < 2
         
-        Rho = 1;
-        assert(nargin > 0,'Not enough input argument.');
+        Rho = 1;        
         
     else
         
-        assert(isreal(Rho) & Rho > 0,'Rho must be a positive real number.');
+        if ~isreal(Rho) || Rho <= 0
+            
+            error('Rho must be a positive real number.');
+            
+        end
         
     end
     
