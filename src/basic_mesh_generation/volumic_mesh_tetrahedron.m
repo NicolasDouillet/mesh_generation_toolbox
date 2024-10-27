@@ -1,4 +1,4 @@
-function [V, T] = volumic_mesh_tetrahedron(nb_it, V1, V2, V3, V4)
+function [V, T] = volumic_mesh_tetrahedron(nb_it, V1, V2, V3, V4, sampling_mode)
 %% volumic_mesh_tetrahedron : function to build a volumic mesh of a given
 % tetrahedron. Performs barycentre based subdivisions.
 %
@@ -18,6 +18,8 @@ function [V, T] = volumic_mesh_tetrahedron(nb_it, V1, V2, V3, V4)
 %
 % - V4 = [V4x V4y V4z], real row vector double, the fourth vertex of the tetrahedron, size(V4) = [1,3]. Optional.
 %
+% - sampling_mode : character string in the set {'barycentric','BARYCENTRIC','edge_subdivision'*,'EDGE_SUBDIVISION'}, the sampling_mode. Case insensitive. Optional.
+%
 %
 % Output arguments
 %
@@ -31,20 +33,26 @@ function [V, T] = volumic_mesh_tetrahedron(nb_it, V1, V2, V3, V4)
 
 
 %% Input parsing
-if nargin < 5
+if nargin < 6
     
-    % Default basic tetrahedron included in the unit sphere
-    V1 = [2*sqrt(2)/3 0 -1/3];
-    V2 = [-sqrt(2)/3 sqrt(6)/3 -1/3];
-    V3 = [-sqrt(2)/3 -sqrt(6)/3 -1/3];
-    V4 = [0 0 1];
+    sampling_mode = 'barycentric';
     
-    if nargin < 1
+    if nargin < 5
         
-        nb_it = 1;
+        % Default basic tetrahedron included in the unit sphere
+        V1 = [2*sqrt(2)/3 0 -1/3];
+        V2 = [-sqrt(2)/3 sqrt(6)/3 -1/3];
+        V3 = [-sqrt(2)/3 -sqrt(6)/3 -1/3];
+        V4 = [0 0 1];
+        
+        if nargin < 1
+            
+            nb_it = 1;
+            
+        end
         
     end
-    
+        
 end
 
 
@@ -66,7 +74,17 @@ for j = 1:nb_it
     
     for k = tetra_start_idx:nb_tetra
         
-        [V,T,new_tetra] = split_tetrahedron(V,T,tetra_list(k,:));
+        if strcmpi(sampling_mode,'barycentric')
+            
+            [V,T,new_tetra] = split_tetra_barycentre(V,T,tetra_list(k,:));
+        
+        elseif strcmpi(sampling_mode,'edge_subdivision')
+            
+            [V,T,new_tetra] = split_tetra_edges(V,T,tetra_list(k,:));
+            
+        end
+        
+        T = remove_duplicated_triangles(T);
         tetra_list = cat(1,tetra_list,new_tetra);
         
     end
@@ -75,26 +93,79 @@ for j = 1:nb_it
     
 end
 
-T = remove_duplicated_triangles(T);
-
 
 end % volumic_mesh_tetrahedron
 
 
-%% split_tetrahedron subfunction
-function [V, T, new_tetra] = split_tetrahedron(V, T, tetra_list_k) 
+%% split_tetra_barycentre subfunction
+function [V, T, new_tetra] = split_tetra_barycentre(V, T, tetra_list_k) 
 %
 % Author : nicolas.douillet (at) free.fr, 2024.
 
 
-new_vtx = mean(V(tetra_list_k,:),1);
+% One new vertex
+new_vtx = mean(V(tetra_list_k,:),1); 
 V = cat(1,V,new_vtx);
 new_vtx_idx = size(V,1);
 
-new_tgl = cat(2,combnk(tetra_list_k,2),new_vtx_idx*ones(6,1));
+% 6 new triangles
+new_tgl = combnk([tetra_list_k,new_vtx_idx],3);
 T = cat(1,T,new_tgl);
 
-new_tetra = cat(2,combnk(tetra_list_k,3),new_vtx_idx*ones(4,1));
+% 4 new tetrahedra
+new_tetra = cat(2,combnk(tetra_list_k,3),new_vtx_idx*ones(4,1)); 
 
 
-end % split_tetrahedron
+end % split_tetra_barycentre
+
+
+%% split_tetra_edges subfunction
+function [V, T, new_tetra] = split_tetra_edges(V, T, tetra_list_k) 
+%
+% Author : nicolas.douillet (at) free.fr, 2024.
+
+
+% 7 new vertices
+% Middle edge ones
+new_vtx1 =  mean(V([tetra_list_k(1),tetra_list_k(2)],:),1);
+new_vtx2 =  mean(V([tetra_list_k(1),tetra_list_k(3)],:),1);
+new_vtx3 =  mean(V([tetra_list_k(1),tetra_list_k(4)],:),1);
+new_vtx4 =  mean(V([tetra_list_k(2),tetra_list_k(3)],:),1);
+new_vtx5 =  mean(V([tetra_list_k(2),tetra_list_k(4)],:),1);
+new_vtx6 =  mean(V([tetra_list_k(3),tetra_list_k(4)],:),1);
+
+new_vtx7 =  mean(V(tetra_list_k,:),1); % central one
+
+V = cat(1,V,new_vtx1,new_vtx2,new_vtx3,new_vtx4,new_vtx5,new_vtx6,new_vtx7);
+new_vtx_idx = size(V,1)-6:size(V,1);
+
+% 12 new tetrahedra
+new_tetra = [tetra_list_k(1) new_vtx_idx(1) new_vtx_idx(2) new_vtx_idx(3);...
+             tetra_list_k(2) new_vtx_idx(1) new_vtx_idx(4) new_vtx_idx(5);...
+             tetra_list_k(3) new_vtx_idx(2) new_vtx_idx(4) new_vtx_idx(6);...
+             tetra_list_k(4) new_vtx_idx(3) new_vtx_idx(5) new_vtx_idx(6);...
+             
+             new_vtx_idx(1) new_vtx_idx(2) new_vtx_idx(4) new_vtx_idx(7);...
+             new_vtx_idx(4) new_vtx_idx(5) new_vtx_idx(6) new_vtx_idx(7);...                                                       
+             new_vtx_idx(1) new_vtx_idx(3) new_vtx_idx(5) new_vtx_idx(7);...
+             new_vtx_idx(2) new_vtx_idx(3) new_vtx_idx(6) new_vtx_idx(7);...   
+             
+             new_vtx_idx(1) new_vtx_idx(2) new_vtx_idx(3) new_vtx_idx(7);...
+             new_vtx_idx(1) new_vtx_idx(4) new_vtx_idx(5) new_vtx_idx(7);...                                                       
+             new_vtx_idx(2) new_vtx_idx(4) new_vtx_idx(6) new_vtx_idx(7);...
+             new_vtx_idx(3) new_vtx_idx(5) new_vtx_idx(6) new_vtx_idx(7);...
+             ];
+
+% 48 new triangles
+new_tgl = zeros(48,3);
+
+for n = 1:size(new_tetra,1)
+
+    new_tgl(4*n-3:4*n,:) = combnk(new_tetra(n,:),3);
+    
+end
+
+T = cat(1,T,new_tgl);
+
+
+end % split_tetra_edges
