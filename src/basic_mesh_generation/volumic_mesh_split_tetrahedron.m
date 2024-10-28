@@ -1,6 +1,6 @@
-function [V, T] = volumic_mesh_tetrahedron(nb_it, V1, V2, V3, V4, sampling_mode)
-%% volumic_mesh_tetrahedron : function to build a volumic mesh of a given
-% tetrahedron. Performs barycentre based subdivisions.
+function [V, T] = volumic_mesh_split_tetrahedron(nb_it, V1, V2, V3, V4, sampling_mode)
+%% volumic_mesh_split_tetrahedron : function to build and split a volumic mesh of a given
+% tetrahedron. Performs either edges or barycentric subdivisions.
 %
 % Author : nicolas.douillet (at) free.fr, 2024.
 %
@@ -94,7 +94,7 @@ for j = 1:nb_it
 end
 
 
-end % volumic_mesh_tetrahedron
+end % volumic_mesh_split_tetrahedron
 
 
 %% split_tetra_barycentre subfunction

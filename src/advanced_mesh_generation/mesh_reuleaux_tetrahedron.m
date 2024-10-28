@@ -1,37 +1,36 @@
-function [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl)
-%% mesh_reuleaux_tetrahedron : function to compute and save a meshed Reuleaux tetrahedron. 
+function [V, T] = mesh_reuleaux_tetrahedron(sample_step)
+%% mesh_reuleaux_tetrahedron : function to compute the mesh of a Reuleaux tetrahedron. 
 %
-% Author : nicolas.douillet (at) free.fr, 2017-2024.
+% Authors : nicolas.douillet (at) free.fr, 2017-2024.
+%           Gerd Wachsmuth,                     2021.
 %
 %
 % Syntax
 %
 % mesh_reuleaux_tetrahedron;
-% mesh_reuleaux_tetrahedron(nb_edg_smpl);
-% [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl);
+% mesh_reuleaux_tetrahedron(sample_step);
+% [V, T] = mesh_reuleaux_tetrahedron(sample_step);
 %
 %
 % Description
 %
-% mesh_reuleaux_tetrahedron computes the meshed Reuleaux
+% mesh_reuleaux_tetrahedron computes the mesh Reuleaux
 % tetrahedron included in the unit sphere, and which each
-% edge is sampled in 8.
+% edge is sampled in 32.
 %
-% mesh_reuleaux_tetrahedron(nb_edg_smpl) uses nb_edg_smpl steps.
+% mesh_reuleaux_tetrahedron(sample_step) uses sample_step steps.
 %
-% [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl) stores the resulting
-% vertices coordinates in the array V, and the corresponding triplet indices list in the array T.
+% [V, T] = mesh_reuleaux_tetrahedron(sample_step) stores the resulting
+% vertices coordinates in the array V, and the corresponding triplet indices
+% list in the array T.
 % 
 %
-% See also
-%
-% <https://fr.mathworks.com/help/matlab/ref/mesh.html?s_tid=srchtitle mesh> | 
-% <https://fr.mathworks.com/help/matlab/ref/trimesh.html?searchHighlight=trimesh&s_tid=doc_srchtitle trimesh>
+% See also MESH, TRIMESH.
 %
 %
 % Input arguments
 %
-% - nb_edg_smpl : positive integer scalar, power of 2.
+% - sample_step : positive integer scalar double, , power of 2. Optional.
 %
 %
 % Output arguments
@@ -45,18 +44,15 @@ function [V, T] = mesh_reuleaux_tetrahedron(nb_edg_smpl)
 %     [ |  |  |]
 
 
-% TODO : nb_steps rotations du bord échantilloné autour de l'axe défini par le sommet supérieur et le sommet opposé, puis triangulation. 
-
-
-%% Default parameter values and input parsing
+%% Input parsing
 if nargin > 0
-
-    assert(isnumeric(nb_edg_smpl) && nb_edg_smpl == floor(nb_edg_smpl) && nb_edg_smpl > 0,'nb_edg_smpl parameter must be a positive integer.');        
-	
-else
-
-    nb_edg_smpl = 8;    
-	
+    
+    assert(isnumeric(sample_step) && sample_step == floor(sample_step) && sample_step > 0,'sample_step parameter must be a positive integer.');  
+    
+else        
+    
+    sample_step = 32;
+    
 end
 
 
@@ -69,32 +65,8 @@ V4 = [-sqrt(2)/3 -sqrt(6)/3 -1/3];
 
 edge_length = norm(V1-V2); %  = 2*sqrt(6)/3
 
-
-[V123, T] = mesh_triangle(V2', V1', V3', nb_edg_smpl);
-V_flat = V123; 
-
-D123 = sqrt(sum((V123 - V4).^2,2)); % distance matrix
-V123 = edge_length*(V123 - V4) ./ repmat(D123, [1 3]) + repmat(V4, [size(V123,1), 1]); % "inflated triangle" / opposite vertex V4
-
-be = 1:nb_edg_smpl+1;                       % bottom edge index vector
-re = cumsum(nb_edg_smpl+1:-1:0);            % right edge index vector
-le = cat(2,1,1+cumsum(nb_edg_smpl+1:-1:2)); % left edge index vector
-
-M34 = [-sqrt(2)/3 0 -1/3]; % middle of [V3;V4] segment
-D34 = sqrt(sum((V_flat(le,:) - M34).^2,2));
-V_flat(le,:) = sqrt(2)*(V_flat(le,:) - M34) ./ repmat(D34, [1 3]) + repmat(M34, [size(V_flat(le,:),1), 1]);
-V123(le,:) = V_flat(le,:);
-
-M24 = [1/3/sqrt(2) -1/sqrt(6) -1/3]; % middle of [V2;V4] segment
-D24 = sqrt(sum((V_flat(re,:) - M24).^2,2));
-V_flat(re,:) = sqrt(2)*(V_flat(re,:) - M24) ./ repmat(D24, [1 3]) + repmat(M24, [size(V_flat(re,:),1), 1]);
-V123(re,:) = V_flat(re,:);
-
-M14 = [-1/3/sqrt(2) -1/sqrt(6) 1/3]; % middle of [V1;V4] segment
-D14 = sqrt(sum((V_flat(be,:) - M14).^2,2));
-V_flat(be,:) = sqrt(2)*(V_flat(be,:) - M14) ./ repmat(D14, [1 3]) + repmat(M14, [size(V_flat(be,:),1), 1]);
-V123(be,:) = V_flat(be,:);
-
+[V123, T] = sample_and_curve_triangle(V1',V2',V3',sample_step,0.85);
+V123 = inflate_triangle_sample_from_opposite_vertex(V123,V4,edge_length);
 
 % Tetrahedron faces rotations
 Rmy = @(theta) [cos(theta) 0 -sin(theta);
@@ -117,10 +89,135 @@ T = [T;
      T+2*repmat(size(V123,1), [size(T,1) size(T,2)]);...
      T+3*repmat(size(V123,1), [size(T,1) size(T,2)])];
     
-
-% Duplicated vertices removal (from the edges)
-tol = 1e3*eps;
-[V,T] = remove_duplicated_vertices(V,T,tol);
+TRI = triangulation(T,V(:,1),V(:,2),V(:,3));
 
 
 end % mesh_reuleaux_tetrahedron
+
+
+%% sample_and_curve_triangle subfunction
+function [T, I] = sample_and_curve_triangle(V0, V1, V2, nbstep, warp)
+%
+% Authors : nicolas.douillet (at) free.fr, 2017-2024.
+%           Gerd Wachsmuth,                     2021.
+
+
+% Create sampling grid
+Ndim = size(V0,1);
+
+% (V0V1, V0V2) base
+u = (V1 - V0);
+v = (V2 - V0);
+
+T = zeros((nbstep+1)*(nbstep+2)/2, Ndim);
+    
+k = 1;
+
+% Sampling & vertices generation    
+for m = 0:nbstep
+    
+    for n = 0:nbstep
+        
+        if (m+n) <= nbstep % in (V0,V1,V2) triangle conditions ; indices # nb segments
+            
+            % Barycentric coordinates.
+            l1 = m/nbstep;
+            l2 = n/nbstep;
+            l3 = (nbstep - n - m)/nbstep;
+
+            % Transform the barycentric coordinates.
+            b1 = l1^warp;
+            b2 = l2^warp;
+            b3 = l3^warp;
+
+            % Assure that they still sum up to 1.
+            db = (b1 + b2 + b3) - 1;
+            b1 = b1 - db*l1;
+            b2 = b2 - db*l2;
+            b3 = b3 - db*l3;
+
+            % translation vector
+            tv = b1*u + b2*v;
+            T(k,:) = (V0 + tv)';
+            k = k+1;
+            
+        end
+        
+    end
+    
+end
+    
+% Index triplets list construction
+I = zeros(nbstep^2,3);
+row_length = 1 + nbstep;
+cum_row_length = row_length;
+row_idx = 1;
+p = 1;
+
+while p <= nbstep^2 && row_length > 1
+    
+     i = p;
+    
+    if p < 2 % "right" triangle serie only
+        
+        while i < cum_row_length
+            
+            I(row_idx,:) = [i i+1 i+row_length];
+            row_idx = row_idx + 1;
+            i = i +1;
+            
+        end
+        
+        row_length = row_length - 1;
+        cum_row_length = cum_row_length + row_length;
+        p = p + row_length+1;
+        
+    else
+        
+        % Since p >= 2
+        while i < cum_row_length % both triangle series
+            
+            I(row_idx,:) = [i i+1 i+row_length];
+            row_idx = row_idx + 1;            
+            I(row_idx,:) = [i i-row_length i+1]; % + upside-down triangles serie
+            row_idx = row_idx + 1;
+            
+            i = i +1;
+        end
+        
+        row_length = row_length - 1;
+        cum_row_length = cum_row_length + row_length;
+        p = p + row_length+1;
+        
+    end
+    
+end
+
+I = sort(I, 2);
+I = unique(I, 'rows');
+
+
+end % sample_and_curve_triangle
+
+
+%% inflate_triangle_sample_from_opposite_vertex subfunction
+function V = inflate_triangle_sample_from_opposite_vertex(U, X, Rho)
+%
+% Authors : nicolas.douillet (at) free.fr, 2017-2024.
+%           Gerd Wachsmuth,                     2021.
+
+
+% We are looking for t such that
+%   || t U - X ||^2 = Rho^2
+% This is a quadratic equation.
+
+% Discriminant
+D = sum(U.*X, 2).^2 - sum(U.^2,2).*(sum(X.^2,2) - Rho^2);
+
+% We take the positive solution
+t = (sum(U.*X, 2) + sqrt(D)) ./ sum(U.^2,2);
+
+V = t.*U;
+
+
+end % inflate_triangle_sample_from_opposite_vertex
