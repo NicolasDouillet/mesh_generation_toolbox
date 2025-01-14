@@ -2,10 +2,10 @@ function [V, T] = volumic_mesh_split_tetrahedron(nb_it, V1, V2, V3, V4, sampling
 %% volumic_mesh_split_tetrahedron : function to build and split a volumic mesh of a given
 % tetrahedron. Performs either middle-edge or face-barycentric subdivisions.
 %
-%%% Author : nicolas.douillet (at) free.fr, 2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2025.
 %
 %
-%%% Input argument
+%%% Input arguments
 %
 % - nb_it : positive integer scalar double, the number of iteration.
 %           Optional. Set to 1 by default.
@@ -100,7 +100,7 @@ end % volumic_mesh_split_tetrahedron
 %% split_tetra_barycentre subfunction
 function [V, T, new_tetra] = split_tetra_barycentre(V, T, tetra_list_k) 
 %
-% Author : nicolas.douillet (at) free.fr, 2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2024-2025.
 
 
 % One new vertex
@@ -122,7 +122,7 @@ end % split_tetra_barycentre
 %% split_tetra_edges subfunction
 function [V, T, new_tetra] = split_tetra_edges(V, T, tetra_list_k) 
 %
-% Author : nicolas.douillet (at) free.fr, 2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2024-2025.
 
 
 % 7 new vertices

@@ -1,20 +1,20 @@
 function [V, T] = mesh_polygon(P, mode)
 %% mesh_polygon : function to triangularly mesh a given polygon.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2021-2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
 %       [ |  |  |]
-% - P = [Px Py Pz], real matrix double, the polygon, size(P) = [nb_vertices,3].
+% - P = [Px Py Pz], real matrix double, the polygon, size(P) = [nb_vertices,3]. Mandatory.
 %       [ |  | | ]
 %
 % - mode : character string in the set {'raw','sorted'},
-%          the type of contour considered. Case insensitive.
+%          the type of contour considered. Case insensitive. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -26,7 +26,7 @@ function [V, T] = mesh_polygon(P, mode)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % P at least must be a quadrangle; Function won't perform on polygons which already are triangles.
 % Triangles / normals may not be coherently oriented.

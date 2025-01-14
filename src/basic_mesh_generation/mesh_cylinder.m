@@ -1,18 +1,19 @@
 function [V, T] = mesh_cylinder(r, h, edg_nb_smpl)
 %% mesh_cylinder : function to mesh a cylinder.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
-% - r : positive real scalar double, the cylinder radius.
-% - h : positive real scalar double, the cylinder height.
+% - r : positive real scalar double, the cylinder radius. Mandatory.
 %
-% - edg_nb_smpl : positive integer scalar double, one sixth of the number of samples on the disk perimeter.
+% - h : positive real scalar double, the cylinder height. Mandatory.
+%
+% - edg_nb_smpl : positive integer scalar double, one sixth of the number of samples on the disk perimeter. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -24,7 +25,7 @@ function [V, T] = mesh_cylinder(r, h, edg_nb_smpl)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Cylinder is centered on the origin, [0 0 0], and has (Oz) for logitudinal axis.
 % Triangles / normals are coherently oriented and facing outward.

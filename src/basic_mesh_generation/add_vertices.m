@@ -1,22 +1,22 @@
 function [V_out, new_id] = add_vertices(V_set, V_in)
 %% add_vertices : function to add some new vertices to the vertex set.
 %
-% Author : nicolas.douillet (at) free.fr, 2020-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 %
 %
-% Input arguments
+%%% Input arguments
 %
 %           [| | |]
-% - V_set = [X Y Z], real matrix double, the vertex set to add, size(V_set) = [nb_new_vertices,3].
+% - V_set = [X Y Z], real matrix double, the vertex set to add, size(V_set) = [nb_new_vertices,3]. Mandatory.
 %           [| | |]
 %
 %          [ |    |    |  ]
-% - V_in = [X_in Y_in Z_in], real matrix double, the input point set, size(V_in) = [nb_input_vertices,3].
+% - V_in = [X_in Y_in Z_in], real matrix double, the input point set, size(V_in) = [nb_input_vertices,3]. Mandatory.
 %          [ |    |    |  ]
 %
 %
 %
-% Output arguments
+%%% Output arguments
 %
 %           [  |     |     |  ]
 % - V_out = [X_out Y_out Z_out], real matrix double, the output point set, size(V_out) = [nb_output_vertices,3],

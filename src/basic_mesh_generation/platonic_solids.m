@@ -1,7 +1,7 @@
 function [V, F] = platonic_solids(id, Rho, face_type)
 %% platonic_solids : function to compute the five platonic solids.
 %
-% About / info
+%%% About / info
 %
 % Platonic solids verify Euler formula, V - E + F = 2 with here : 
 %
@@ -13,10 +13,10 @@ function [V, F] = platonic_solids(id, Rho, face_type)
 % Triangles / normals are coherently oriented and facing outward.
 %
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2021-2025.
 %
 %
-% Syntax
+%%% Syntax
 %
 % platonic_solids(id);
 %
@@ -27,7 +27,7 @@ function [V, F] = platonic_solids(id, Rho, face_type)
 % [V, F] = platonic_solids(id, Rho, face_type);
 %
 %
-% Description
+%%% Description
 %
 % platonic_solids(id) computes the vertex coordinates of the solid #id, its corresponding face set, and displays it.
 %
@@ -40,24 +40,24 @@ function [V, F] = platonic_solids(id, Rho, face_type)
 % [V, F] = platonic_solids(id, Rho, face_type) also returns vertex and face sets.
 %
 %
-% See also : PLOT::TETRAHEDRON, PLOT::CUBE, PLOT::OCTAHEDRON, PLOT::ICOSAHEDRON, PLOT::DODECAHEDRON, PLOT::SPHERE
+%%% See also : PLOT::TETRAHEDRON, PLOT::CUBE, PLOT::OCTAHEDRON, PLOT::ICOSAHEDRON, PLOT::DODECAHEDRON, PLOT::SPHERE
 %
 %
-% Input arguments
+%%% Input arguments
 %
-% - id : positive integer scalar double in the set {1;2;3;4;5}.
+% - id : positive integer scalar double in the set {1;2;3;4;5}. Mandatory.
 %        id = 1 -> tetrahedron (fire)
 %        id = 2 -> cube (earth)
 %        id = 3 -> octahedron (air)
 %        id = 4 -> icosahedron (water)
 %        id = 5 -> dodecahedron (ether)
 %
-% - Rho : real positive scalar double, the radius of the sphere circumscribed to the solid.
+% - Rho : real positive scalar double, the radius of the sphere circumscribed to the solid. Optional.
 %
-% - face_type : character string in the set {'default','triangle'}. Case insensitive.
+% - face_type : character string in the set {'default','triangle'}. Case insensitive. Optional.
 %
 %
-% Output arguments
+%%% Output arguments
 %
 %       [ |  |  |]
 % - V = [Vx Vy Vz], real matrix double, the vertex set. Size(V) = [vertex_nb,3].
@@ -68,7 +68,7 @@ function [V, F] = platonic_solids(id, Rho, face_type)
 %       [ |  |  |]
 %
 %
-% Examples
+%%% Examples
 %
 % platonic_solids(1); % tetrahedron
 %

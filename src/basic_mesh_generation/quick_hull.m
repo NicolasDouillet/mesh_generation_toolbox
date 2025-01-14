@@ -2,17 +2,17 @@ function [V_out, T] = quick_hull(V_in)
 %% quick_hull : function to compute the 3D convex hull of
 % a given point cloud with the divide & conquer algorithm.
 %
-% Author : nicolas.douillet (at) free.fr, 2020-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 %
 %
-% Input argument
+%%% Input argument
 %
 %          [| | |]
-% - V_in = [X Y Z], real matrix double, the input point set, size(V_in) = [nb_input_vertices,3].
+% - V_in = [X Y Z], real matrix double, the input point set, size(V_in) = [nb_input_vertices,3]. Mandatory.
 %          [| | |]
 %
 %
-% Output argument
+%%% Output arguments
 %
 %           [| | |]
 % - V_out = [X Y Z], real matrix double, the out_put point set, size(V_out) = [nb_output_vertices,3].
@@ -22,8 +22,6 @@ function [V_out, T] = quick_hull(V_in)
 % - T = [i1 i2 i3], positive integer matrix double, the convex hull triangulation, size(T) = [nb_triangles,3].
 %       [ |  |  |]
 
-
-tic
 
 %% Input parsing
 if size(V_in,1) < 4    

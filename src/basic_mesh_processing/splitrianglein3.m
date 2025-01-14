@@ -5,22 +5,22 @@ function T_out = splitrianglein3(T_in, tid, vid)
 % new one. The triangle is deleted after the split. Preserves normals orientation.
 %
 %
-% Author : nicolas.douillet (at) free.fr, 2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
 %          [  |     |     |  ]
-% - T_in = [i1_in i2_in i3_in], positive integer matrix double, the input triangulation, size(T_in) = [nb_input_triangles,3].
+% - T_in = [i1_in i2_in i3_in], positive integer matrix double, the input triangulation, size(T_in) = [nb_input_triangles,3]. Mandatory.
 %          [  |     |     |  ]
 %
-% - tid : integer scalar double, the index of the triangle to remove. 1 <= tid <= size(T_in,1).
+% - tid : integer scalar double, the index of the triangle to remove. 1 <= tid <= size(T_in,1). Mandatory.
 %
-% - vid : integer scalar double, the index of the vertex to connect with. 1 <= vid <= size(V,1),
+% - vid : integer scalar double, the index of the vertex to connect with. 1 <= vid <= size(V,1). Mandatory.
 %         where V is the vertex set.
 %
 %
-% Output argument :
+%%% Output argument
 %
 %           [  |      |      |   ]
 % - T_out = [i1_out i2_out i3_out], positive integer matrix double, the output triangulation, size(T_out) = [nb_output_triangles,3].

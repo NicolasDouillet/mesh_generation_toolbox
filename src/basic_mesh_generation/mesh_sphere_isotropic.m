@@ -1,16 +1,17 @@
 function [V, T] = mesh_sphere_isotropic(r, nb_samples)
 %% mesh_sphere_isotropic : function isotropically mesh a sphere.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
-% - r > 0 :      positive real scalar double, the sphere radius.
-% - nb_samples : positive integer scalar double , the number of samples.
+% - r > 0 :      positive real scalar double, the sphere radius. Mandatory.
+%
+% - nb_samples : positive integer scalar double , the number of samples. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -22,7 +23,7 @@ function [V, T] = mesh_sphere_isotropic(r, nb_samples)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Sphere is centered on the origin, [0 0 0].
 % Triangles / normals are coherently oriented and facing outward.

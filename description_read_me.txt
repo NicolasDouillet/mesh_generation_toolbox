@@ -92,6 +92,6 @@ Since I am not native english speaker, please forgive my langage approximations.
 
 Matlab release version used for development and tests : R2019b.
 
-Contact : please report me any bug (with data set used and Matlab(R) code attached) or suggestion at nicolas.douillet (at) free.fr
+Contact : please report me any bug (with data set used and Matlab(R) code attached) or suggestion at nicolas.douillet9 (at) gmail.com
 
-Last update : 01/07/2025.
+Last update : 01/14/2025.

@@ -1,15 +1,15 @@
 function [V, T] = mesh_quadrangle(M1, M2, M3, M4, edg_nb_smpl)
 %% mesh_quadrangle : function to mesh the (M1M2M3M4) quadrangle.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
 %
-% Input arguments :
+%%% Input argument
 %
-% - edg_nb_smpl : positive integer scalar double, the number of samples.
+% - edg_nb_smpl : positive integer scalar double, the number of samples. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -21,7 +21,7 @@ function [V, T] = mesh_quadrangle(M1, M2, M3, M4, edg_nb_smpl)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Triangles / normals are coherently oriented.
 

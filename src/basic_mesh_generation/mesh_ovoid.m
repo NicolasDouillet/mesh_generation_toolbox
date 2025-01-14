@@ -2,16 +2,16 @@ function [V, T] = mesh_ovoid(nb_samples)
 %% mesh_ovoid : function to mesh an ovoid following
 % Hügelschäffer egg curve parameteric equation.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2021-2025.
 %
 %
-% Input arguments :
+%%% Input argument
 %
 % - nb_samples > 1 : positive integer scalar double, the number of samples / levels 
-%                    along one side of the ovoïd curve, from top to bottom.
+%                    along one side of the ovoïd curve, from top to bottom. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -23,7 +23,7 @@ function [V, T] = mesh_ovoid(nb_samples)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Ovoid longitudinal axis is (Oz).
 % Triangles / normals are not coherently oriented.

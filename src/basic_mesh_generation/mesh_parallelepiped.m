@@ -1,17 +1,19 @@
 function [V, T] = mesh_parallelepiped(L, d, h, edg_nb_smpl)
 % mesh_parallelepiped : function to mesh a parallelepiped.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
-% - L : real scalar double, the length (X) of the parallelepiped.
-% - d : real scalar double, the depth  (Y) of the parallelepiped.
-% - h : real scalar double, the height (Z) of the parallelepiped.
+% - L : real scalar double, the length (X) of the parallelepiped. Mandatory.
+%
+% - d : real scalar double, the depth  (Y) of the parallelepiped. Mandatory.
+%
+% - h : real scalar double, the height (Z) of the parallelepiped. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -23,7 +25,7 @@ function [V, T] = mesh_parallelepiped(L, d, h, edg_nb_smpl)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Parallelepiped is centered on the origin, [0 0 0].
 % Triangles / normals are coherently oriented and facing outward.

@@ -2,15 +2,15 @@ function isin = isin3Dconvexset(V, H, M, epsilon)
 %% isin3Dconvexset : function to check if a vertex is located inside or outside a given
 % convex set, boundary not included (opened set). Supports dimensions 2 and 3.
 %
-% Author : nicolas.douillet (at) free.fr, 2018-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2018-2025.
 %
 %
-% Syntax
+%%% Syntax
 %
 % isin = isin3Dconvexset(V, H, M);
 %
 %
-% Description
+%%% Description
 %
 % isin = isin3Dconvexset(V, H, M) computes the boolean isin which is true/logical 1
 % in the case the vertex M belongs to the opened convex set (V,H) defined by
@@ -18,29 +18,29 @@ function isin = isin3Dconvexset(V, H, M, epsilon)
 % case vertex M belongs to the complementary set or the boundary convex hull.
 %
 %
-% See also : CONVHULL
+%%% See also : CONVHULL
 %
 %
-% Input arguments
+%%% Input arguments
 %
 %       [ |  |  |]
-% - V = [Vx Vy Vz], real matrix double, the convex set, with size(V,1) > size(V,2) to define a relevant convex set.
+% - V = [Vx Vy Vz], real matrix double, the convex set, with size(V,1) > size(V,2) to define a relevant convex set. Mandatory.
 %       [ |  |  |]
 %
 %       [ |  |]
 % - H = [i1 i2], positive integer matrix double, the hyperplane set (edge list in 2D, face list in 3D). 
 %       [ |  |]
 %
-%                H elements / rows don't need to be coherently oriented. Size(H) = [nb_hyperplanes,2].
+%                H elements / rows don't need to be coherently oriented. Size(H) = [nb_hyperplanes,2]. Mandatory.
 %
 %       [ |  |  |]
-% - M = [Mx My Mz], real row vector or matrix double, the coordinates of the vertex / vertices  to check. Size(M,2) = size(V,2).
+% - M = [Mx My Mz], real row vector or matrix double, the coordinates of the vertex / vertices  to check. Size(M,2) = size(V,2). Mandatory.
 %       [ |  |  |]
 %
-% - epsilon : real scalar double : admitted floating point error, power of eps.
+% - epsilon : real scalar double : admitted floating point error, power of eps. Mandatory.
 %
 %
-% Output argument
+%%% Output argument
 %
 %          [      |      ]
 % - isin = [logical 1 / 0], logical true (1)/false (0) scalar / column vector. The boolean result. Size(isin) = [size(M,1),1].

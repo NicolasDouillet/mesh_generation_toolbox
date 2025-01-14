@@ -2,15 +2,17 @@ function T = convex_hull(V)
 %% convex_hull : function to compute the 3D convex hull of a given
 % point cloud with the Jarvis / gift wrapping algorithm.
 %
-% Author : nicolas.douillet (at) free.fr, 2020-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 %
+%
+%%% Input argument
 %
 %       [| | |]
-% - V = [X Y Z], real matrix double, the point set, size(V) = [nb_vertices,3].
+% - V = [X Y Z], real matrix double, the point set, size(V) = [nb_vertices,3]. Mandatory.
 %       [| | |]
 %
 %
-% Output argument
+%%% Output argument
 %
 %       [ |  |  |]
 % - T = [i1 i2 i3], positive integer matrix double, the convex hull triangulation, size(T) = [nb_triangles,3].

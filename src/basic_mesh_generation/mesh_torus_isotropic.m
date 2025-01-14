@@ -1,17 +1,19 @@
 function [V, T] = mesh_torus_isotropic(R, r, nb_samples)
 %% mesh_torus_isotropic : function isotropically mesh a torus.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
-% - R > r > 0 :  positive real scalar double, the torus large radius.
-% - r > 0 :      positive real scalar double, the torus small radius.
-% - nb_samples : positive integer scalar, the number of samples.
+% - R > r > 0 :  positive real scalar double, the torus large radius. Mandatory.
+%
+% - r > 0 :      positive real scalar double, the torus small radius. Mandatory.
+%
+% - nb_samples : positive integer scalar, the number of samples. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -23,7 +25,7 @@ function [V, T] = mesh_torus_isotropic(R, r, nb_samples)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Torus is centered on the origin, [0 0 0], and has (0z) for axis.
 % Triangles / normals are coherently oriented and facing outward.

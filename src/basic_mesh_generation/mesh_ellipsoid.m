@@ -2,20 +2,22 @@ function [V, T] = mesh_ellipsoid(a, b, c, nb_samples)
 %% mesh_ellipsoid : function to mesh an ellipsoid based on the geoid,
 % based itself on a subsampling of the icosahedron.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
-% - a : positive real scalar double, X axis multiplicating factor.
-% - b : positive real scalar double, Y axis multiplicating factor.
-% - c : positive real scalar double, Z axis multiplicating factor.
+% - a : positive real scalar double, X axis multiplicating factor. Mandatory.
+%
+% - b : positive real scalar double, Y axis multiplicating factor. Mandatory.
+%
+% - c : positive real scalar double, Z axis multiplicating factor. Mandatory.
 %
 % - nb_samples : positive integer scalar, the number of samples used to
-%                subsample each triangle of the icosahedron.
+%                subsample each triangle of the icosahedron. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -27,7 +29,7 @@ function [V, T] = mesh_ellipsoid(a, b, c, nb_samples)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Ellipsoid is centered on the origin, [0 0 0].
 % Triangles / normals are coherently oriented and facing outward.

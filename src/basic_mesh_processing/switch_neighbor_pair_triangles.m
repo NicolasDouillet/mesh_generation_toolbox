@@ -1,31 +1,26 @@
 function T_out = switch_neighbor_pair_triangles(T_in, tid1, tid2)
-%% switch_neighbor_pair_triangles : function to swuitch
-% neighbor pair triangles.
+%% switch_neighbor_pair_triangles : function to swuitch neighbor
+% pair triangles. May mess up triangle normals orientation
 %
-% Author : nicolas.douillet (at) free.fr, 2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
 %          [  |     |     |  ]
-% - T_in = [i1_in i2_in i3_in], positive integer matrix double, the input triangulation, size(T_in) = [nb_input_triangles,3].
+% - T_in = [i1_in i2_in i3_in], positive integer matrix double, the input triangulation, size(T_in) = [nb_input_triangles,3]. Mandatory.
 %          [  |     |     |  ]
 %
-% - tid1 : integer scalar double, the index of the first triangle of the pair to switch. 1 <= tid1 <= size(T_in,1).
+% - tid1 : integer scalar double, the index of the first triangle of the pair to switch. 1 <= tid1 <= size(T_in,1). Mandatory.
 %
-% - tid2 : integer scalar double, the index of the second triangle of the pair to switch. 1 <= tid2 <= size(T_in,1).
+% - tid2 : integer scalar double, the index of the second triangle of the pair to switch. 1 <= tid2 <= size(T_in,1). Mandatory.
 %
 %
-% Output argument :
+%%% Output argument
 %
 %           [  |      |      |   ]
 % - T_out = [i1_out i2_out i3_out], positive integer matrix double, the output triangulation, size(T_out) = [nb_output_triangles,3].
 %           [  |      |      |   ]
-%
-%
-% About / others information
-%
-% May mess up triangle normals orientation
 
 
 %% Body

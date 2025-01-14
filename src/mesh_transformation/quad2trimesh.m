@@ -1,26 +1,24 @@
 function T = quad2trimesh(Q)
 %% quadmesh2trimesh : function to convert a quadrangular mesh into a triangular mesh.
-%
 % Assumption : % V1, V2, V3, V4 vertices of each quadrangle are assumed to be coplanar.
 %
-% Author : nicolas.douillet (at) free.fr, 2020-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 %
 %
-% Input argument
+%%% Input argument
 %
 %       [|  |  |  | ]
-% - Q : [i1 i2 i3 i4], positive integer matrix, the quadrangles list, size(Q) = [nb_quadrangles,4]
+% - Q : [i1 i2 i3 i4], positive integer matrix, the quadrangles list, size(Q) = [nb_quadrangles,4]. Mandatory.
 %       [|  |  |  | ]
 %
 %
-% Output argument
+%%% Output argument
 %
 %       [|  |  | ]
 % - T = [i1 i2 i3], positive integer matrix, the triangulation, size(T) = [nb_triangles,3],
 %       [|  |  | ]
 %
 %       with nb_triangles = 2*nb_quadrangles.
-%
 
 
 %% Body

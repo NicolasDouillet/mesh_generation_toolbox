@@ -2,14 +2,14 @@ function [V, T] = mesh_triangle(V1, V2, V3, nb_samples)
 %% mesh_triangle : function to sample one given (V1V2V3) triangle using nb_samples^2
 % homothetic smaller versions of it. Works in any dimension Ndim >= 2.
 %
-% Author : nicolas.douillet (at) free.fr, 2017-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2017-2025.
 %
 %
-% Syntax
+%%% Syntax
 % [V T] = mesh_triangle(V1, V2, V3)
 % [V T] = mesh_triangle(V1, V2, V3, nb_samples)
 % 
-% Description
+%%% Description
 % [V T] = mesh_triangle(V1, V2, V3) generates and returns a set of points
 % which samples the triangle (V1, V2, V3), such that there is 20 samples
 % steps in each vector direction, (V1V2) and (V1V3).
@@ -18,25 +18,28 @@ function [V, T] = mesh_triangle(V1, V2, V3, nb_samples)
 % direction, (V1V2) and (V1V3), therefore size(V,1) is always a triangular
 % number.
 %
-% See also : MESHGRID, TRIMESH, LINSPACE, MESH
 %
-% Input arguments
+%%% See also : MESHGRID, TRIMESH, LINSPACE, MESH
+%
+%
+%%% Input arguments
 %
 %        [V1x]
-% - V1 = [V1y] : numeric column vector, size(V1) = [Ndim, 1]. The 1st vertex coordinates.
+% - V1 = [V1y] : numeric column vector, size(V1) = [Ndim, 1]. The 1st vertex coordinates. Mandatory.
 %        [V1z]
 %
 %        [V1x]
-% - V2 = [V2y] : numeric column vector, size(V2) = [Ndim, 1]. The 2nd vertex coordinates.
+% - V2 = [V2y] : numeric column vector, size(V2) = [Ndim, 1]. The 2nd vertex coordinates. Mandatory.
 %        [V2z]
 %
 %        [V3x]
-% - V3 = [V3y] : numeric column vector, size(V3) = [Ndim, 1]. The 3rd vertex coordinates.
+% - V3 = [V3y] : numeric column vector, size(V3) = [Ndim, 1]. The 3rd vertex coordinates. Mandatory.
 %        [V3z]
 %
-% - nb_samples : numeric scalar, integer, nb_samples > 1. The number of samples.
+% - nb_samples : numeric scalar, integer, nb_samples > 1. The number of samples. Optional.
 %
-% Output arguments
+%
+%%% Output arguments
 %
 %        | | |
 % - V = [X Y Z] in dimension 3, numeric matrix, the data matrix of the sampling points coordinates. size(V) = [sum(1:1+nb_samples),Ndim].
@@ -46,7 +49,8 @@ function [V, T] = mesh_triangle(V1, V2, V3, nb_samples)
 % - T = [i0 i1 i2] in dimension 3. numeric matrix, triangles index matrix. size(T) = [nb_samples^2,3].
 %         |  |  |
 %
-% 3D Example
+%
+%%% 3D Example
 %
 % 3D regular sampling + mesh
 % V1 = [-2 3 7]';
@@ -62,12 +66,12 @@ function [V, T] = mesh_triangle(V1, V2, V3, nb_samples)
 % axis equal, axis tight;
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Triangles / normals are coherently oriented.
 
 
-%% Inputs parsing
+%% Input parsing
 if nargin < 4
     nb_samples = 20;
 else

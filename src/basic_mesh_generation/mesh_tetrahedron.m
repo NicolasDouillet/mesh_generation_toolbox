@@ -1,15 +1,15 @@
 function [V, T] = mesh_tetrahedron(edg_nb_smpl)
 %% mesh_tetrahedron : function to mesh a tetrahedron.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
 %
-% Input arguments :
+%%% Input argument
 %
-% - edg_nb_smpl : positive integer scalar double, the number of samples for each one the tetrahedron edges.
+% - edg_nb_smpl : positive integer scalar double, the number of samples for each one the tetrahedron edges. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -21,7 +21,7 @@ function [V, T] = mesh_tetrahedron(edg_nb_smpl)
 %       [|  |  |]
 %
 %
-% About / others information
+%%% About / others information
 %
 % Tetrahedron is centered on the origin, [0 0 0].
 % Triangles / normals are coherently oriented and facing outward.

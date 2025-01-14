@@ -2,23 +2,23 @@ function [V_out, T_out] = remove_duplicated_vertices(V_in, T_in, tol)
 %% remove_duplicated_vertices : function to remove duplicated
 % vertices from the point set.
 %
-% Author : nicolas.douillet (at) free.fr, 2020-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 %
 %
-% Input arguments
+%%% Input arguments
 %
 %          [ |    |    |  ]
-% - V_in = [X_in Y_in Z_in], real matrix double, the input point set, size(V_in) = [nb_input_vertices,3].
+% - V_in = [X_in Y_in Z_in], real matrix double, the input point set, size(V_in) = [nb_input_vertices,3]. Mandatory.
 %          [ |    |    |  ]
 %
 %          [  |     |     |  ]
-% - T_in = [i1_in i2_in i3_in], positive integer matrix double, the input triangulation, size(T_in) = [nb_input_triangles,3].
+% - T_in = [i1_in i2_in i3_in], positive integer matrix double, the input triangulation, size(T_in) = [nb_input_triangles,3]. Mandatory.
 %          [  |     |     |  ]
 %
-% - tol : real scalar double. tol = f(eps), the tolerance to error.
+% - tol : real scalar double. tol = f(eps), the tolerance to error. Mandatory.
 %
 %
-% Output arguments
+%%% Output arguments
 %
 %           [  |     |     |  ]
 % - V_out = [X_out Y_out Z_out], real matrix double, the output point set, size(V_out) = [nb_output_vertices,3],

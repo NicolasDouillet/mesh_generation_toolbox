@@ -2,16 +2,17 @@ function [V, T] = mesh_torus_specific(R, r)
 %% mesh_torus_specific : function to mesh a torus while allowing to specifically choose
 % the number of samples in the two directions, longitude and latitude.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
-% - R > r > 0 : positive integer scalar double, the torus large radius.
-% - r > 0     : positive ODD scalar double, the torus small radius.
+% - R > r > 0 : positive integer scalar double, the torus large radius. Mandatory.
+%
+% - r > 0     : positive ODD scalar double, the torus small radius. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -23,7 +24,7 @@ function [V, T] = mesh_torus_specific(R, r)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Torus is centered on the origin, [0 0 0], and has (0z) for axis.
 % Triangles / normals are coherently oriented and facing outward.
@@ -63,7 +64,7 @@ end % mesh_torus_specific
 %% index_mesh_triangles subfunction
 function T = index_mesh_triangles(M)
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 
 
 H = size(M,2);
@@ -114,7 +115,7 @@ end % index_mesh_triangles
 %% regular_2D_trigrid subfunction
 function M = regular_2D_trigrid(W, H, a)
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 
 
 h = 0.5*a*sqrt(3); % equilateral triangle height

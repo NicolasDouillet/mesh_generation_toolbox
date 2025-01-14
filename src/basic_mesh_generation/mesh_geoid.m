@@ -3,21 +3,21 @@ function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
 % (all except dodecahedron) iterative projections on the unit sphere,
 % with two different sampling modes available.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2021-2025.
 %
 %
-% Input arguments
+%%% Input arguments
 %
-% - id :              positive integer scalar double, the basis polyhedron (platonic solid) id.
+% - id :              positive integer scalar double, the basis polyhedron (platonic solid) id. Mandatory.
 %
-% - sampling_mode :   character string in the set : {'edge','face'}. Case insensitive.
+% - sampling_mode :   character string in the set : {'edge','face'}. Case insensitive. Mandatory.
 %
 % - nb_it :           positive integer scalar double, either the number of sub edges to subdivide the original edge in,
 %                     when sampling_mode = 'edge') or the number of iterations to perform,
-%                     when sampling_mode = 'face'.
+%                     when sampling_mode = 'face'. Optional.
 %
 %
-% Output arguments
+%%% Output arguments
 %
 %       [| | |]
 % - V = [X Y Z], real matrix double, the resulting point set, size(V) = [nb_vertices,3].
@@ -28,7 +28,7 @@ function [V, T] = mesh_geoid(id, nb_it, sampling_mode)
 %       [ |  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Geoid is centered on the origin, [0 0 0].
 % Triangles / normals are coherently oriented and facing outward.
@@ -165,7 +165,7 @@ function [V, T, N] = grow_nxt_lvl_tetrahedra(V, T, N, tgl_id)
 % to create the next triangulation level and erase
 % the 4*three^(nb_it-1) previous triangles.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2021-2025.
 
 
 for idx = tgl_id
@@ -197,7 +197,7 @@ end % grow_nxt_lvl_tetrahedra
 function isconcave = detect_concavity(V, T, N, tgl_pair_id, epsilon)
 % detect_concavity : function to detect concave triangle pair configurations.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2021-2025.
 
 
 i1 = tgl_pair_id(1);
@@ -225,7 +225,7 @@ end % detect_concavity
 function [T, N, edg_list] = flip_two_ngb_triangles(tgl_pair_id, T, V, N, edg_list)
 % flip_two_ngb_triangles : function to flip two triangles sharing one common edge.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2021-2025.
 
 
 T1 = T(tgl_pair_id(1),:);

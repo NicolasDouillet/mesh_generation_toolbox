@@ -1,19 +1,19 @@
 function [V, T] = mesh_ellipse(a, b, edg_nb_smpl)
 %% mesh_ellipse : function to mesh an ellipse, based on the disk.
 %
-% Author : nicolas.douillet (at) free.fr, 2023-2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
 %
-% Input arguments :
+%%% Input arguments
 %
-% - a : positive real scalar double, X axis multiplicating factor.
+% - a : positive real scalar double, X axis multiplicating factor. Mandatory.
 %
-% - b : positive real scalar double, Y axis multiplicating factor.
+% - b : positive real scalar double, Y axis multiplicating factor. Mandatory.
 %
-% - edg_nb_smpl : positive integer scalar double, one sixth of the number of samples on the ellipse perimeter.
+% - edg_nb_smpl : positive integer scalar double, one sixth of the number of samples on the ellipse perimeter. Mandatory.
 %
 %
-% Output arguments :
+%%% Output arguments
 %
 %        [| | |]
 % - V_ = [X Y Z], real matrix double, the output point set, size(V) = [nb_vertices,3]
@@ -25,7 +25,7 @@ function [V, T] = mesh_ellipse(a, b, edg_nb_smpl)
 %       [|  |  |]
 %
 %
-% About / other informations
+%%% About / other information
 %
 % Ellipse is centered on the origin, [0 0 0], and has (Oz) for normal axis.
 % Normals are coherently oriented.

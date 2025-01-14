@@ -1,18 +1,18 @@
 function [V, T] = mesh_reuleaux_tetrahedron(sample_step)
 %% mesh_reuleaux_tetrahedron : function to compute the mesh of a Reuleaux tetrahedron. 
 %
-% Authors : nicolas.douillet (at) free.fr, 2017-2024.
-%           Gerd Wachsmuth,                     2021.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2017-2025.
+%            Gerd Wachsmuth,                        2021.
 %
 %
-% Syntax
+%%% Syntax
 %
 % mesh_reuleaux_tetrahedron;
 % mesh_reuleaux_tetrahedron(sample_step);
 % [V, T] = mesh_reuleaux_tetrahedron(sample_step);
 %
 %
-% Description
+%%% Description
 %
 % mesh_reuleaux_tetrahedron computes the mesh Reuleaux
 % tetrahedron included in the unit sphere, and which each
@@ -25,15 +25,15 @@ function [V, T] = mesh_reuleaux_tetrahedron(sample_step)
 % list in the array T.
 % 
 %
-% See also MESH, TRIMESH.
+%%% See also MESH, TRIMESH.
 %
 %
-% Input arguments
+%%% Input argument
 %
 % - sample_step : positive integer scalar double, , power of 2. Optional.
 %
 %
-% Output arguments
+%%% Output arguments
 %
 %     [ |  |  |]
 % - V [Vx Vy Vz] : real matrix double, the point set. Size = [nb_vertices,3].
@@ -98,8 +98,8 @@ end % mesh_reuleaux_tetrahedron
 %% sample_and_curve_triangle subfunction
 function [T, I] = sample_and_curve_triangle(V0, V1, V2, nbstep, warp)
 %
-% Authors : nicolas.douillet (at) free.fr, 2017-2024.
-%           Gerd Wachsmuth,                     2021.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2017-2025.
+%            Gerd Wachsmuth,                        2021.
 
 
 % Create sampling grid
@@ -203,8 +203,8 @@ end % sample_and_curve_triangle
 %% inflate_triangle_sample_from_opposite_vertex subfunction
 function V = inflate_triangle_sample_from_opposite_vertex(U, X, Rho)
 %
-% Authors : nicolas.douillet (at) free.fr, 2017-2024.
-%           Gerd Wachsmuth,                     2021.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2017-2025.
+%            Gerd Wachsmuth,                        2021.
 
 
 % We are looking for t such that

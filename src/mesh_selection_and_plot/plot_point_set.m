@@ -1,23 +1,23 @@
 function [] = plot_point_set(V, marker, color, markersize)
 %% plot_point_set : function to plot the point set vertices in a Matlab (R) figure.
 %
-% Author : nicolas.douillet (at) free.fr, 2021-2024.
+%%% Author : nicolas.douillet (at) gmail.com, 2021-2025.
 %
 %
-% Input arguments
+%%% Input arguments
 %
 %       [| | |]
-% - V = [X Y Z], real matrix double, the point set, size(V) = [nb_vertices,3].
+% - V = [X Y Z], real matrix double, the point set, size(V) = [nb_vertices,3]. Mandatory.
 %       [| | |]
 %
 % - marker : character in the set {'o','+','*','.','x','s','d','^','v','>','<','p','h'}. For further details see Line Spec in
-%            plot function documentation (doc plot).
+%            plot function documentation (doc plot). Optional.
 %
 % - color : character in the set {'y','m','c','r','g','b','w','k'}. For further details see Line Spec in
-%           plot function documentation (doc plot).
+%           plot function documentation (doc plot). Optional.
 %
 % - markersize : positive integer scalar double, the size of markers.
-%                Default value is 6.
+%                Default value is 6. Optional.
 
 
 %% Body
