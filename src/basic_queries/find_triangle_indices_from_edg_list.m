@@ -1,5 +1,5 @@
-function tgl_id_list = find_triangle_indices_from_edges_list(T, edg_list)
-%% find_triangle_indices_from_edges_list : function to find
+function tgl_id_list = find_triangle_indices_from_edg_list(T, edg_list)
+%% find_triangle_indices_from_edg_list : function to find
 % belonging triangle indices of the edge list.
 %
 % Author : nicolas.douillet (at) free.fr, 2020-2024.
@@ -24,7 +24,7 @@ function tgl_id_list = find_triangle_indices_from_edges_list(T, edg_list)
 %% Body
 % tic;
 tgl_id_list = cellfun(@(r) find(sum(bitor(T == r(1,1),T == r(1,2)),2) == 2)',num2cell(edg_list,2),'un',0);
-% fprintf('find_triangle_indices_from_edges_list request executed in %d seconds.\n',toc);
+% fprintf('find_triangle_indices_from_edg_list request executed in %d seconds.\n',toc);
 
 
-end % find_triangle_indices_from_edges_list
+end % find_triangle_indices_from_edg_list

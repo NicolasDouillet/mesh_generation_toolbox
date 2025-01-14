@@ -81,6 +81,8 @@ Basic 3D mathematical computation algorithm (like point_to_plane_distance) are a
 
 I especially thank William V, Binbin Qi, for what they taught me while solving my cody problems.
 I also thank Stepan Kortus for time optimization of the upsample algorithm.
+I eventually thank Gerd Wachsmuth for the sampling optimization of the meshed Reuleaux tetrahedron.
+
 Matlab users, your advices and tips to improve and speed up my algorithms are welcome !
 
 If you can’t see the mesh while plotting it, try ‘shading flat’ (it may be shadowed by its numerous dark edges).
@@ -92,4 +94,4 @@ Matlab release version used for development and tests : R2019b.
 
 Contact : please report me any bug (with data set used and Matlab(R) code attached) or suggestion at nicolas.douillet (at) free.fr
 
-Last update : 27 / 10 / 2024.
+Last update : 01/07/2025.

@@ -85,7 +85,7 @@ else % if strcmpi(mode,'specific')
 end
 
 % Find triangles and edge opposite vertices
-tgl_id_list = cell2mat(find_triangle_indices_from_edges_list(T_in,edge2split(1,:)));
+tgl_id_list = cell2mat(find_triangle_indices_from_edg_list(T_in,edge2split(1,:)));
 
 % Retrieve originally oriented edge in triangles
 orientedg = zeros(numel(tgl_id_list),2);

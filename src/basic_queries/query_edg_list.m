@@ -1,5 +1,5 @@
-function edg_list = query_edges_list(T, mode)
-%% query_edges_list : function to query the edges list
+function edg_list = query_edg_list(T, mode)
+%% query_edg_list : function to query the edges list
 % corresponding to the triangulation T.
 %
 % Author : nicolas.douillet (at) free.fr, 2020-2024.
@@ -49,7 +49,7 @@ if nargin  > 1 && strcmpi(mode,'sorted')
     
 end
 
-% fprintf('query_edges_list request executed in %d seconds.\n',toc);
+% fprintf('query_edg_list request executed in %d seconds.\n',toc);
 
 
-end % query_edges_list
+end % query_edg_list

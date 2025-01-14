@@ -45,7 +45,7 @@ function [new_tgl] = create_vol_mesh_triangles(T, C_id)
 % create_vol_mesh_triangles : function to create new triangles
 % part of tetrahedric volumic mesh (inside triangles)
 
-edg_list = unique(query_edges_list(T,'sorted'),'rows');
+edg_list = unique(query_edg_list(T,'sorted'),'rows');
 new_tgl = cat(2,edg_list,C_id*ones(size(edg_list,1),1));
 
 

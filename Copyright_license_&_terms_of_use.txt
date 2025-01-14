@@ -1,0 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      MESH GENERATION TOOLBOX	      %
+%				      %
+% COPYRIGHT, LICENSE AND TERMS OF USE %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+All the code included in this toolbox is the result of my own work during the years 2021-2025, and going on for further versions.
+
+
+This toolbox and its content is free of use and redistribution on all the following conditions that :
+
+- SELLING THIS WHOLE TOOLBOX OR EVEN PARTS OF IT IS STRICLY PROHIBITED; 
+
+- This license file must be included as well as each function header must be preserved without any modification;
+
+- Modifications of any kind are done under your own and unique responsability;
+
+- I do not provide any warrantee on the correctness of these algorithms and functions (even if they all have been have been independently tested);  
+
+- The point set test file 'concave_Reuleaux_tetrahedron.mat' is my design and creation. I allow its redistributions on the condition that its author (me) is mentioned for each use; 
+
+- Downloading and using this toolbox or just part of it assumes you to have read, accepted and agreed with all the previous conditions of this license, without any exception.
+
+
+Author : Nicolas Douillet
+Contact : nicolas.douillet9 (at) gmail.com
+License version : 01 / 13 / 2025.

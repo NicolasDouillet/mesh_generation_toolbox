@@ -113,12 +113,12 @@ elseif strcmpi(sampling_mode,'face')
         tgl_id = 1:begin_nb_faces*3^iteration; % concavity
         
         [V,T,N] = grow_nxt_lvl_tetrahedra(V,T,N,tgl_id);
-        edg_list = query_edges_list(T,'sorted');
+        edg_list = query_edg_list(T,'sorted');
         i = 1;
         
         while i < 1 + size(edg_list,1)
             
-            tgl_pair_id = cell2mat(find_triangle_indices_from_edges_list(T,edg_list(i,:)));
+            tgl_pair_id = cell2mat(find_triangle_indices_from_edg_list(T,edg_list(i,:)));
             isconcave = detect_concavity(V,T,N,tgl_pair_id,epsilon);
             
             if isconcave

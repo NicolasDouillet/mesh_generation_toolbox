@@ -1,5 +1,5 @@
-function T = build_triangulation_from_edge_list(E, mode)
-%% build_triangulation_from_edge_list : function to build the
+function T = build_triangulation_from_edg_list(E, mode)
+%% build_triangulation_from_edg_list : function to build the
 % triangulation T from the edge list E. 
 %
 % Author : nicolas.douillet (at) free.fr, 2020-2024.
@@ -65,7 +65,7 @@ end
 % fprintf('%d triangles mesh rebuilt from %d edges in %d seconds.\n',size(T,1),size(E,1),toc);
 
 
-end % build_triangulation_from_edge_list
+end % build_triangulation_from_edg_list
 
 
 %% get_vertex_linked_vertices subfunction
