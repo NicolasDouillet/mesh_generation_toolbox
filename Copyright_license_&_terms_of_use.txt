@@ -25,4 +25,4 @@ This toolbox and its content is free of use and redistribution on all the follow
 
 Author : Nicolas Douillet
 Contact : nicolas.douillet9 (at) gmail.com
-License version : 01 / 13 / 2025.
+License version : 07 / 31 / 2025.

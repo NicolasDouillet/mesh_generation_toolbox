@@ -79,9 +79,8 @@ By default, vertex and face normals are normalized at the same time they are com
 
 Basic 3D mathematical computation algorithm (like point_to_plane_distance) are also independently available with their documentations in my file exchange contributions.
 
-I especially thank William V, Binbin Qi, for what they taught me while solving my cody problems.
-I also thank Stepan Kortus for time optimization of the upsample algorithm.
-I eventually thank Gerd Wachsmuth for the sampling optimization of the meshed Reuleaux tetrahedron.
+I thank Stepan Kortus for time optimization of the upsample algorithm.
+I also thank Gerd Wachsmuth for the sampling optimization of the meshed Reuleaux tetrahedron.
 
 Matlab users, your advices and tips to improve and speed up my algorithms are welcome !
 
@@ -94,4 +93,4 @@ Matlab release version used for development and tests : R2019b.
 
 Contact : please report me any bug (with data set used and Matlab(R) code attached) or suggestion at nicolas.douillet9 (at) gmail.com
 
-Last update : 01/14/2025.
+Last update : 07 / 31 / 2025.

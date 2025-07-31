@@ -152,7 +152,6 @@ end
 % To retrieve the original point set
 V_out = cat(1,V_out,setdiff(V_in,V_out,'rows'));
 
-fprintf('Mesh quick hull computed in %ds.\n',toc);
 
 
 end % quick_hull

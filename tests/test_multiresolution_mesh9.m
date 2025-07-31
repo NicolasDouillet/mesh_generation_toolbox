@@ -25,7 +25,7 @@ load('concave_Reuleaux_tetrahedron.mat');
 % load('Gargoyle_5k.mat');
 % load('meshed_mtlb_logo.mat');
 
-% V = unique(V,'Rows'); % if necessary (presence of duplicated vertices)
+% V = unique(V,'rows'); % if necessary (presence of duplicated vertices)
 
 k = 6;
 [~,T_new] = multiresolution_mesh9(V,k);
