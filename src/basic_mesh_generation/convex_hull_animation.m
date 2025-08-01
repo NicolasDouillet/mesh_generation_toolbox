@@ -1,16 +1,15 @@
 function [] = convex_hull_animation()
-% Jarvis / gift wrapping algorithm
+%% Jarvis / gift wrapping algorithm
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2025.
+% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 
 
 load('../../data/Random_unit_ball_128_pts.mat');
 on_vtx_id = false(size(V,1),1);
 
 
-% --------------------- Display parameters --------------------- %
+%%  ------------------- Display parameters --------------------- %
 time_lapse = 0.5;      % animation time lapse; default value : 0.5
-zoom_coeff = 0.9;      % zoom coefficient; default value : 1
 bckgrd_clr = [0 0 0];  % background color; default : [0 0 0] (black)
 text_color = [1 1 1];  % title color; default : [1 1 1] (white)
 vtx_color_in  = 'r';   % Inside vertex color; default : 'r' (red)
@@ -31,7 +30,6 @@ h = figure;
 set(h,'Position',get(0,'ScreenSize'));
 set(gcf,'Color',bckgrd_clr);
 
-
 drawnow;
 frame = getframe(h);
 im = frame2im(frame);
@@ -39,16 +37,13 @@ im = frame2im(frame);
 imwrite(imind,cm,filename,'gif', 'Loopcount',Inf,'DelayTime',2*time_lapse);
 clf;
 
-
-% II Point set only (red / yellow) ; pause(1)
+% Initial point set only (red / yellow)
 plot3(V(~on_vtx_id,1),V(~on_vtx_id,2),V(~on_vtx_id,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',3);
 set(gca,'Color',bckgrd_clr);
 axis equal tight;
 axis off;
 view(0,el);
 title(title_text,'Color',text_color,'FontSize',16);
-% zoom(zoom_coeff);
-
 
 drawnow;
 frame = getframe(h);
@@ -58,7 +53,7 @@ imwrite(imind,cm,filename,'gif','WriteMode','append','DelayTime',2*time_lapse);
 clf;
 
 
-% Body
+%% Body
 coeff = 1;
 epsilon = coeff*eps; % floating point tolerance error
 nb_vtx = size(V,1); % nb vertices
@@ -98,17 +93,15 @@ while ~isempty(curr_edge)
         
         plot3(V(~on_vtx_id,1),V(~on_vtx_id,2),V(~on_vtx_id,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',edge_width), hold on;                 
         plot3(V(on_vtx_id,1), V(on_vtx_id,2), V(on_vtx_id,3), strcat(vtx_color_on,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_on,'MarkerFaceColor',vtx_color_on,'LineWidth',edge_width);                
-        t = trisurf(T,V(:,1),V(:,2),V(:,3),'LineWidth',2); shading faceted;
-        % colormap(1-jet.^0.5);
-        set(t,'FaceColor',face_color,'EdgeColor',edge_color);        
+        t = trisurf(T,V(:,1),V(:,2),V(:,3),'LineWidth',2); shading flat;
+        set(t,'FaceColor',face_color,'EdgeColor',edge_color);      
         set(gca,'Color',bckgrd_clr);
         axis equal tight;
         axis off;
         alpha(0.5);        
-        % camlight right;        
+  
         view(0,el);               
         title(title_text,'Color',text_color,'FontSize',16);
-        % zoom(zoom_coeff); 
         
         drawnow;        
         frame = getframe(h);
@@ -144,29 +137,29 @@ while ~isempty(curr_edge)
 end
 
 
+plot3(V(~on_vtx_id,1),V(~on_vtx_id,2),V(~on_vtx_id,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',edge_width), hold on;
+plot3(V(on_vtx_id,1), V(on_vtx_id,2), V(on_vtx_id,3), strcat(vtx_color_on,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_on,'MarkerFaceColor',vtx_color_on,'LineWidth',edge_width), hold on;
+t = trisurf(T,V(:,1),V(:,2),V(:,3),'LineWidth',2); shading faceted, hold on;
+set(t,'FaceColor',face_color,'EdgeColor',edge_color);
+set(gca,'Color',bckgrd_clr);
+axis equal tight;
+axis off;
+alpha(0.5);
+
+
 % Roll 360° view point 
 angle_step = 5;
 
 for phi = angle_step:angle_step:360-angle_step
-    
-    plot3(V(~on_vtx_id,1),V(~on_vtx_id,2),V(~on_vtx_id,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',edge_width), hold on;
-    plot3(V(on_vtx_id,1), V(on_vtx_id,2), V(on_vtx_id,3), strcat(vtx_color_on,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_on,'MarkerFaceColor',vtx_color_on,'LineWidth',edge_width), hold on;
-    t = trisurf(T,V(:,1),V(:,2),V(:,3),'LineWidth',2); shading faceted;
-    set(t,'FaceColor',face_color,'EdgeColor',edge_color);
-    set(gca,'Color',bckgrd_clr);
-    axis equal tight;
-    axis off;
-    alpha(0.5);               
+        
     view(phi,el);    
     title(title_text,'Color',text_color,'FontSize',16);
-    % zoom(zoom_coeff);
     
     drawnow;
     frame = getframe(h);
     im = frame2im(frame);
     [imind,cm] = rgb2ind(im,256);
     imwrite(imind,cm,filename,'gif','WriteMode','append','DelayTime',0.2*time_lapse);
-    clf;
     
 end
 
@@ -176,7 +169,7 @@ close(h);
 end % convex_hull_animation
 
 
-% find_nxt_vertex subfunction
+%% find_nxt_vertex subfunction
 function [new_tgl,nxt_vtx_id] = find_nxt_vertex(edge, V, nb_vtx, epsilon)
 % find_nxt_vertex : function to find the next vertices in the algorithm
 % given a current edge. These candidate new vertices are the ones which

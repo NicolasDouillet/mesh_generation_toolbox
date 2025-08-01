@@ -116,14 +116,14 @@ while nb_new_tgl
         [T,N,new_vtx_id] = grow_tetrahedron(V_out,T,N,curr_tgl_id,epsilon);
         
         if new_vtx_id % effective grow with new triangles
-                              
+            
             nb_new_tgl = nb_new_tgl + 2;
             edg_list = query_edg_list(T,'sorted');
             i = 1;
             
             while i < 1 + size(edg_list,1)
                 
-                tgl_pair_id = cell2mat(find_triangle_indices_from_edg_list(T,edg_list(i,:)));                
+                tgl_pair_id = cell2mat(find_triangle_indices_from_edg_list(T,edg_list(i,:)));
                 isconcave = detect_concavity(V_out,T,N,tgl_pair_id,epsilon);
                 
                 if isconcave
@@ -138,9 +138,13 @@ while nb_new_tgl
                 
             end
             
-            [V_out,T] = remove_inside_pts(V_out,T,epsilon);            
+            [V_out,T] = remove_inside_pts(V_out,T,epsilon);
             curr_tgl_id = curr_tgl_id - 1;
-                        
+            
+        else
+            
+            nb_new_tgl = 0;
+            
         end
         
         curr_tgl_id = curr_tgl_id + 1;

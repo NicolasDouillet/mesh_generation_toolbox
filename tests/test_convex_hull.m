@@ -34,7 +34,7 @@ T_mcv         = convex_hull(V); % my Jarvis / gift wrapping algorithm
 [V_out,T_qcv] = quick_hull(V);  % my quickhull algorithm
 
 
-if isequal(sortrows(sort(T_mcv,2)),sortrows(sort(T_cv,2))) % no test with T_qcv since V_out and then triangulations are different
+if isequal(sortrows(sort(T_mcv,2)),sortrows(sort(T_cv,2))) % no test with T_qcv since V_out and then triangulations are different (!)
    
     disp('Same point sets and triangulations.');
     
