@@ -15,7 +15,7 @@ function T = build_triangulation_from_edg_list(E, mode)
 %
 % - mode : character string in the set {'sorted','raw'}, case insensitive. Optional.
 %
-%
+
 %%% Output argument
 %
 %       [ |  |  |]
@@ -27,10 +27,19 @@ function T = build_triangulation_from_edg_list(E, mode)
 % tic;
 if nargin > 1 && strcmpi(mode,'sorted')
     
-    C = mat2cell(E,repelem(3,floor(size(E,1)/3)),2);
-    R_list = cellfun(@(t) reshape(t',[1,6]),C,'un',0); % replicated
-    U = cellfun(@(i) unique(i,'stable'),R_list,'un',0); % unique
-    T = cell2mat(U);
+    %     C = mat2cell(E,repelem(3,floor(size(E,1)/3)),2);
+    %     R_list = cellfun(@(t) reshape(t',[1,6]),C,'un',0); % replicated
+    %     U = cellfun(@(i) unique(i,'stable'),R_list,'un',0); % unique
+    %     T = cell2mat(U);    
+    
+    T = [];
+    
+    for i = 1:3:height(E)
+        
+        T = cat(1,T,cat(2,E(i, :),E(i+2,2)));
+        
+    end
+    
     
 elseif nargin < 2 || strcmpi(mode,'raw')
     
@@ -71,7 +80,7 @@ end % build_triangulation_from_edg_list
 %% get_vertex_linked_vertices subfunction
 function vtx_id_list = get_vertex_linked_vertices(E, vtx_id)
 %
-%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
+% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 
 
 vtx_id_list = setdiff(E(any(E==vtx_id,2),:),vtx_id)';

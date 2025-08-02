@@ -42,7 +42,7 @@ set(gca,'Color',bckgrd_clr);
 axis equal tight;
 axis off;
 view(0,el);
-title(title_text,'Color',text_color,'FontSize',16);
+% title(title_text,'Color',text_color,'FontSize',16);
 
 drawnow;
 frame = getframe(h);
@@ -128,8 +128,9 @@ on_vtx_id = false(size(V_out,1),1);
 on_vtx_id(unique(T(:)),1) = true;
 
 
-% plot3(V_out(~on_vtx_id,1),V_out(~on_vtx_id,2),V_out(~on_vtx_id,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',edge_width), hold on;                 
-plot3(V_in(:,1),V_in(:,2),V_in(:,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',3), hold on;
+Vx = setdiff(V_in,V_out(on_vtx_id,:),'rows');
+
+plot3(Vx(:,1),Vx(:,2),Vx(:,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',3), hold on;
 plot3(V_out(on_vtx_id,1), V_out(on_vtx_id,2), V_out(on_vtx_id,3), strcat(vtx_color_on,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_on,'MarkerFaceColor',vtx_color_on,'LineWidth',edge_width);   
 t = trisurf(T,V_out(:,1),V_out(:,2),V_out(:,3),'LineWidth',2); shading flat;
 set(t,'FaceColor',face_color,'EdgeColor',edge_color);
@@ -139,7 +140,7 @@ axis off;
 alpha(0.5);
 
 view(0,el);
-title(title_text,'Color',text_color,'FontSize',16);
+% title(title_text,'Color',text_color,'FontSize',16);
 
 drawnow;
 frame = getframe(h);
@@ -161,8 +162,9 @@ while nb_new_tgl
         [T,N,new_vtx_id] = grow_tetrahedron(V_out,T,N,curr_tgl_id,epsilon);
         on_vtx_id(new_vtx_id,1) = true;
         
-        % plot3(V_out(~on_vtx_id,1),V_out(~on_vtx_id,2),V_out(~on_vtx_id,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',edge_width), hold on;                 
-        plot3(V_in(:,1),V_in(:,2),V_in(:,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',3), hold on;
+        Vx = setdiff(V_in,V_out(on_vtx_id,:),'rows');
+       
+        plot3(Vx(:,1),Vx(:,2),Vx(:,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',3), hold on;
         plot3(V_out(on_vtx_id,1), V_out(on_vtx_id,2), V_out(on_vtx_id,3), strcat(vtx_color_on,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_on,'MarkerFaceColor',vtx_color_on,'LineWidth',edge_width);   
         t = trisurf(T,V_out(:,1),V_out(:,2),V_out(:,3),'LineWidth',2); shading flat;
         set(t,'FaceColor',face_color,'EdgeColor',edge_color);
@@ -172,7 +174,7 @@ while nb_new_tgl
         alpha(0.5);
         
         view(0,el);
-        title(title_text,'Color',text_color,'FontSize',16);
+        % title(title_text,'Color',text_color,'FontSize',16);
         
         drawnow;
         frame = getframe(h);
@@ -197,9 +199,9 @@ while nb_new_tgl
                     
                     [T,N,edg_list] = flip_two_ngb_triangles(tgl_pair_id,T,V_out,N,edg_list);
                     
+                    Vx = setdiff(V_in,V_out(on_vtx_id,:),'rows');
                     
-                    % plot3(V_out(~on_vtx_id,1),V_out(~on_vtx_id,2),V_out(~on_vtx_id,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',edge_width), hold on;                 
-                    plot3(V_in(:,1),V_in(:,2),V_in(:,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',3), hold on;
+                    plot3(Vx(:,1),Vx(:,2),Vx(:,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',3), hold on;
                     plot3(V_out(on_vtx_id,1), V_out(on_vtx_id,2), V_out(on_vtx_id,3), strcat(vtx_color_on,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_on,'MarkerFaceColor',vtx_color_on,'LineWidth',edge_width);   
                     t = trisurf(T,V_out(:,1),V_out(:,2),V_out(:,3),'LineWidth',2); shading flat;
                     set(t,'FaceColor',face_color,'EdgeColor',edge_color);
@@ -209,7 +211,7 @@ while nb_new_tgl
                     alpha(0.5);
                     
                     view(0,el);
-                    title(title_text,'Color',text_color,'FontSize',16);
+                    % title(title_text,'Color',text_color,'FontSize',16);
                     
                     drawnow;
                     frame = getframe(h);
@@ -244,8 +246,9 @@ while nb_new_tgl
     
 end
 
+Vx = setdiff(V_in,V_out(on_vtx_id,:),'rows');
 
-plot3(V_in(:,1),V_in(:,2),V_in(:,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',3), hold on;
+plot3(Vx(:,1),Vx(:,2),Vx(:,3),strcat(vtx_color_in,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_in,'MarkerFaceColor',vtx_color_in,'LineWidth',3), hold on;
 plot3(V_out(:,1),V_out(:,2),V_out(:,3),strcat(vtx_color_on,vertex_marker),'MarkerSize',vertex_size,'MarkerEdgeColor',vtx_color_on,'MarkerFaceColor',vtx_color_on,'LineWidth',3), hold on;
 t = trisurf(T,V_out(:,1),V_out(:,2),V_out(:,3),'LineWidth',2); shading flat;
 set(t,'FaceColor',face_color,'EdgeColor',edge_color);
@@ -261,7 +264,7 @@ angle_step = 5;
 for phi = angle_step:angle_step:360-angle_step
     
     view(phi,el);
-    title(title_text,'Color',text_color,'FontSize',16);
+    % title(title_text,'Color',text_color,'FontSize',16);
     
     drawnow;
     frame = getframe(h);

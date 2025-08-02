@@ -43,7 +43,7 @@ set(gca,'Color',bckgrd_clr);
 axis equal tight;
 axis off;
 view(0,el);
-title(title_text,'Color',text_color,'FontSize',16);
+% title(title_text,'Color',text_color,'FontSize',16);
 
 drawnow;
 frame = getframe(h);
@@ -101,7 +101,7 @@ while ~isempty(curr_edge)
         alpha(0.5);        
   
         view(0,el);               
-        title(title_text,'Color',text_color,'FontSize',16);
+        % title(title_text,'Color',text_color,'FontSize',16);
         
         drawnow;        
         frame = getframe(h);
@@ -153,7 +153,7 @@ angle_step = 5;
 for phi = angle_step:angle_step:360-angle_step
         
     view(phi,el);    
-    title(title_text,'Color',text_color,'FontSize',16);
+    % title(title_text,'Color',text_color,'FontSize',16);
     
     drawnow;
     frame = getframe(h);
