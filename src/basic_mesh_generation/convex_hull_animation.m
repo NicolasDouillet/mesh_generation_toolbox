@@ -9,7 +9,7 @@ on_vtx_id = false(size(V,1),1);
 
 
 %%  ------------------- Display parameters --------------------- %
-time_lapse = 0.5;      % animation time lapse; default value : 0.5
+time_lapse = 0.1;      % animation time lapse; default value : 0.5
 bckgrd_clr = [0 0 0];  % background color; default : [0 0 0] (black)
 text_color = [1 1 1];  % title color; default : [1 1 1] (white)
 vtx_color_in  = 'r';   % Inside vertex color; default : 'r' (red)
@@ -22,7 +22,7 @@ vertex_size = 8;       % vertex size; default : 6
 el = 5;                % view elevation
 
 title_text = {'Convex hull construction of a random spherical point set', 'Via gift wrapping / Jarvis algorithm'};
-filename = 'convex_hull_GWJ_optim.gif';
+filename = 'convex_hull_animation.gif';
 
 
 % -------- Display settings -------- %
@@ -34,7 +34,7 @@ drawnow;
 frame = getframe(h);
 im = frame2im(frame);
 [imind,cm] = rgb2ind(im,256);
-imwrite(imind,cm,filename,'gif', 'Loopcount',Inf,'DelayTime',2*time_lapse);
+imwrite(imind,cm,filename,'gif', 'Loopcount',Inf,'DelayTime',time_lapse);
 clf;
 
 % Initial point set only (red / yellow)
@@ -159,7 +159,7 @@ for phi = angle_step:angle_step:360-angle_step
     frame = getframe(h);
     im = frame2im(frame);
     [imind,cm] = rgb2ind(im,256);
-    imwrite(imind,cm,filename,'gif','WriteMode','append','DelayTime',0.2*time_lapse);
+    imwrite(imind,cm,filename,'gif','WriteMode','append','DelayTime',time_lapse);
     
 end
 
