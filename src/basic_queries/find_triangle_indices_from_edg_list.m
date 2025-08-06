@@ -1,6 +1,5 @@
 function tgl_id_list = find_triangle_indices_from_edg_list(T, edg_list)
-%% find_triangle_indices_from_edg_list : function to find
-% belonging triangle indices of the edge list.
+%% find_triangle_indices_from_edg_list : function to find belonging triangle indices of the edge list.
 %
 %%% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 %

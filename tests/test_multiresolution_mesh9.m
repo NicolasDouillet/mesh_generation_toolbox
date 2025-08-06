@@ -17,7 +17,8 @@ addpath('../data/');
 % Tests avec :
 %
 % - surface boite à oeufs
-% - surface spiralante,
+% - surfaces spiralantes ()
+%
 % - visage
 % - logo Matlab
 
@@ -27,7 +28,7 @@ load('concave_Reuleaux_tetrahedron.mat');
 
 % V = unique(V,'rows'); % if necessary (presence of duplicated vertices)
 
-k = 6;
+k = 9;
 [~,T_new] = multiresolution_mesh9(V,k);
 plot_mesh(V,T_new);
 alpha(1);

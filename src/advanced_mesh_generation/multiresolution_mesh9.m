@@ -4,9 +4,24 @@ function [V, T_new] = multiresolution_mesh9(V, lvl)
 %%% Author : nicolas.douillet9 (at) gmail.com, 2024-2025.
 
 
-% "splitedge" (avec point différent du milieu) dans la direction de la normale orientée vers l'intérieure.
+% -> "splitedge" (avec point différent du milieu) dans la direction de la normale orientée vers l'intérieure.
 % Boucle sur les edges par ordre décroissant de longueur.
 % Sans mise à jour à chaque itération, mais mise à jour edge list après chaque boucle.
+
+% Nécessite de calculer toutes les edge normals orientée vers l'intérieur
+% (calculées à partir des normales des faces normées ou non ?)
+
+% Faces en dernier
+
+% -> Méthode pour ne recalculer que partiellement les vertex et face normals
+%
+% - update_vertex_normals
+% - update_face_normals
+
+
+
+% Comment s'assurer de ne pas "traverser un point" ?
+
 
 
 addpath('C:\Users\Nicolas\Desktop\TMW_contributions\mesh_processing_toolbox\src\basic_mesh_processing\'); % for splitrianglein3
@@ -144,7 +159,9 @@ for k = 1:lvl % or max number of faces as a criterion
         if numel(tgl_pair_id) == 2
             
             isconcave = detect_concavity(V,T_cur,N_cur,tgl_pair_id,epsilon); 
-                                    
+            
+            
+            % -> Plus besoin lorsque l'algo sera "propre et optimal"
             if isconcave % = convex with inverse normals
                 
                 tgl_pair2 = find_tgl_tetra_id(tgl_pair_id,T_cur);
@@ -258,7 +275,7 @@ tgl_pair2 = cat(1,fliplr(T3),fliplr(T4));
 end % find_tgl_tetra_id
 
 
-% TODO : use flip_edge
+% TODO : use flip_edge -> voir enveloppe convexe
 function [T, N, edg_list] = flip_two_ngb_triangles(tgl_pair_id, T, V, N, edg_list)
 % flip_two_ngb_triangles : function to flip
 % two triangles sharing one common edge.

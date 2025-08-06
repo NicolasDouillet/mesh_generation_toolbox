@@ -21,7 +21,7 @@ vertex_marker = '+';   % vertex marker; default : '+' spare : 's'
 vertex_size = 8;       % vertex size; default : 6
 el = 5;                % view elevation
 
-title_text = {'Convex hull construction of a random spherical point set', 'Via quick hull / divide and conquer algorithm'};
+title_text = {'Animation of the convex hull construction steps of a random 3D point set', 'Computed with quick hull / divide and conquer algorithm'};
 filename = 'quick_hull.gif';
 
 
