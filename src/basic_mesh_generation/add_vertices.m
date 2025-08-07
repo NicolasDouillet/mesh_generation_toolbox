@@ -15,7 +15,6 @@ function [V_out, new_id] = add_vertices(V_set, V_in)
 %          [ |    |    |  ]
 %
 %
-%
 %%% Output arguments
 %
 %           [  |     |     |  ]

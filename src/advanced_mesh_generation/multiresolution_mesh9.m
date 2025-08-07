@@ -29,8 +29,6 @@ addpath('C:\Users\Nicolas\Desktop\TMW_contributions\mesh_processing_toolbox\src\
 
 
 % I Convex hull with inward oriented normals
-% [V,T] = quick_hull(V); % ne fonctionne pas, car vertices supprimés ! ->
-% réindexation nécessaire
 T = convhull(V);
 T = fliplr(T);
 N = face_normals(V,T,'norm');

@@ -105,7 +105,7 @@ T = T - 1;
      
 
 % Sample triangles
-for k = 1:size(T,1)
+for k = 1:height(T)
        
     [Vt,Tt] = mesh_triangle(V(T(k,1),:)',V(T(k,2),:)',V(T(k,3),:)',nb_samples);
             

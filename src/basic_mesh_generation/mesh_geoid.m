@@ -87,7 +87,7 @@ if strcmpi(sampling_mode,'edge')
     T_new = zeros(begin_nb_faces*nt,3);
     V_new = zeros(0.5*begin_nb_faces*(nb_it+1)*(nb_it+2),3);
     
-    for j = 1:size(T,1)
+    for j = 1:height(T)
         
         [new_sub_V, new_sub_T] = mesh_triangle(V(T(j,1),:)',V(T(j,2),:)',V(T(j,3),:)',nb_it);
         new_sub_T = new_sub_T + (j-1)*nv; % update triangle indices
