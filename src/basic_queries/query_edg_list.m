@@ -29,21 +29,13 @@ function edg_list = query_edg_list(T, mode)
 % tic;
 L = cat(2,T,T(:,1)); % loop
 R = repelem(L,1,[1 2*ones(1,size(L,2)-2) 1]); % replicated
-face_nb_vtx = width(T);
+face_nb_vtx = size(T,2);
 
 edg_list = unique(cell2mat(cellfun(@(x) reshape(x,[2,face_nb_vtx])',num2cell(R,2),'un',0)),'rows');
 
 if nargin  > 1 && strcmpi(mode,'sorted')
     
-    edg_list = unique(sort(edg_list,2),'rows');
-    
-    % elseif nargin  < 2 || strcmpi(mode,'raw')
-    
-    % do nothing
-    
-    % else
-    
-    % do nothing
+    edg_list = unique(sort(edg_list,2),'rows');        
     
 end
 

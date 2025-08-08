@@ -21,16 +21,20 @@ addpath('C:\Users\Nicolas\Desktop\TMW_contributions\mesh_processing_toolbox\data
 % - visage
 % - logo Matlab
 
-% load('spiky_cell_like_surface.mat');
+% load('spiky_cell_like_surface.mat'); % beware of potential duplicated vertices
+% -> à vérifier
+
 load('concave_Reuleaux_tetrahedron.mat');
 % load('Archi_spiral.mat');
 % load('Gargoyle_5k.mat');
 % load('meshed_mtlb_logo.mat');
+clear T;
 
 % V = unique(V,'rows'); % if necessary (presence of duplicated vertices)
 
-k = 9;
-[~,T_new] = multiresolution_mesh9(V,k);
-plot_point_set_and_mesh(V,T_new);
-alpha(0.5);
+% k = 9;
+T = multiresolution_mesh11(V);
+select_face_normals(V,T);
+% plot_point_set_and_mesh(V,T);
+alpha(1);
 camlight left;

@@ -10,5 +10,5 @@ addpath('../data');
 
 
 N = face_normals(V,T);
-E = query_edg_list(T);
+E = query_edg_list(T,'sorted');
 N_e = select_edge_normals(V,T,N,E);

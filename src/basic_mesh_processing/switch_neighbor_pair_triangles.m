@@ -2,7 +2,7 @@ function T_out = switch_neighbor_pair_triangles(T_in, tid1, tid2)
 %% switch_neighbor_pair_triangles : function to swuitch neighbor
 % pair triangles. May mess up triangle normals orientation
 %
-%%% Author : nicolas.douillet9 (at) gmail.com, 2025.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 %
 %
 %%% Input arguments
