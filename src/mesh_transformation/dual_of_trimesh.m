@@ -1,6 +1,8 @@
 function [V_dual, T_dual] = dual_of_trimesh(V, T)
 %% dual_of_trimesh : function to compute the dual mesh of a given triangular mesh.
-% Hypothesis : input mesh is a 2D manifold triangulation.
+%
+% Hypothesis : input mesh is a 2D manifold triangulation
+%
 %
 %%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
 %
@@ -31,7 +33,7 @@ function [V_dual, T_dual] = dual_of_trimesh(V, T)
 
 %% Body
 V_dual = cell2mat(cellfun(@(r) mean(V(r,:),1),num2cell(T,2),'un',0));
-T_dual = cell(0,1);
+T_dual = cell(size(V,1),1);
 
 % Loop on every vertices of the set
 for vtx_id = 1:size(V,1)
@@ -40,17 +42,7 @@ for vtx_id = 1:size(V,1)
     tgl_ngb_id = find_triangles_from_vertex_list(T,vtx_id);
     
     % Sort triangle indices around common linked vertex
-    sorted_ngb_tgl_id = order_vtx_ngb_tgl(T,tgl_ngb_id);
-    
-    new_polyhedron = [];
-    
-    % Compute new vertices and polyhedron            
-    for k = sorted_ngb_tgl_id                
-        
-        new_polyhedron = cat(2,new_polyhedron,k);
-                
-    end
-    
+    new_polyhedron = order_vtx_ngb_tgl(T,tgl_ngb_id);        
     T_dual(vtx_id,1) = num2cell(new_polyhedron,2);            
 
 end

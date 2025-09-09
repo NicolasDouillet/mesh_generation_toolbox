@@ -1,0 +1,105 @@
+List of the MG toolbox functions in /src ( 09 / 09 / 2025 )
+
+
+%% ADVANCED MESH GENERATION %%
+
+- discrete_contour_mesh_patch
+- mesh_reuleaux_tetrahedron
+- mesh_torus_curv_adapt
+- mesh_torus_specific
+
+
+%% BASIC MESH GENERATION %%
+
+- add_triangles
+- add_vertices
+- build_triangulation_from_edg_list
+- convex_hull
+- convex_hull_animation
+- mesh_cube
+- mesh_cylinder
+- mesh_disk
+- mesh_dodecahedron
+- mesh_ellipse
+- mesh_ellipsoid
+- mesh_geoid
+- mesh_icosahedron
+- mesh_octahedron
+- mesh_ovoid
+- mesh_parallelepiped
+- mesh_polygon
+- mesh_quadrangle
+- mesh_sphere_isotropic
+- mesh_tetrahedron
+- mesh_torus_isotropic
+- mesh_triangle
+- platonic_solids
+- quick_hull
+- quick_hull_animation
+- upsample_mesh
+- volumic_mesh_from_convex_set_mesh
+- volumic_mesh_split_tetrahedron
+
+
+%% BASIC MESH PROCESSING %%
+
+- remove_duplicated_triangles
+- remove_duplicated_vertices
+- remove_triangles
+- remove_vertices
+- split_edge
+- splitrianglein3
+- switch_neighbor_pair_triangles
+
+
+%% BASIC QUERIES %%
+
+- find_neighbor_triangle_indices
+- find_one_vertex_neighbor_indices
+- find_triangle_indices_from_edg_list
+- find_triangles_from_vertex_list
+- query_edg_list
+
+
+%% GEOMETRY RESSOURCES %%
+
+- point_to_line_distance
+- point_to_plane_distance
+- triangle_circumcircle
+
+
+%% MESH PROPERTIES DETECTION %%
+
+- isin3Dconvexset
+- issetconvex
+
+
+%% MESH SELECTION AND PLOT %%
+
+- plot_mesh
+- plot_point_set
+- plot_point_set_and_mesh
+- show_edge_normals
+- show_face_normals
+- show_vertex_normals
+
+
+%% MESH TRANSFORMATION %%
+
+- dual_of_trimesh
+- quad2trimesh
+
+
+%% MISC %%
+
+- get_global_param
+- meshed_mtlb_logo
+- reset_global_param
+- set_global_param
+
+
+%% NORMALS %%
+
+- edge_normals
+- face_normals
+- vertex_normals

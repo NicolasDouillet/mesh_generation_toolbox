@@ -8,7 +8,6 @@ function [V_out, T_out] = splitrianglein3(V_in, T_in, tid, mode, vid, V_new)
 %
 % - preserves normals orientation.
 %
-%
 %%% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 %
 %

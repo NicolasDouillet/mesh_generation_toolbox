@@ -21,4 +21,4 @@ clear T;
 
 % Build the mesh
 T = build_triangulation_from_edg_list(E);
-select_face_normals(V,T);
+show_face_normals(V,T);

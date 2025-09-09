@@ -1,4 +1,4 @@
-% test select_edge_normals
+% test show_edge_normals
 
 clc;
 
@@ -11,4 +11,4 @@ addpath('../data');
 
 N = face_normals(V,T);
 E = query_edg_list(T,'sorted');
-N_e = select_edge_normals(V,T,N,E);
+N_e = show_edge_normals(V,T,N,E);

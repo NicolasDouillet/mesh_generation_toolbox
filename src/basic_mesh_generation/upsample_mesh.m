@@ -1,8 +1,9 @@
 function [V_out, T_out] = upsample_mesh(V_in, T_in, mode, tgl_id)
-%% upsample_mesh : function to upsample a mesh. Preserves face normals orientation.
+%% upsample_mesh : function to upsample a gieven mesh (T_in).
+% Preserves face normals orientation.
 %
-%%% Authors : nicolas.douillet9 (at) gmail.com, 2023-2025.
-%             Stepan Kortus (cpu time optimization), 2024.
+%%% Author : nicolas.douillet9 (at) gmail.com, 2023-2025.
+%             Stepan Kortus (cpu time optimization)
 %
 %
 %%% Input arguments

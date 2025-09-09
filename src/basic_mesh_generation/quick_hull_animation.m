@@ -4,30 +4,30 @@ function [] = quick_hull_animation()
 % Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 
 
-load('../../data/Random_unit_ball_128_pts.mat');
+load('../../data/geoid_lvl4.mat');
 V_in = V;
 
 
 %% -------------------- Display parameters --------------------- %
-time_lapse = 0.1;      % animation time lapse; default value : 0.5
+time_lapse = 1e-4;     % animation time lapse; default value : 0.5
 bckgrd_clr = [0 0 0];  % background color; default : [0 0 0] (black)
 text_color = [1 1 1];  % title color; default : [1 1 1] (white)
 vtx_color_in  = 'r';   % Inside vertex color; default : 'r' (red)
 vtx_color_on  = 'g';   % On convex hull vertex color; default : 'g' (green)
 face_color = [0 1 1];  % face color; default :   [0 1 1] (cyan)
 edge_color = [0 0 0];  % edge color; default :   [0 1 1] (cyan)
-edge_width = 2;        % edge width; default : 2
+edge_width = 1.5;      % edge width; default : 2
 vertex_marker = '+';   % vertex marker; default : '+' spare : 's'
-vertex_size = 8;       % vertex size; default : 6
-el = 5;                % view elevation
+vertex_size = 5;       % vertex size; default : 6
+el = 0;                % view elevation
 
 title_text = {'Animation of the convex hull construction steps of a random 3D point set', 'Computed with quick hull / divide and conquer algorithm'};
-filename = 'quick_hull.gif';
+filename = 'quick_hull_animation.gif';
 
 
-% -------- Display settings -------- %
+%% -------- Display settings -------- %
 h = figure;
-set(h,'Position',get(0,'ScreenSize'));
+set(h,'Position',get(0,'ScreenSize')/2);
 set(gcf,'Color',bckgrd_clr);
 
 drawnow;
@@ -219,8 +219,7 @@ while nb_new_tgl
                     [imind,cm] = rgb2ind(im,256);
                     imwrite(imind,cm,filename,'gif','WriteMode','append','DelayTime',time_lapse);
                     clf;
-                    
-                    
+                                        
                 else
                     
                     i = i + 1;
@@ -234,10 +233,6 @@ while nb_new_tgl
             on_vtx_id(unique(T(:)),1) = true;
             curr_tgl_id = curr_tgl_id - 1;
               
-        else
-            
-            nb_new_tgl = 0;
-            
         end
         
         curr_tgl_id = curr_tgl_id + 1;

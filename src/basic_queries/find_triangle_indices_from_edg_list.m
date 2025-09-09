@@ -17,7 +17,7 @@ function tgl_id_list = find_triangle_indices_from_edg_list(T, edg_list)
 %
 %%% Output argument
 %
-% - tgl_id_list : positive integer row vector double, the triangle indices list, size(tgl_id_list) = [nb_triangles,3].
+% - tgl_id_list : cell array of positive integer row vectors double, where each cell is a triangle indices list, and size(cell2mat(tgl_id_list)) = [nb_triangles,3].
 
 
 %% Body

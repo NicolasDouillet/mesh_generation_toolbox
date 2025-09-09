@@ -1,5 +1,5 @@
 function T_out = add_triangles(T_set, T_in)
-%% add_triangles : function to add new triangles to the triangle set.
+%% add_triangles : function to add new triangles T_set to the triangle set T_in.
 % If one or more vertices are new, they must be added first in the vertex set
 % for the triangulation to be valid.
 %

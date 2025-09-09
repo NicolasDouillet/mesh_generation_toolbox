@@ -19,7 +19,7 @@ function [d2H, H] = point_to_plane_distance(M, n, I)
 % - I = [Ix Iy Iz], real row vector double, a point belonging to the plane, size(I) = [1,3]. Mandatory.
 %
 % 
-%%% Output argument
+%%% Output arguments
 %
 % - d2H : real scalar -or vector- double, the euclidian distance between M and the plane (I,n). size(d2H) = [N,1].
 %

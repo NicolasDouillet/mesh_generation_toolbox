@@ -1,5 +1,5 @@
 function [V_out, T_out] = remove_vertices(V_set, V_in, T_in, mode)
-%% remove_vertices : function to remove vertices from the vertex set.
+%% remove_vertices : function to remove vertices from the vertex set (V_in).
 %
 %%% Author : nicolas.douillet9 (at) gmail.com, 2020-2025.
 %
@@ -19,7 +19,7 @@ function [V_out, T_out] = remove_vertices(V_set, V_in, T_in, mode)
 % - T_in = [i1_in i2_in i3_in], positive integer matrix double, the input triangulation, size(T_in) = [nb_input_triangles,3]. Mandatory.
 %          |  |     |     |  ]
 %
-% - mode : character string in the set {'index','explicit','INDEX','EXPLICIT'}. Explicit mode corresponds to the
+% - mode : character string in the set {'index','explicit',INDEX,'EXPLICIT'}. Explicit mode corresponds to the
 %          case where V_set is made of vertices [X Y Z] coordinates. Case insensitive. Optional.
 %
 %

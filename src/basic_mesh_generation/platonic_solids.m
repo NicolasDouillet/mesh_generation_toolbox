@@ -1,6 +1,9 @@
 function [V, F] = platonic_solids(id, Rho, face_type)
 %% platonic_solids : function to compute the five platonic solids.
 %
+%%% Author : nicolas.douillet9 (at) gmail.com, 2021-2025.
+%
+%
 %%% About / info
 %
 % Platonic solids verify Euler formula, V - E + F = 2 with here : 
@@ -12,8 +15,6 @@ function [V, F] = platonic_solids(id, Rho, face_type)
 % Solid is centered on the origin, [0 0 0].
 % Triangles / normals are coherently oriented and facing outward.
 %
-%
-%%% Author : nicolas.douillet9 (at) gmail.com, 2021-2025.
 %
 %
 %%% Syntax

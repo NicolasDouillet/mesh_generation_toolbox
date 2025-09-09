@@ -15,6 +15,6 @@ V = cat(1,I,J,K,O);
 T = [4 1 2;...
      4 2 3];
  
-select_face_normals(V,T); 
+show_face_normals(V,T); 
 T = switch_neighbor_pair_triangles(T,1,2);
-select_face_normals(V,T); 
+show_face_normals(V,T); 

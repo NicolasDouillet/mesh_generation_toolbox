@@ -18,7 +18,7 @@ plot_mesh(V,T);
 
 %% Example #3 : mesh an ovoid and select its face normals
 [V,T] = mesh_ovoid(8);
-select_face_normals(V,T); % beware : not all coherently oriented / facing outward
+show_face_normals(V,T); % beware : not all coherently oriented / facing outward
 alpha(1);
 
 %% Example #4 : mesh a torus with quasi equilateral triangles 

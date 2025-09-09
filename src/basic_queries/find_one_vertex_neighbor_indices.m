@@ -13,7 +13,7 @@ function vtx_ngb_id = find_one_vertex_neighbor_indices(T, vtx_id)
 % - vtx_id : positive integer scalar, the vertex index. Mandatory.
 %
 %
-%%% Output arguments
+%%% Output argument
 %
 % - vtx_ngb_id : positive integer matrix double, the neighor vertex indices, size(vtx_ngb_id) = [1,number_of_neighbor_vertices].
 

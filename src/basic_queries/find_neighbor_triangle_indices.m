@@ -13,11 +13,11 @@ function ngb_T = find_neighbor_triangle_indices(T, T_subset, mode)
 %
 % - T_subset : either positive integer row vector double* (the indices of the triangles; default behaviour) or
 %              positive integer matrix double giving the explicit indices triplet list. In this latter case,
-%              mode must be set to 'explicit'. Optional.
+%              mode must be set to 'explicit'. Mandatory.
 %
-% - mode : character string in the set : {'explicit',indices,'EXPLICIT','INDEX'}. Explicit mode
+% - mode : character string in the set : {'explicit',index,'EXPLICIT',INDEX}. Explicit mode
 %          corresponds to the case where T_subset is made of triangle vertices [i1 i2 i3] indices.
-%          Case insensitive. Mandatory only if T_subset.
+%          Case insensitive. Optional.
 %
 %
 %%% Output argument
@@ -40,8 +40,7 @@ if nargin > 1
         elseif strcmpi(mode,'explicit')
             
             subset_id = find(all(bsxfun(@eq,T,T_subset),2));
-            
-            
+                        
         end
         
     else

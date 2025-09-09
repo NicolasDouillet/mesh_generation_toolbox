@@ -95,7 +95,7 @@ N = face_normals(V_in,T,'norm');
 
 % Orient normals outward
 Gt = cell2mat(cellfun(@(r) mean(V_in(r,:),1),num2cell(T,2),'un',0));
-orientation = sign(dot(N,Gt-repmat(G,[nb_t,1]),2));
+orientation = sign(sum(N.*(Gt-G),2));
 
 if ~isequal(orientation,ones(nb_t,1)) && ~isequal(orientation,zeros(nb_t,1))
     N = N.*orientation;
@@ -139,11 +139,7 @@ while nb_new_tgl
             end
             
             [V_out,T] = remove_inside_pts(V_out,T,epsilon);
-            curr_tgl_id = curr_tgl_id - 1;
-            
-        else
-            
-            nb_new_tgl = 0;
+            curr_tgl_id = curr_tgl_id - 1;                        
             
         end
         
@@ -155,7 +151,6 @@ end
 
 % To retrieve the original point set
 V_out = cat(1,V_out,setdiff(V_in,V_out,'rows'));
-
 
 
 end % quick_hull
@@ -170,15 +165,13 @@ function [T, N, new_vtx_id] = grow_tetrahedron(V, T, N, tgl_id, epsilon)
 
 
 new_vtx_id = [];
-nb_vtx = size(V,1);
-
-d = dot(repmat(N(tgl_id,:),[nb_vtx,1]),V,2);
+d = sum(N(tgl_id,:).*V,2);
 
 if find(abs(d) > epsilon)
     
     f = find(d == max(d));    
     
-    if f & ~ismember(f,unique(T(:))) % prevent from creating non manifold stuffs
+    if f & ~ismember(f,unique(T(:))) % prevent from creating non manifold vertices
         
         f = f(1,1);
         

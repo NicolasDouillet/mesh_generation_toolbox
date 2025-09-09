@@ -36,9 +36,6 @@ function [R, I, r] = triangle_circumcircle(A, B, C, nb_samples)
 
 
 %% Input parsing
-assert(nargin > 2, 'Not enought input arguments. Three points required to define one triangle.');
-assert(nargin < 5, 'Too many input arguments.');
-
 if nargin < 4
     
     nb_samples = 60;

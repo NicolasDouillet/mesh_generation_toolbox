@@ -128,13 +128,12 @@ end
 
 for p = 1:numel(op_vtx)
     
-    % Create new triangles
+    % Create 2 new triangles
     new_tgl1 = cat(2,orientedg(p,1),new_vtx_id,op_vtx(p));
     new_tgl2 = cat(2,new_vtx_id,orientedg(p,2),op_vtx(p));
     
-    % Add new triangles
-    T_out = add_triangles(new_tgl1,T_out);
-    T_out = add_triangles(new_tgl2,T_out);
+    % Add them
+    T_out = cat(1,T_out,new_tgl1,new_tgl2);    
     
 end
 
